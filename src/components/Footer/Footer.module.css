@@ -1,0 +1,19 @@
+.containerPrincipal{
+    width: 100%;
+    background-color: #282828;
+    padding: 20px;
+    display: flex;
+    color: white;
+}
+.title{
+    color: #E95708;
+    font-size: 25px;
+}
+.column{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    
+
+}

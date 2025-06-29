@@ -1,0 +1,42 @@
+.containerPrincipal{
+    width: 100%;
+    background-color: #444444;
+    padding: 10px;
+}
+.containerPrincipal h1{
+    color: #E95708;
+    font-size: 50px;
+    width: 50%;
+}
+.containerItems{
+    display: flex;
+    width: 100%;
+    color: white;
+}
+.containerNav{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 40px;
+}
+.containerNav p {
+    font-size: 20px;
+    cursor: pointer;
+}
+.searchAndProfile{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    gap: 20px;
+}
+.searchAndProfile input{
+    padding: 5px;
+    width: 40%;
+    border: none;
+    outline: none;
+}
+.searchAndProfile span{
+    cursor: pointer;
+}
