@@ -1,57 +1,27 @@
-import axios from 'axios'
 import {BASE_URL} from '../utils/constantes'
-import { ErrorAlert } from '../utils/ErrorAlert'
 import type { ICountry } from '../types/ICountry'
+import { createEntity, deleteEntity, getAll, getById, updateEntity } from './crudGeneric'
 
 
 const BASE_COUNTRY = `${BASE_URL}/country`
+const title = 'País'
 
-export const getAllCountries = async() => {
-    try {
-        const countries = await axios.get(BASE_COUNTRY)
-        return countries.data
-    } catch (error : any) {
-        console.log('Error en getAllCountries', error.message);
-        ErrorAlert('Error', 'No se pudo mostrar los paises')
-    }
+export const getAllCountries = () => {
+    return getAll(BASE_COUNTRY, title)
 }
 
-export const getCountryById = async(id : number) => {
-    try {
-        const country = await axios.get(`${BASE_COUNTRY}/${id}`)
-        return country.data
-    } catch (error : any) {
-        console.log('Error en getCountryById', error.message);
-        ErrorAlert('Error', 'No se encontro el País')
-    }
+export const getCountryById = (idCountry: number) => {
+    return getById(BASE_COUNTRY, title, idCountry)
 }
 
 export const createCountry = async(country : ICountry) =>{
-    try{
-        const newCountry = await axios.post(`${BASE_COUNTRY}`,country)
-        return newCountry.data
-    }catch(error: any){
-        console.log('Error en createCountry', error.message);
-        ErrorAlert('Error', 'No se pudo crear el pais')
-    }
+    return createEntity(BASE_COUNTRY, title, country)
 }
 
 export const updatedCountry = async(newCountry : ICountry, id: number) => {
-    try {
-        const updatedCountry = await axios.put(`${BASE_COUNTRY}/${id}`, newCountry)
-        return updatedCountry.data
-    } catch (error : any) {
-        console.log('Error en updateCountry', error.message);
-        ErrorAlert('Error', 'No se pudo actualizar el país')
-    }
+    return updateEntity(BASE_COUNTRY, title, newCountry, id)
 }
 
 export const deleteCountry = async(id : number) => {
-    try {
-        const deletedCountry = await axios.delete(`${BASE_COUNTRY}/${id}`)
-        return deletedCountry.data
-    } catch (error : any) {
-        console.log('Error en deleteCountry', error.message);
-        ErrorAlert('Error', 'No se pudo eliminar el país')
-    }
+    return deleteEntity(BASE_COUNTRY, title, id)
 }
