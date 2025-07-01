@@ -6,3 +6,9 @@ export interface IProvince{
     country: ICountry
 
 }
+
+export interface IRequestProvince{
+    id?: number
+    name: string
+    country: {id : number}
+}

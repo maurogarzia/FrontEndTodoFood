@@ -10,8 +10,8 @@ export const getAllCountries = () => {
     return getAll(BASE_COUNTRY, title)
 }
 
-export const getCountryById = (idCountry: number) => {
-    return getById(BASE_COUNTRY, title, idCountry)
+export const getCountryById = (id: number) => {
+    return getById(BASE_COUNTRY, title, id)
 }
 
 export const createCountry = async(country : ICountry) =>{
