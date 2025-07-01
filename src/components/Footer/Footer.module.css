@@ -16,9 +16,18 @@
     gap: 20px;
     padding: 10px;
     width: 100%;
+    
 
 }
 .column a{
     text-decoration: none;
     color: inherit;
+}
+.social{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.social span{
+    font-size: 25px;
 }

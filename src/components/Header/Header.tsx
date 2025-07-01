@@ -1,11 +1,18 @@
+import { useNavigate } from 'react-router'
 import styles from './Header.module.css'
 
 export const Header = () => {
+    const navigate = useNavigate()
+
+    const handleNavigate = () => {
+        navigate("/")
+    }
+
     return(
         <div className={styles.containerPrincipal}>
             <header>
                 <nav className={styles.containerItems}>
-                    <h1>TodoFood</h1>
+                    <h1 onClick={handleNavigate}>TodoFood</h1>
 
                     <div className={styles.containerNav}>
                         <p>Promociones</p>

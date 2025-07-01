@@ -4,11 +4,9 @@ import { ErrorAlert } from '../utils/ErrorAlert'
 import type { ICountry } from '../types/ICountry'
 
 
-const BASE = BASE_URL
+const BASE_COUNTRY = `${BASE_URL}/country`
 
-const BASE_COUNTRY = `${BASE}/country`
-
-export const getAllCountry = async() => {
+export const getAllCountries = async() => {
     try {
         const countries = await axios.get(BASE_COUNTRY)
         return countries.data

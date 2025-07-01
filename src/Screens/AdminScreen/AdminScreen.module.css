@@ -1,6 +1,8 @@
 .containerPrincipal{
     display: flex;
     flex-direction: column;
+    background-color: #585858;
+    color: white;
 }
 .containerAdmin{
     display: flex;

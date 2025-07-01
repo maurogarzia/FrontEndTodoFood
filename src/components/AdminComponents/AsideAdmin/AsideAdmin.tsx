@@ -1,18 +1,22 @@
+import { useStoreAdmin } from '../../../Store/useStoreAdmin'
 import style from './AsideAdmin.module.css'
 
 export const AsideAdmin = () => {
+
+    const {setPage} = useStoreAdmin()
+
     return (
         <div className={style.containerPrincipal} >
-            <p>País</p>
-            <p>Provincia</p>
-            <p>Localidad</p>
-            <p>Dirección</p>
-            <p>Productos</p>
-            <p>Imágenes</p>
-            <p>Usuarios</p>
-            <p>Sucursales</p>
-            <p>Tamaños</p>
-            <p>Promociones</p>
+            <p onClick={() => setPage('country')}>País</p>
+            <p onClick={() => setPage('province')}>Provincia</p>
+            <p onClick={() => setPage('locality')}>Localidad</p>
+            <p onClick={() => setPage('address')}>Dirección</p>
+            <p onClick={() => setPage('products')}>Productos</p>
+            <p onClick={() => setPage('images')}>Imágenes</p>
+            <p onClick={() => setPage('users')}>Usuarios</p>
+            <p onClick={() => setPage('branches')}>Sucursales</p>
+            <p onClick={() => setPage('sizes')}>Tamaños</p>
+            <p onClick={() => setPage('promotions')}>Promociones</p>
 
         </div>
     )

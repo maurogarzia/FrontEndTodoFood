@@ -17,9 +17,20 @@ export const Footer = () => {
 
             <div className={styles.column}>
                 <h2>Redes Sociales</h2>
-                <p>@todofood</p>
-                <p>todofood</p>
-                <p>2616938666</p>
+                <div className={styles.social}>
+                    <span className="fab fa-instagram"></span>
+                    <p>@todofood</p>
+                </div>
+
+                <div className={styles.social}>
+                    <span className="fab fa-facebook"></span>
+                    <p>todofood</p>
+                </div>
+
+                <div className={styles.social}>
+                    <span className="fab fa-whatsapp"></span>
+                    <p>2616938666</p>
+                </div>
             </div>
 
             <div className={styles.column}>
