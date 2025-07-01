@@ -14,7 +14,7 @@ export const CountryAdmin = () => {
     return (
         <div className={style.containerPrincipal}>
             <div className={style.containerTitleAndButton}>
-                <h1>Paises</h1>
+                <h1>Países</h1>
                 <button>Agregar</button>
             </div>
             <div className={style.countryTable}>

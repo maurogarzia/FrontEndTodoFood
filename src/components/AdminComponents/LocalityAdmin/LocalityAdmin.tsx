@@ -13,7 +13,7 @@ export const LocalityAdmin = () => {
     return (
         <div className={style.containerPrincipal}>
             <div className={style.containerTitleAndButton}>
-                <h1>Provincias</h1>
+                <h1>Localidades</h1>
                 <button>Agregar</button>
             </div>
             <div className={style.entityTable}>
