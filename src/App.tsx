@@ -1,11 +1,13 @@
+import { AppRoutes } from "./Routes/AppRoutes"
 import { Home } from "./Screens/Home/Home"
+
 
 function App() {
   
 
   return (
     <>
-      <Home/>
+      <AppRoutes/>
     </>
   )
 }

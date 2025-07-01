@@ -1,0 +1,12 @@
+.containerPrincipal{
+    display: flex;
+    flex-direction: column;
+}
+.containerAdmin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    padding: 10px;
+    
+}

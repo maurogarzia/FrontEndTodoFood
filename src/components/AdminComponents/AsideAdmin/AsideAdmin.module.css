@@ -1,0 +1,18 @@
+.containerPrincipal{
+    display: flex;
+    flex-direction: column;
+    background-color: #292929;
+    color: white;
+    padding: 10px;
+    min-width: 200px;
+}
+.containerPrincipal p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.containerPrincipal p:hover{
+    cursor: pointer;
+    background-color: #4b4b4b;
+}

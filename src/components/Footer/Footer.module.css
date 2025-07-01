@@ -8,12 +8,17 @@
 .title{
     color: #E95708;
     font-size: 25px;
+    width: 100%;
 }
 .column{
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 10px;
-    
+    width: 100%;
 
+}
+.column a{
+    text-decoration: none;
+    color: inherit;
 }

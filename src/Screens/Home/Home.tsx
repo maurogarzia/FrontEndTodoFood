@@ -6,6 +6,9 @@ export const Home = () => {
     return (
         <div className={style.containerPrincipal}>
             <Header/>
+            <div style={{"height" : "100%"}}>
+
+            </div>
             <Footer/>
         </div>
     )
