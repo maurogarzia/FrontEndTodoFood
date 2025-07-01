@@ -17,7 +17,11 @@ export const useStoreCountry = create<IUseStoreCountry>((set) => ({
 
     fetchCountry: async() => {
         const fetchedCountry = await getAllCountries()
-        set({countries : fetchedCountry})
+        if (fetchedCountry) {
+            set({countries : fetchedCountry})
+        } else {
+            set({countries : []})
+        }
         
     }
 

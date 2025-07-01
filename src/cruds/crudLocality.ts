@@ -1,6 +1,6 @@
 import {BASE_URL} from '../utils/constantes'
 import { createEntity, deleteEntity, getAll, getById, updateEntity } from './crudGeneric'
-import type { ILocality } from '../types/ILocality'
+import type { IRequestLocality } from '../types/ILocality'
 
 
 
@@ -15,11 +15,11 @@ export const getLocalityById = (id: number) => {
     return getById(BASE_LOCALITY, title, id)
 }
 
-export const createLocality = async(locality : ILocality) =>{
+export const createLocality = async(locality : IRequestLocality) =>{
     return createEntity(BASE_LOCALITY, title, locality)
 }
 
-export const updatedLocality = async(newLocality : ILocality, id: number) => {
+export const updatedLocality = async(newLocality : IRequestLocality, id: number) => {
     return updateEntity(BASE_LOCALITY, title, newLocality, id)
 }
 

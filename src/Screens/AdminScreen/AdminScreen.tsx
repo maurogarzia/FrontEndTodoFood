@@ -1,5 +1,7 @@
 import { AsideAdmin } from '../../components/AdminComponents/AsideAdmin/AsideAdmin'
 import { CountryAdmin } from '../../components/AdminComponents/CountryAdmin/CountryAdmin'
+import { LocalityAdmin } from '../../components/AdminComponents/LocalityAdmin/LocalityAdmin'
+import { ProvinceAdmin } from '../../components/AdminComponents/ProvinceAdmin/ProvinceAdmin'
 import { Footer } from '../../components/Footer/Footer'
 import { Header } from '../../components/Header/Header'
 import { useStoreAdmin } from '../../Store/useStoreAdmin'
@@ -16,6 +18,8 @@ export const AdminScreen = () => {
                 <AsideAdmin/>
                 {page === 'admin' && <div className={style.containerAdmin}><h1>ADMINISTRACIÓN</h1></div>}
                 {page === 'country' && <CountryAdmin/>}
+                {page === 'province' && <ProvinceAdmin/>}
+                {page === 'locality' && <LocalityAdmin/>}
             </div>
             <Footer/>
         </div>

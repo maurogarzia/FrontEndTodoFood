@@ -4,7 +4,7 @@ import { ErrorAlert } from "../utils/ErrorAlert";
 export const getAll = async(url : string, title: string) => {
     try {
         const entities = await axios.get(url)
-        return entities.data
+        return entities.data 
     } catch (error : any) {
         console.log(`Errror de getAll de ${title}`);
         ErrorAlert('Error', `getAll de ${title} fallo`)

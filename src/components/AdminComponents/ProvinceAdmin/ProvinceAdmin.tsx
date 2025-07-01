@@ -1,38 +1,39 @@
 import { useEffect } from 'react'
-import { useStoreCountry } from '../../../Store/useStoreCountry'
-import style from './CountryAdmin.module.css'
+import { useStoreProvince } from '../../../Store/useStoreProvince'
+import style from './ProvinceAdmin.module.css'
 
-export const CountryAdmin = () => {
+export const ProvinceAdmin = () => {
 
-    const {fetchCountry,countries} = useStoreCountry()
+    const {fetchProvince, provinces} = useStoreProvince()
 
     useEffect(() => {
-        fetchCountry()
+        fetchProvince()
     },[])
-    
 
-    return (
+    return(
         <div className={style.containerPrincipal}>
             <div className={style.containerTitleAndButton}>
-                <h1>Paises</h1>
+                <h1>Provincias</h1>
                 <button>Agregar</button>
             </div>
-            <div className={style.countryTable}>
+            <div className={style.entityTable}>
 
                 <table className={style.table}>
                     <thead>
                         <tr>
                             <th>Id</th>
                             <th>Nombre</th>
+                            <th>País</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        {countries.map((country) => (
-                            <tr key={country.id}>
-                                <td>{country.id ? country.id : '' }</td>
-                                <td>{country.name ? country.name : ''}</td>
+                        {provinces.map((province) => (
+                            <tr key={province.id}>
+                                <td>{province.id ? province.id : '' }</td>
+                                <td>{province.name ? province.name : ''}</td>
+                                <td>{province.country.name ? province.country.name : ''}</td>
 
                                 <td>
                                     <div className={style.actionButtons}>

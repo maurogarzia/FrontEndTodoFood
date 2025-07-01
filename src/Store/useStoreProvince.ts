@@ -9,7 +9,7 @@ interface IUseStoreProvince {
     fetchProvince : () => Promise<void>
 }
 
-export const useStoreCountry = create<IUseStoreProvince>((set) => ({
+export const useStoreProvince = create<IUseStoreProvince>((set) => ({
     provinces : [],
     activeProvince: null,
 
@@ -17,7 +17,11 @@ export const useStoreCountry = create<IUseStoreProvince>((set) => ({
 
     fetchProvince: async() => {
         const fetchedProvince = await getAllProvinces()
-        set({provinces : fetchedProvince})
+        if (fetchedProvince) {
+            set({provinces : fetchedProvince})
+        } else {
+            set({provinces : []})
+        }
         
     }
 

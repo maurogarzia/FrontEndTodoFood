@@ -1,38 +1,41 @@
 import { useEffect } from 'react'
-import { useStoreCountry } from '../../../Store/useStoreCountry'
-import style from './CountryAdmin.module.css'
+import { useStoreLocality } from '../../../Store/useStoreLocality'
+import style from './LocalityAdmin.module.css'
 
-export const CountryAdmin = () => {
+export const LocalityAdmin = () => {
 
-    const {fetchCountry,countries} = useStoreCountry()
+    const {fetchLocality, localities} = useStoreLocality()
 
     useEffect(() => {
-        fetchCountry()
+        fetchLocality()
     },[])
-    
 
     return (
         <div className={style.containerPrincipal}>
             <div className={style.containerTitleAndButton}>
-                <h1>Paises</h1>
+                <h1>Provincias</h1>
                 <button>Agregar</button>
             </div>
-            <div className={style.countryTable}>
+            <div className={style.entityTable}>
 
                 <table className={style.table}>
                     <thead>
                         <tr>
                             <th>Id</th>
                             <th>Nombre</th>
+                            <th>Código Postal</th>
+                            <th>Provincia</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        {countries.map((country) => (
-                            <tr key={country.id}>
-                                <td>{country.id ? country.id : '' }</td>
-                                <td>{country.name ? country.name : ''}</td>
+                        {localities.map((localities) => (
+                            <tr key={localities.id}>
+                                <td>{localities.id ? localities.id : '' }</td>
+                                <td>{localities.name ? localities.name : ''}</td>
+                                <td>{localities.cp ? localities.cp : ''}</td>
+                                <td>{localities.province.name ? localities.province.name : ''}</td>
 
                                 <td>
                                     <div className={style.actionButtons}>
