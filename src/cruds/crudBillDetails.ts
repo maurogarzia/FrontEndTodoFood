@@ -1,5 +1,4 @@
 
-import type { IBill } from '../types/IBill'
 import type { IBIllDetail } from '../types/IBillDetail'
 
 import {BASE_URL} from '../utils/constantes'

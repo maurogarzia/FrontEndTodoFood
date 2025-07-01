@@ -1,3 +1,4 @@
+import { AddressAdmin } from '../../components/AdminComponents/AddressAdmin/AddressAdmin'
 import { AsideAdmin } from '../../components/AdminComponents/AsideAdmin/AsideAdmin'
 import { CountryAdmin } from '../../components/AdminComponents/CountryAdmin/CountryAdmin'
 import { LocalityAdmin } from '../../components/AdminComponents/LocalityAdmin/LocalityAdmin'
@@ -20,6 +21,7 @@ export const AdminScreen = () => {
                 {page === 'country' && <CountryAdmin/>}
                 {page === 'province' && <ProvinceAdmin/>}
                 {page === 'locality' && <LocalityAdmin/>}
+                {page === 'address' && <AddressAdmin/>}
             </div>
             <Footer/>
         </div>
