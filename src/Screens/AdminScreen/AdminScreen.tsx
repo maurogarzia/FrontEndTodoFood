@@ -13,7 +13,7 @@ export const AdminScreen = () => {
             <Header/>
             <div style={{"height" : "100vh", "display" : "flex"}}>
                 <AsideAdmin/>
-                {page === 'admin' && <div className={style.containerAdmin}><h1>ADMIN</h1></div>}
+                {page === 'admin' && <div className={style.containerAdmin}><h1>ADMINISTRACIÓN</h1></div>}
             </div>
             <Footer/>
         </div>
