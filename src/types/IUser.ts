@@ -7,7 +7,7 @@ export interface IUser {
     name: string
     password: string,
     rol: Rol,
-    emial: string,
+    email: string,
     dni: number,
     address: IAddress
 }
@@ -17,7 +17,7 @@ export interface IRequestUser {
     name: string
     password: string,
     rol: Rol,
-    emial: string,
+    email: string,
     dni: number,
     address: {id: number}
 }

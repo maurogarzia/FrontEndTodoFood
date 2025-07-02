@@ -9,7 +9,7 @@ interface IUseStoreProducts {
     fetchProduct : () => Promise<void>
 }
 
-export const useStoreAddress = create<IUseStoreProducts>((set) => ({
+export const useStoreProducts = create<IUseStoreProducts>((set) => ({
     products : [],
     activeProduct: null,
 

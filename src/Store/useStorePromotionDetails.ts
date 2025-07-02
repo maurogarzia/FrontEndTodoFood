@@ -10,7 +10,7 @@ interface IUseStorePromotionsDetails {
     fetchPromotionsDetails : () => Promise<void>
 }
 
-export const useStorePromotion = create<IUseStorePromotionsDetails>((set) => ({
+export const useStorePromotionDetails = create<IUseStorePromotionsDetails>((set) => ({
     promotionsDetails : [],
     activePromotionDetails: null,
 

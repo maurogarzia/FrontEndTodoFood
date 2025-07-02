@@ -9,7 +9,7 @@ interface IUseStoreImages {
     fetchImage : () => Promise<void>
 }
 
-export const useStoreCountry = create<IUseStoreImages>((set) => ({
+export const useStoreImage = create<IUseStoreImages>((set) => ({
     images : [],
     activeImage: null,
 

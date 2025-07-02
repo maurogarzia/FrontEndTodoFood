@@ -1,26 +1,26 @@
 import { create } from "zustand";
+import { getAllProducts } from "../cruds/crudProducts";
 import type { IProductsDetails } from "../types/IProductsDetails";
-import { getAllProductsDetails } from "../cruds/crudProductDetails";
 
 interface IUseStoreProductsDetails {
-    productsDetails : IProductsDetails[]
+    productDetails : IProductsDetails[]
     activeProductDetails: IProductsDetails | null
     setActiveProductDetails : (incommingProductDetails : IProductsDetails | null) => void,
     fetchProductDetails : () => Promise<void>
 }
 
 export const useStoreProductDetails = create<IUseStoreProductsDetails>((set) => ({
-    productsDetails : [],
+    productDetails : [],
     activeProductDetails: null,
 
-    setActiveProductDetails : (incommingProductDetails : IProductsDetails | null) => set({activeProductDetails: incommingProductDetails}),
+    setActiveProductDetails : (incommingProductDetails) => set({activeProductDetails: incommingProductDetails}),
 
     fetchProductDetails: async() => {
-        const fetchedProductDetails = await getAllProductsDetails()
+        const fetchedProductDetails = await getAllProducts()
         if (fetchedProductDetails) {
-            set({productsDetails : fetchedProductDetails})
+            set({productDetails : fetchedProductDetails})
         } else {
-            set({productsDetails : []})
+            set({productDetails : []})
         }
         
     }

@@ -9,7 +9,7 @@ export interface IPromotionsDetails {
     description: string,
     discount: number
     price: IPrice,
-    product: IProducts,
+    products: IProducts[],
     image: IImage
 }
 
@@ -20,6 +20,6 @@ export interface IRequestPromotionsDetails {
     description: string,
     discount: number
     price: {id: number},
-    product: {id: number},
+    product: {ids: number[]},
     image: {id: number}
 }
