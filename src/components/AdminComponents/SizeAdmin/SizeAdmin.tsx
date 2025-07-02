@@ -13,7 +13,7 @@ export const SizeAdmin = () => {
     return (
         <div className={style.containerPrincipal}>
             <div className={style.containerTitleAndButton}>
-                <h1>Talles</h1>
+                <h1>Tamaños</h1>
                 <button>Agregar</button>
             </div>
             <div className={style.entityTable}>

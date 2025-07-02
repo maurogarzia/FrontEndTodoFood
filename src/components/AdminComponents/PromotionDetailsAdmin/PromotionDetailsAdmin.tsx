@@ -14,7 +14,7 @@ export const PromotionDetails = () => {
     return (
         <div className={style.containerPrincipal}>
             <div className={style.containerTitleAndButton}>
-                <h1>Promoción</h1>
+                <h1>Detalles Promoción</h1>
                 <button>Agregar</button>
             </div>
             <div className={style.entityTable}>

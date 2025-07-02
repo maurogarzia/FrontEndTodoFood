@@ -15,7 +15,7 @@ export const PromotionAdmin = () => {
     return (
         <div className={style.containerPrincipal}>
             <div className={style.containerTitleAndButton}>
-                <h1>Promoción</h1>
+                <h1>Promociones</h1>
                 <button>Agregar</button>
             </div>
             <div className={style.entityTable}>

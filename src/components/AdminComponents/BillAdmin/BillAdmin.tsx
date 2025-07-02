@@ -13,7 +13,7 @@ export const BillAdmin = () => {
     return (
         <div className={style.containerPrincipal}>
             <div className={style.containerTitleAndButton}>
-                <h1>Categorías</h1>
+                <h1>Facturas</h1>
                 <button>Agregar</button>
             </div>
             <div className={style.entityTable}>
