@@ -23,6 +23,6 @@ export const updatedProvince = async(newProvince : IRequestProvince, id: number)
     return updateEntity(BASE_PROVINCE, title, newProvince, id)
 }
 
-export const deleteCountry = async(id : number) => {
+export const deleteProvince = async(id : number) => {
     return deleteEntity(BASE_PROVINCE, title, id)
 }

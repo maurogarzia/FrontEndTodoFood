@@ -35,14 +35,14 @@ export const ModalAdminCountry = () => {
             if (activeCountry) {
                 // Editar
                 await updatedCountry(country, country.id!)
-                SuccesAlerts('Editado', 'Se edito el país correctamente')
+                SuccesAlerts('Editado', 'Se editó el país correctamente')
                 fetchCountry() // Actualizo el estado
                 closeViewModalAdminCountry()
 
             } else {
 
                 await createCountry(country)
-                SuccesAlerts('Creado', 'Se creo el país correctamente')
+                SuccesAlerts('Creado', 'Se creó el país correctamente')
                 fetchCountry()
                 closeViewModalAdminCountry()
             }

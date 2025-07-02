@@ -1,14 +1,14 @@
 import type { ICountry } from "./ICountry"
 
 export interface IProvince{
-    id: number
+    id: number 
     name: string
     country: ICountry
 
 }
 
 export interface IRequestProvince{
-    id?: number
+    id?: number | null
     name: string
-    country: {id : number}
+    country: {id : number | null}
 }
