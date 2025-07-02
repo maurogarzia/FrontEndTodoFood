@@ -11,7 +11,7 @@ export const ProductsAdmin = () => {
     },[])
 
     return (
-        <div>
+        
             <div className={style.containerPrincipal}>
             <div className={style.containerTitleAndButton}>
                 <h1>Productos</h1>
@@ -51,6 +51,6 @@ export const ProductsAdmin = () => {
                 </table>
             </div>
         </div>
-        </div>
+        
     )
 }

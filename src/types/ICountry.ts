@@ -1,5 +1,5 @@
 
 export interface ICountry {
-    id: number,
-    name : String,
+    id: number | null,
+    name : string,
 }
