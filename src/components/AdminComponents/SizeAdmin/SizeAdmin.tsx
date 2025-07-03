@@ -6,10 +6,13 @@ import type { ISize } from '../../../types/ISize'
 import { useStoreModal } from '../../../Store/useStoreModal'
 import { deleteSize } from '../../../cruds/crudSize'
 import { ModalAdminSize } from '../../Modals/ModalAdminSize/ModalAdminSize'
+import { useStoreProducts } from '../../../Store/useStoreProducts'
+import { ErrorAlert } from '../../../utils/ErrorAlert'
 
 export const SizeAdmin = () => {
     const { sizes, fetchSize, setActiveSize } = useStoreSize()
     const {openViewModalAdminSize, viewModalAdminSize} = useStoreModal()
+    const {products, fetchProduct} = useStoreProducts()
 
     useEffect(() => {
         fetchSize()
@@ -21,6 +24,15 @@ export const SizeAdmin = () => {
     }
 
     const handleDelete = async(id : number) => {
+
+        fetchProduct() // Renderizo productos
+        const existingProductWithSize = products.some((product) => product.category.id === id)
+        
+        if (existingProductWithSize) {
+            ErrorAlert('Error', 'El tamaño está asociado con un producto')
+            return
+        }
+
         try {
             await deleteSize(id)
             fetchSize()
