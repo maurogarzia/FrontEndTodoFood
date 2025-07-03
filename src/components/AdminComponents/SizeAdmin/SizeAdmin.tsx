@@ -2,19 +2,39 @@ import { useEffect } from 'react'
 
 import style from './SizeAdmin.module.css'
 import { useStoreSize } from '../../../Store/useStoreSize'
+import type { ISize } from '../../../types/ISize'
+import { useStoreModal } from '../../../Store/useStoreModal'
+import { deleteSize } from '../../../cruds/crudSize'
+import { ModalAdminSize } from '../../Modals/ModalAdminSize/ModalAdminSize'
 
 export const SizeAdmin = () => {
-    const { sizes, fetchSize } = useStoreSize()
+    const { sizes, fetchSize, setActiveSize } = useStoreSize()
+    const {openViewModalAdminSize, viewModalAdminSize} = useStoreModal()
 
     useEffect(() => {
         fetchSize()
     }, [])
 
+    const handleOpen = (size : ISize | null) => {
+        setActiveSize(size)
+        openViewModalAdminSize()
+    }
+
+    const handleDelete = async(id : number) => {
+        try {
+            await deleteSize(id)
+            fetchSize()
+        } catch (error : any) {
+            console.log(error);
+            
+        }
+    }
+
     return (
         <div className={style.containerPrincipal}>
             <div className={style.containerTitleAndButton}>
                 <h1>Tamaños</h1>
-                <button>Agregar</button>
+                <button onClick={() => handleOpen(null)}>Agregar</button>
             </div>
             <div className={style.entityTable}>
                 <table className={style.table}>
@@ -32,8 +52,8 @@ export const SizeAdmin = () => {
                                 <td>{size.name}</td>
                                 <td>
                                     <div className={style.actionButtons}>
-                                        <button>Editar</button>
-                                        <button>Eliminar</button>
+                                        <button onClick={() => handleOpen(size)}>Editar</button>
+                                        <button onClick={() => handleDelete(size.id!)}>Eliminar</button>
                                     </div>
                                 </td>
                             </tr>
@@ -41,6 +61,7 @@ export const SizeAdmin = () => {
                     </tbody>
                 </table>
             </div>
+            {viewModalAdminSize && <div className={style.modalBackdrop}><ModalAdminSize/></div>}
         </div>
     )
 }

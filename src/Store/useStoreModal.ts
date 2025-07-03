@@ -5,7 +5,8 @@ interface IUseStoreModal {
     viewModalAdminProvince : boolean,
     viewModalAdminLocality : boolean,
     viewModalAdminAddress : boolean,
-    viewModalAdminBranch : boolean
+    viewModalAdminBranch : boolean,
+    viewModalAdminSize : boolean,
 
 
     openViewModalAdminCountry : VoidFunction,
@@ -21,7 +22,10 @@ interface IUseStoreModal {
     closeViewModalAdminAddress : VoidFunction
 
     openViewModalAdminBarnch : VoidFunction,
-    closeViewModalAdminBranch : VoidFunction
+    closeViewModalAdminBranch : VoidFunction,
+
+    openViewModalAdminSize : VoidFunction,
+    closeViewModalAdminSize : VoidFunction
 }
 
 
@@ -31,6 +35,7 @@ export const useStoreModal = create<IUseStoreModal>((set) => ({
     viewModalAdminLocality : false,
     viewModalAdminAddress : false,
     viewModalAdminBranch : false,
+    viewModalAdminSize: false,
 
     // Pais
     openViewModalAdminCountry : () => set({viewModalAdminCountry : true}),
@@ -48,7 +53,12 @@ export const useStoreModal = create<IUseStoreModal>((set) => ({
     openViewModalAdminAddress : () => set({viewModalAdminAddress : true}),
     closeViewModalAdminAddress : () => set({viewModalAdminAddress : false}),
 
+    // Sucursal
     openViewModalAdminBarnch : () => set({viewModalAdminBranch : true}),
     closeViewModalAdminBranch : () => set({viewModalAdminBranch : false}),
+
+    // Tamanio
+    openViewModalAdminSize : () => set({viewModalAdminSize : true}),
+    closeViewModalAdminSize : () => set({viewModalAdminSize : false}),
 
 }))

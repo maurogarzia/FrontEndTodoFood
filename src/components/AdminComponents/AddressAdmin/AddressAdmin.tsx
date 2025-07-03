@@ -5,11 +5,14 @@ import { useStoreModal } from '../../../Store/useStoreModal'
 import { ModalAdminAddress } from '../../Modals/ModalAdminAddress/ModalAdminAddress'
 import type { IAddress } from '../../../types/IAddress'
 import { deleteAddress } from '../../../cruds/crudAddress'
+import { useStoreBranch } from '../../../Store/UseStoreBranch'
+import { ErrorAlert } from '../../../utils/ErrorAlert'
 
 export const AddressAdmin = () => {
 
     const {fetchAddress, addresses, setActiveAddress} = useStoreAddress()
     const {openViewModalAdminAddress, viewModalAdminAddress} = useStoreModal()
+    const {fetchBranch, branches} = useStoreBranch()
 
     useEffect(() => {
         fetchAddress()
@@ -21,6 +24,16 @@ export const AddressAdmin = () => {
     }
 
     const handleDelete = async(id : number) => {
+
+        fetchBranch() // Renderizo las sucursales
+
+        const existingBranchWithAddress = branches.some((branch) => branch.address.id    === id)
+
+        if (existingBranchWithAddress) {
+            ErrorAlert('Error', 'La direccion se encuentra vinculada a una sucursal')
+            return
+        }
+
         try {
             await deleteAddress(id)
             fetchAddress()

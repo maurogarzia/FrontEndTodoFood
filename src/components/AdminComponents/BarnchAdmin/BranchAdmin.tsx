@@ -3,8 +3,9 @@ import style from './BranchAdmin.module.css'
 import { useStoreBranch } from '../../../Store/UseStoreBranch'
 import { useStoreModal } from '../../../Store/useStoreModal'
 import type { IBranch } from '../../../types/IBranch'
-import { ModalAdminBranch } from '../../Modals/ModalAdminBranch/ModalAdminBRanch'
+
 import { deleteBranch } from '../../../cruds/crudBranches'
+import { ModalAdminBranch } from '../../Modals/ModalAdminBranch/ModalAdminBranch'
 
 export const BranchAdmin = () => {
     const { branches, fetchBranch, setActiveBranches } = useStoreBranch()
