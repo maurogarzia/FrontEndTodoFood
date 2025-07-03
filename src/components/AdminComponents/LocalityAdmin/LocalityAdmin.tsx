@@ -1,20 +1,39 @@
 import { useEffect } from 'react'
 import { useStoreLocality } from '../../../Store/useStoreLocality'
 import style from './LocalityAdmin.module.css'
+import { deleteLocality } from '../../../cruds/crudLocality'
+import type { ILocality } from '../../../types/ILocality'
+import { useStoreModal } from '../../../Store/useStoreModal'
+import { ModalAdminLocality } from '../../Modals/ModalAdminLocality/ModalAdminLocality'
 
 export const LocalityAdmin = () => {
 
-    const {fetchLocality, localities} = useStoreLocality()
+    const {fetchLocality, localities, setActiveLocality} = useStoreLocality()
+    const {openViewModalAdminLocality, viewModalAdminLocality} = useStoreModal()
 
     useEffect(() => {
         fetchLocality()
     },[])
 
+    const handleOpen = (locality : ILocality | null) => {
+        setActiveLocality(locality)
+        openViewModalAdminLocality()
+    }
+
+    const handleDelete = async(id : number) => {
+        try {
+            await deleteLocality(id)
+            fetchLocality()
+        } catch (error : any) {
+            console.log('');
+        }
+    }
+
     return (
         <div className={style.containerPrincipal}>
             <div className={style.containerTitleAndButton}>
                 <h1>Localidades</h1>
-                <button>Agregar</button>
+                <button onClick={() => handleOpen(null)}>Agregar</button>
             </div>
             <div className={style.entityTable}>
 
@@ -30,17 +49,17 @@ export const LocalityAdmin = () => {
                     </thead>
 
                     <tbody>
-                        {localities.map((localities) => (
-                            <tr key={localities.id}>
-                                <td>{localities.id ? localities.id : '' }</td>
-                                <td>{localities.name ? localities.name : ''}</td>
-                                <td>{localities.cp ? localities.cp : ''}</td>
-                                <td>{localities.province.name ? localities.province.name : ''}</td>
+                        {localities.map((locality) => (
+                            <tr key={locality.id}>
+                                <td>{locality.id ? locality.id : '' }</td>
+                                <td>{locality.name ? locality.name : ''}</td>
+                                <td>{locality.cp ? locality.cp : ''}</td>
+                                <td>{locality.province.name ? locality.province.name : ''}</td>
 
                                 <td>
                                     <div className={style.actionButtons}>
-                                        <button>Editar</button>
-                                        <button>Eliminar</button>
+                                        <button onClick={() => handleOpen(locality)}>Editar</button>
+                                        <button onClick={() => handleDelete(locality.id)}>Eliminar</button>
                                     </div>
                                 </td>
                             </tr>
@@ -49,6 +68,7 @@ export const LocalityAdmin = () => {
                     </tbody>
                 </table>
             </div>
+            {viewModalAdminLocality && <div className={style.modalBackdrop}><ModalAdminLocality/></div>}
         </div>
     )
 }

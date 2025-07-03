@@ -5,7 +5,7 @@ import style from './ModalAdminCountry.module.css'
 import type { ICountry } from '../../../types/ICountry'
 import { createCountry, updatedCountry } from '../../../cruds/crudCountry'
 import { ErrorAlert } from '../../../utils/ErrorAlert'
-import { SuccesAlerts } from '../../../utils/SuccesAlert'
+
 
 export const ModalAdminCountry = () => {
 
@@ -35,14 +35,12 @@ export const ModalAdminCountry = () => {
             if (activeCountry) {
                 // Editar
                 await updatedCountry(country, country.id!)
-                SuccesAlerts('Editado', 'Se editó el país correctamente')
                 fetchCountry() // Actualizo el estado
                 closeViewModalAdminCountry()
 
             } else {
 
                 await createCountry(country)
-                SuccesAlerts('Creado', 'Se creó el país correctamente')
                 fetchCountry()
                 closeViewModalAdminCountry()
             }

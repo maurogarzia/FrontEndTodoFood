@@ -6,7 +6,7 @@ import style from './ModalAdminProvince.module.css'
 import type { IRequestProvince } from '../../../types/IProvince'
 import { ErrorAlert } from '../../../utils/ErrorAlert'
 import { createProvince, updatedProvince } from '../../../cruds/crudProvince'
-import { SuccesAlerts } from '../../../utils/SuccesAlert'
+
 
 export const ModalAdminProvince = () => {
 
@@ -52,14 +52,12 @@ export const ModalAdminProvince = () => {
             if (activeProvince) {
                 
                 await updatedProvince(province, province.id!)
-                SuccesAlerts('Editado', 'Se editó la provincia')
                 fetchProvince()
                 closeViewModalAdminProvince()
 
             } else {
                 
                 await createProvince(province)
-                SuccesAlerts('Creado', 'Se creó la provincia')
                 fetchProvince()
                 closeViewModalAdminProvince()
             }

@@ -9,8 +9,8 @@ export interface ILocality {
 }
 
 export interface IRequestLocality {
-    id? : number,
+    id? : number | null,
     name: string,
     cp: number,
-    province: {id: number}
+    province: {id: number | null}
 }
