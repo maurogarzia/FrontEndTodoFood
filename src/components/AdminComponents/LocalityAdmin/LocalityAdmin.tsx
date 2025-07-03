@@ -5,11 +5,14 @@ import { deleteLocality } from '../../../cruds/crudLocality'
 import type { ILocality } from '../../../types/ILocality'
 import { useStoreModal } from '../../../Store/useStoreModal'
 import { ModalAdminLocality } from '../../Modals/ModalAdminLocality/ModalAdminLocality'
+import { useStoreAddress } from '../../../Store/useStoreAddress'
+import { ErrorAlert } from '../../../utils/ErrorAlert'
 
 export const LocalityAdmin = () => {
 
     const {fetchLocality, localities, setActiveLocality} = useStoreLocality()
     const {openViewModalAdminLocality, viewModalAdminLocality} = useStoreModal()
+    const {addresses, fetchAddress} = useStoreAddress()
 
     useEffect(() => {
         fetchLocality()
@@ -21,6 +24,14 @@ export const LocalityAdmin = () => {
     }
 
     const handleDelete = async(id : number) => {
+
+        fetchAddress() // Renderizo direcciones
+        const existingAddressInLocality = addresses.some((address) => address.id === id)
+        if (existingAddressInLocality) {
+            ErrorAlert('Error', 'La localidad está vinculada a una dirección')
+            return
+        }
+
         try {
             await deleteLocality(id)
             fetchLocality()

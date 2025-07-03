@@ -7,11 +7,13 @@ import type { ICountry } from '../../../types/ICountry'
 import { ErrorAlert } from '../../../utils/ErrorAlert'
 import { deleteCountry } from '../../../cruds/crudCountry'
 import { SuccesAlerts } from '../../../utils/SuccesAlert'
+import { useStoreProvince } from '../../../Store/useStoreProvince'
 
 export const CountryAdmin = () => {
 
     const {fetchCountry,countries, setActiveCountry} = useStoreCountry()
     const {openViewModalAdminCountry, viewModalAdminCountry} = useStoreModal()
+    const {fetchProvince, provinces} = useStoreProvince()
 
     useEffect(() => {
         fetchCountry()
@@ -23,6 +25,15 @@ export const CountryAdmin = () => {
     }
 
     const handleDelete = async(id : number) => {
+
+        fetchProvince() //Renderizo Provincias
+
+        const existingProvinceInCounty = provinces.some((province) => province.country.id === id)
+        if (existingProvinceInCounty) {
+            ErrorAlert('Error', 'El país se encuentra vinculado a una provincia')
+            return
+        }
+
         try {
             await deleteCountry(id)
             fetchCountry()

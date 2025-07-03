@@ -7,11 +7,13 @@ import { SuccesAlerts } from '../../../utils/SuccesAlert'
 import { useStoreModal } from '../../../Store/useStoreModal'
 import { ModalAdminProvince } from '../../Modals/ModalAdminProvince/ModalAdminProvince'
 import type { IProvince } from '../../../types/IProvince'
+import { useStoreLocality } from '../../../Store/useStoreLocality'
 
 export const ProvinceAdmin = () => {
 
     const {fetchProvince, provinces, setActiveProvince} = useStoreProvince()
     const {viewModalAdminProvince, openViewModalAdminProvince} = useStoreModal()
+    const {fetchLocality, localities} = useStoreLocality()
 
     useEffect(() => {
         fetchProvince()
@@ -25,6 +27,14 @@ export const ProvinceAdmin = () => {
 
     // Eliminar Provincia
     const handleDelete = async(id : number) => {
+
+        fetchLocality() // Renderizo localidades
+        const existingLocalityInProvince = localities.some((locality) => locality.id === id)
+        if (existingLocalityInProvince) {
+            ErrorAlert('Error', 'La provincia se encuentra vinculada a una localidad')
+            return
+        }
+
         try {
             await deleteProvince(id)
             fetchProvince()
