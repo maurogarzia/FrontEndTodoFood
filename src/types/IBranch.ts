@@ -2,10 +2,12 @@ import type { IAddress } from "./IAddress";
 
 export interface IBranch {
     id: number,
+    name: string,
     address : IAddress
 }
 
 export interface IRequestBranch {
-    id: number,
-    address : {id: number}
+    id: number | null,
+    name : string,
+    address : {id: number | null}
 }

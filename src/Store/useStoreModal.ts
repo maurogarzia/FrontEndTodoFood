@@ -4,7 +4,9 @@ interface IUseStoreModal {
     viewModalAdminCountry : boolean,
     viewModalAdminProvince : boolean,
     viewModalAdminLocality : boolean,
-    viewModalAdminAddress : boolean
+    viewModalAdminAddress : boolean,
+    viewModalAdminBranch : boolean
+
 
     openViewModalAdminCountry : VoidFunction,
     closeViewModalAdminCountry : VoidFunction,
@@ -17,6 +19,9 @@ interface IUseStoreModal {
 
     openViewModalAdminAddress : VoidFunction,
     closeViewModalAdminAddress : VoidFunction
+
+    openViewModalAdminBarnch : VoidFunction,
+    closeViewModalAdminBranch : VoidFunction
 }
 
 
@@ -25,6 +30,7 @@ export const useStoreModal = create<IUseStoreModal>((set) => ({
     viewModalAdminProvince : false,
     viewModalAdminLocality : false,
     viewModalAdminAddress : false,
+    viewModalAdminBranch : false,
 
     // Pais
     openViewModalAdminCountry : () => set({viewModalAdminCountry : true}),
@@ -40,6 +46,9 @@ export const useStoreModal = create<IUseStoreModal>((set) => ({
 
     // Direccion
     openViewModalAdminAddress : () => set({viewModalAdminAddress : true}),
-    closeViewModalAdminAddress : () => set({viewModalAdminAddress : false})
+    closeViewModalAdminAddress : () => set({viewModalAdminAddress : false}),
+
+    openViewModalAdminBarnch : () => set({viewModalAdminBranch : true}),
+    closeViewModalAdminBranch : () => set({viewModalAdminBranch : false}),
 
 }))
