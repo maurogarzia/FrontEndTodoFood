@@ -8,8 +8,8 @@ export interface IAddress {
 }
 
 export interface IRequestAddress {
-    id? : number,
+    id? : number | null,
     street: string,
     number: number,
-    locality: {id: number}
+    locality: {id: number | null}
 }

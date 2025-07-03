@@ -3,7 +3,8 @@ import { create } from "zustand";
 interface IUseStoreModal {
     viewModalAdminCountry : boolean,
     viewModalAdminProvince : boolean,
-    viewModalAdminLocality : boolean
+    viewModalAdminLocality : boolean,
+    viewModalAdminAddress : boolean
 
     openViewModalAdminCountry : VoidFunction,
     closeViewModalAdminCountry : VoidFunction,
@@ -13,6 +14,9 @@ interface IUseStoreModal {
 
     openViewModalAdminLocality : VoidFunction,
     closeViewModalAdminLocality : VoidFunction
+
+    openViewModalAdminAddress : VoidFunction,
+    closeViewModalAdminAddress : VoidFunction
 }
 
 
@@ -20,6 +24,7 @@ export const useStoreModal = create<IUseStoreModal>((set) => ({
     viewModalAdminCountry : false,
     viewModalAdminProvince : false,
     viewModalAdminLocality : false,
+    viewModalAdminAddress : false,
 
     // Pais
     openViewModalAdminCountry : () => set({viewModalAdminCountry : true}),
@@ -31,6 +36,10 @@ export const useStoreModal = create<IUseStoreModal>((set) => ({
 
     // Localidad
     openViewModalAdminLocality : () => set({viewModalAdminLocality : true}),
-    closeViewModalAdminLocality : () => set({viewModalAdminLocality : false})
+    closeViewModalAdminLocality : () => set({viewModalAdminLocality : false}),
+
+    // Direccion
+    openViewModalAdminAddress : () => set({viewModalAdminAddress : true}),
+    closeViewModalAdminAddress : () => set({viewModalAdminAddress : false})
 
 }))

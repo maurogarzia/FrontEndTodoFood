@@ -1,20 +1,40 @@
 import { useEffect } from 'react'
 import { useStoreAddress } from '../../../Store/useStoreAddress'
 import style from './AddressAdmin.module.css'
+import { useStoreModal } from '../../../Store/useStoreModal'
+import { ModalAdminAddress } from '../../Modals/ModalAdminAddress/ModalAdminAddress'
+import type { IAddress } from '../../../types/IAddress'
+import { deleteAddress } from '../../../cruds/crudAddress'
 
 export const AddressAdmin = () => {
 
-    const {fetchAddress, addresses} = useStoreAddress()
+    const {fetchAddress, addresses, setActiveAddress} = useStoreAddress()
+    const {openViewModalAdminAddress, viewModalAdminAddress} = useStoreModal()
 
     useEffect(() => {
         fetchAddress()
     },[])
 
+    const handleOpen = (address : IAddress | null) => {
+        setActiveAddress(address)
+        openViewModalAdminAddress()
+    }
+
+    const handleDelete = async(id : number) => {
+        try {
+            await deleteAddress(id)
+            fetchAddress()
+        } catch (error : any) {
+            console.log(error.message);
+            
+        }
+    }
+
     return(
         <div className={style.containerPrincipal}>
             <div className={style.containerTitleAndButton}>
                 <h1>Direcciones</h1>
-                <button>Agregar</button>
+                <button onClick={() => handleOpen(null)}>Agregar</button>
             </div>
             <div className={style.entityTable}>
 
@@ -39,8 +59,8 @@ export const AddressAdmin = () => {
 
                                 <td>
                                     <div className={style.actionButtons}>
-                                        <button>Editar</button>
-                                        <button>Eliminar</button>
+                                        <button onClick={() => handleOpen(address)}>Editar</button>
+                                        <button onClick={() => handleDelete(address.id)}>Eliminar</button>
                                     </div>
                                 </td>
                             </tr>
@@ -49,6 +69,7 @@ export const AddressAdmin = () => {
                     </tbody>
                 </table>
             </div>
+            {viewModalAdminAddress && <div className={style.modalBackdrop}><ModalAdminAddress/></div>}
         </div>
     )
 }
