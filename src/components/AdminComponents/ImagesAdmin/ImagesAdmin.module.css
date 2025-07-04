@@ -38,6 +38,7 @@
     color: black;
 }
 .table {
+    
     width: 100%;
     border-collapse: collapse;
     text-align: center;
@@ -51,6 +52,7 @@
 .table td {
     padding: 12px 15px;
     border: 1px solid #ddd;
+    overflow-x: auto;
 }
 .table th {
     background-color: #f4f4f4;
@@ -91,4 +93,12 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
+}
+.image{
+    width: 200px;
+    height: 150px;
+}
+.urlColumn{
+    max-width: 200px;
+    overflow-x: auto;
 }

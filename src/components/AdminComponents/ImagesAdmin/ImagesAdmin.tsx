@@ -54,8 +54,9 @@ export const ImagesAdmin = () => {
                     <thead>
                         <tr>
                             <th>Id</th>
+                            <th>Preview</th>
                             <th>Url</th>
-                            <th>PublicId</th>
+                            
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -64,8 +65,9 @@ export const ImagesAdmin = () => {
                         {images.map((image) => (
                             <tr key={image.id}>
                                 <td>{image.id ? image.id : '' }</td>
-                                <td>{image.url ? image.url : ''}</td>
-                                <td>{image.publicId ? image.publicId : ''}</td>
+                                <td><img className={style.image} src={image.url} alt="" /></td>
+                                <td className={style.urlColumn}>{image.url ? image.url : ''}</td>
+                                
 
                                 <td>
                                     <div className={style.actionButtons}>

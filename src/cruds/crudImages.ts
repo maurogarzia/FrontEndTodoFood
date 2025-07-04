@@ -1,14 +1,13 @@
 import axios from 'axios'
-import type { IImage } from '../types/IImage'
 import {BASE_URL} from '../utils/constantes'
 import { ErrorAlert } from '../utils/ErrorAlert'
-import { createEntity, deleteEntity, getAll, getById, updateEntity } from './crudGeneric'
+import { deleteEntity, getAll, getById } from './crudGeneric'
 import { SuccesAlerts } from '../utils/SuccesAlert'
 
 
 
 
-const BASE_IMAGES = `${BASE_URL}/images`
+const BASE_IMAGES = `${BASE_URL}/image`
 const BASE_CLOUDINARY = `${BASE_URL}/upload`
 const title = 'Imágenes'
 
@@ -21,7 +20,7 @@ export const getImagesById = (id: number) => {
 }
 
 export const createImages = async(file : File) =>{
-    const formData = new FormData
+    const formData = new FormData()
     formData.append("file", file)
     
     try {
@@ -38,8 +37,22 @@ export const createImages = async(file : File) =>{
     }
 }
 
-export const updatedImages = async(newImage : IImage, id: number) => {
-    return updateEntity(BASE_IMAGES, title, newImage, id)
+export const updatedImages = async(file : File, id: number) => {
+    const formData = new FormData()
+    formData.append("file", file)
+
+    try {
+        const response = await axios.put(`${BASE_CLOUDINARY}/${id}`, formData, {
+            headers : {
+                'Content-Type' : 'multipart/form-data'
+            }
+        })
+        SuccesAlerts('Editado', `${title} editado correctamente`)
+        return response.data
+    } catch (error : any) {
+        console.log(error.message);
+        ErrorAlert('Error', `Ocurrió un error al editar ${title}`)
+    }
 }
 
 export const deleteImages = async(id : number) => {
