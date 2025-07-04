@@ -9,6 +9,8 @@ interface IUseStoreModal {
     viewModalAdminSize : boolean,
     viewModalAdminCategory : boolean,
     viewModalAdminImage : boolean,
+    viewModalAdminPrice : boolean,
+    viewModalAdminUser : boolean,
 
 
     openViewModalAdminCountry : VoidFunction,
@@ -33,7 +35,13 @@ interface IUseStoreModal {
     closeViewModalAdminCategory : VoidFunction,
 
     openViewModalAdminImage : VoidFunction,
-    closeViewModalAdminImage : VoidFunction
+    closeViewModalAdminImage : VoidFunction,
+
+    openViewModalAdminPrice : VoidFunction,
+    closeViewModalAdminPrice : VoidFunction,
+
+    openViewModalAdminUser : VoidFunction,
+    closeViewModalAdminUser : VoidFunction
 }
 
 
@@ -46,6 +54,8 @@ export const useStoreModal = create<IUseStoreModal>((set) => ({
     viewModalAdminSize: false,
     viewModalAdminCategory : false,
     viewModalAdminImage : false,
+    viewModalAdminPrice : false,
+    viewModalAdminUser : false,
 
     // Pais
     openViewModalAdminCountry : () => set({viewModalAdminCountry : true}),
@@ -75,8 +85,16 @@ export const useStoreModal = create<IUseStoreModal>((set) => ({
     openViewModalAdminCategory : () => set({viewModalAdminCategory : true}),
     closeViewModalAdminCategory : () => set({viewModalAdminCategory : false}),
 
-    // Image
+    // Imagen
     openViewModalAdminImage : () => set({viewModalAdminImage : true}),
-    closeViewModalAdminImage : () => set({viewModalAdminImage : false})
+    closeViewModalAdminImage : () => set({viewModalAdminImage : false}),
+
+    // Precio
+    openViewModalAdminPrice : () => set({viewModalAdminPrice : true}),
+    closeViewModalAdminPrice : () => set({viewModalAdminPrice : false}),
+
+    // Usuario
+    openViewModalAdminUser : () => set({viewModalAdminUser : true}),
+    closeViewModalAdminUser : () => set({viewModalAdminUser : false})
 
 }))

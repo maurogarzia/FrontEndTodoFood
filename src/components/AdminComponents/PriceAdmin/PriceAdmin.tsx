@@ -2,19 +2,52 @@ import { useEffect } from 'react'
 
 import style from './PriceAdmin.module.css'
 import { useStorePrice } from '../../../Store/useStorePrice'
+import type { IPrice } from '../../../types/IPrice'
+import { useStoreModal } from '../../../Store/useStoreModal'
+import { ModalAdminPrice } from '../../Modals/ModalAdminPrice/ModalAdminPrice'
+import { useStoreProductDetails } from '../../../Store/useStoreProductDetails'
+import { ErrorAlert } from '../../../utils/ErrorAlert'
+import { deletePrice } from '../../../cruds/crudPrice'
 
 export const PriceAdmin = () => {
-    const { prices, fetchPrice } = useStorePrice()
+    const { prices, fetchPrice, setActivePrice } = useStorePrice()
+    const {openViewModalAdminPrice, viewModalAdminPrice} = useStoreModal()
+    const {productDetails, fetchProductDetails} = useStoreProductDetails()
 
     useEffect(() => {
         fetchPrice()
     }, [])
 
+
+    const handleOpen = (price : IPrice | null) => {
+        setActivePrice(price)
+        openViewModalAdminPrice()
+    }
+
+    const handleDelete = async( id : number) => {
+
+        fetchProductDetails() // Renderizo los detalles del producto
+        const existProductWithPrice = productDetails.some((productDetail) => productDetail.price.id === id)
+
+        if (existProductWithPrice) {
+            ErrorAlert('Error', 'El precio se encuentra asociado a un producto')
+            return
+        }
+
+        try {
+            await deletePrice(id)
+            fetchPrice()
+        } catch (error:any) {
+            console.log(error.message);
+            
+        }
+    } 
+
     return (
         <div className={style.containerPrincipal}>
             <div className={style.containerTitleAndButton}>
                 <h1>Precios</h1>
-                <button>Agregar</button>
+                <button onClick={() => handleOpen(null)}>Agregar</button>
             </div>
             <div className={style.entityTable}>
                 <table className={style.table}>
@@ -34,8 +67,8 @@ export const PriceAdmin = () => {
                                 <td>${price.purchasePrice}</td>
                                 <td>
                                     <div className={style.actionButtons}>
-                                        <button>Editar</button>
-                                        <button>Eliminar</button>
+                                        <button onClick={() => handleOpen(price)}>Editar</button>
+                                        <button onClick={() => handleDelete(price.id!)}>Eliminar</button>
                                     </div>
                                 </td>
                             </tr>
@@ -43,6 +76,7 @@ export const PriceAdmin = () => {
                     </tbody>
                 </table>
             </div>
+            {viewModalAdminPrice && <div className={style.modalBackdrop}><ModalAdminPrice/></div>}
         </div>
     )
 }

@@ -1,5 +1,5 @@
 export interface IPrice {
-    id?: number,
+    id?: number | null,
     salesPrice: number,
     purchasePrice: number
 }
