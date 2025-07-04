@@ -41,7 +41,6 @@ export const AdminScreen = () => {
                 {page === 'sizes' && <SizeAdmin/>}
                 {page === 'categories' && <CategoryAdmin/>}
                 {page === 'bills' && <BillAdmin/>}
-                {page === 'billDetails' && <BillDetailsAdmin/>}
                 {page === 'prices' && <PriceAdmin/>}
                 {page === 'promotions' && <PromotionAdmin/>}
                 {page === 'promotionDetails' && <PromotionDetails/>}

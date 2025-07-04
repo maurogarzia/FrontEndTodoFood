@@ -21,7 +21,6 @@ export const AsideAdmin = () => {
             <p onClick={() => setPage('sizes')}>Tamaños</p>
             <p onClick={() => setPage('categories')}>Categorías</p>
             <p onClick={() => setPage('bills')}>Factura</p>
-            <p onClick={() => setPage('billDetails')}>Detalle Factura</p>
             <p onClick={() => setPage('prices')}>Precios</p>
 
         </div>
