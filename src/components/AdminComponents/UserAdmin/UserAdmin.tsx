@@ -1,20 +1,41 @@
 import { useEffect } from 'react'
 import { useStoreUser } from '../../../Store/useStoreUsers'
 import style from './UserAdmin.module.css'
+import { useStoreModal } from '../../../Store/useStoreModal'
+import { ModalAdminUsers } from '../../Modals/ModalAdminUsers/ModalAdminUses'
+import type { IUser } from '../../../types/IUser'
+import { deleteUser } from '../../../cruds/crudUsers'
 
 export const UserAdmin = () => {
 
-    const {users, fetchUser} = useStoreUser()
+    const {users, fetchUser, setActiveUser} = useStoreUser()
+    const {openViewModalAdminUser, viewModalAdminUser} = useStoreModal()
 
     useEffect(() => {
         fetchUser()
     },[])
 
+
+    const handleOpen = (user : IUser | null) => {
+        setActiveUser(user)
+        openViewModalAdminUser()
+    }
+
+    const handleDelete = async (id : number) => {
+        try {
+            await deleteUser(id)
+            fetchUser()
+        } catch (error : any) {
+            console.log(error.message);
+            
+        }
+    }
+
     return(
         <div className={style.containerPrincipal}>
             <div className={style.containerTitleAndButton}>
                 <h1>Usuarios</h1>
-                <button>Agregar</button>
+                <button onClick={() => handleOpen(null)}>Agregar</button>
             </div>
             <div className={style.entityTable}>
 
@@ -23,6 +44,7 @@ export const UserAdmin = () => {
                         <tr>
                             <th>Id</th>
                             <th>Nombre</th>
+                            <th>Apellido</th>
                             <th>Contraseña</th>
                             <th>Email</th>
                             <th>Rol</th>
@@ -52,8 +74,8 @@ export const UserAdmin = () => {
 
                                 <td>
                                     <div className={style.actionButtons}>
-                                        <button>Editar</button>
-                                        <button>Eliminar</button>
+                                        <button onClick={() => handleOpen(user)}>Editar</button>
+                                        <button onClick={() => handleDelete(user.id)}>Eliminar</button>
                                     </div>
                                 </td>
                             </tr>
@@ -62,6 +84,7 @@ export const UserAdmin = () => {
                     </tbody>
                 </table>
             </div>
+            {viewModalAdminUser && <div className={style.modalBackdrop}><ModalAdminUsers/></div>}
         </div>
     )
     

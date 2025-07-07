@@ -4,7 +4,8 @@ import type { IAddress } from "./IAddress"
 
 export interface IUser {
     id: number,
-    name: string
+    name: string,
+    lastname : string
     password: string,
     rol: Rol,
     email: string,
@@ -13,11 +14,12 @@ export interface IUser {
 }
 
 export interface IRequestUser {
-    id?: number,
+    id?: number | null,
     name: string
+    lastname : string
     password: string,
     rol: Rol,
     email: string,
     dni: number,
-    address: {id: number}
+    address: {id: number | null}
 }
