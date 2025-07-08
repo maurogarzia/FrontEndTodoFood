@@ -1,20 +1,41 @@
 import { useEffect } from 'react'
 import { useStoreProductDetails } from '../../../Store/useStoreProductDetails'
 import style from './ProductsDetailsAdmin.module.css'
+import { useStoreModal } from '../../../Store/useStoreModal'
+import type { IProductsDetails } from '../../../types/IProductsDetails'
+import { deleteProductDetails } from '../../../cruds/crudProductDetails'
+import { ModalAdminProductsDetails} from '../../Modals/ModalAdminProductsDetails/ModalAdminProductsDetails'
+
 
 export const ProductsDetailsAdmin = () => {
 
-    const {productDetails, fetchProductDetails} = useStoreProductDetails()
+    const {productDetails, fetchProductDetails, setActiveProductDetails} = useStoreProductDetails()
+    const {viewModalAdminProductDetails, openViewModalAdminProductDetails} = useStoreModal()
 
     useEffect(() => {
         fetchProductDetails()
     },[])
 
+    const handleOpen = (detail : IProductsDetails | null) => {
+        setActiveProductDetails(detail)
+        openViewModalAdminProductDetails()
+    }
+
+    const handleDelete = async(id : number) => {
+
+        try {
+            await deleteProductDetails(id)
+        } catch (error : any) {
+            console.log(error.message);
+            
+        }
+    }
+
     return(
         <div className={style.containerPrincipal}>
             <div className={style.containerTitleAndButton}>
                 <h1>Detalle Productos</h1>
-                <button>Agregar</button>
+                <button onClick={() => handleOpen(null)}>Agregar</button>
             </div>
             <div className={style.entityTable}>
 
@@ -22,6 +43,7 @@ export const ProductsDetailsAdmin = () => {
                     <thead>
                         <tr>
                             <th>Id</th>
+                            <th>Producto</th>
                             <th>Stock</th>
                             <th>Tamaño</th>
                             <th>Imagen</th>
@@ -33,14 +55,16 @@ export const ProductsDetailsAdmin = () => {
                         {productDetails.map((detail) => (
                             <tr key={detail.id}>
                                 <td>{detail.id ? detail.id : '' }</td>
+                                <td>{detail.product ? detail.product.id : ''}</td>
                                 <td>{detail.stock ? detail.stock : ''}</td>
-                                <td>{detail.size.id ? detail.size.id : ''}</td>
-                                <td>{detail.image.id ? detail.image.id : ''}</td>
+                                <td>{detail.size ? detail.size.id : ''}</td>
+                                <td>{detail.image ? detail.image.id : ''}</td>
+                                
 
                                 <td>
                                     <div className={style.actionButtons}>
-                                        <button>Editar</button>
-                                        <button>Eliminar</button>
+                                        <button onClick={() => handleOpen(detail)}>Editar</button>
+                                        <button onClick={() => handleDelete(detail.id)}>Eliminar</button>
                                     </div>
                                 </td>
                             </tr>
@@ -49,6 +73,7 @@ export const ProductsDetailsAdmin = () => {
                     </tbody>
                 </table>
             </div>
+            {viewModalAdminProductDetails && <div className={style.modalBackdrop}><ModalAdminProductsDetails/></div>}
         </div>
     )
 }

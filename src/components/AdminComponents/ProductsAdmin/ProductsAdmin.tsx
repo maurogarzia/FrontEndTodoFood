@@ -4,6 +4,7 @@ import style from './ProductsAdmin.module.css'
 import { useStoreModal } from '../../../Store/useStoreModal'
 import type { IProducts } from '../../../types/IProducts'
 import { ModalAdminProduct } from '../../Modals/ModalAdminProduct/ModalAdminProduct'
+import { deleteProduct } from '../../../cruds/crudProducts'
 
 export const ProductsAdmin = () => {
 
@@ -17,6 +18,14 @@ export const ProductsAdmin = () => {
     const handleOpen = (product : IProducts | null) => {
         setActiveProduct(product)
         openViewModalAdminProduct()
+    }
+
+    const handleDelete = async( id : number) => {
+        try {
+            await deleteProduct(id)
+        } catch (error : any) {
+            console.log(error.message);
+        }
     }
 
     return (
@@ -34,7 +43,6 @@ export const ProductsAdmin = () => {
                             <th>Id</th>
                             <th>Nombre</th>
                             <th>Categoría</th>
-                            <th>Detalles</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -44,17 +52,12 @@ export const ProductsAdmin = () => {
                             <tr key={product.id}>
                                 <td>{product.id ? product.id : '' }</td>
                                 <td>{product.name ? product.name : ''}</td>
-                                <td>{product.details.map((detail) => (
-                                    <div className={style.details}>
-                                        <p>{detail.id}</p>
-                                    </div>
-                                ))}</td>
+                                <td>{product.category ? product.category.name : ''}</td>
                                 
-
                                 <td>
                                     <div className={style.actionButtons}>
                                         <button onClick={() => handleOpen(product)}>Editar</button>
-                                        <button>Eliminar</button>
+                                        <button onClick={() => handleDelete(product.id)}>Eliminar</button>
                                     </div>
                                 </td>
                             </tr>

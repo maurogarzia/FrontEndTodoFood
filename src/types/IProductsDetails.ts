@@ -13,10 +13,10 @@ export interface IProductsDetails{
 }
 
 export interface IRequestProductsDetails {
-    id?: number,
+    id?: number | null,
     stock: number,
-    price: {id: number},
-    size: {id: number},
-    image: {id: number}
-    product : {id : number}
+    price: {id: number | null},
+    size: {id: number | null},
+    image: {id: number | null}
+    product : {id : number | null}
 }

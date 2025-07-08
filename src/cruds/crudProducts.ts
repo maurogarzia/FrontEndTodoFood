@@ -5,7 +5,7 @@ import { createEntity, deleteEntity, getAll, getById, updateEntity } from './cru
 
 
 
-const BASE_PRODUCTS = `${BASE_URL}/products`
+const BASE_PRODUCTS = `${BASE_URL}/product`
 const title = 'Productos'
 
 export const getAllProducts = () => {
