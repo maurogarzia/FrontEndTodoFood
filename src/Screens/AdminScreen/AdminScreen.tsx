@@ -10,7 +10,7 @@ import { PriceAdmin } from '../../components/AdminComponents/PriceAdmin/PriceAdm
 import { ProductsAdmin } from '../../components/AdminComponents/ProductsAdmin/ProductsAdmin'
 import { ProductsDetailsAdmin } from '../../components/AdminComponents/ProductsDetailsAdmin/ProductsDetailsAdmin'
 import { PromotionAdmin } from '../../components/AdminComponents/PromotionAdmin/PromotionAdmin'
-import { PromotionDetails } from '../../components/AdminComponents/PromotionDetailsAdmin/PromotionDetailsAdmin'
+
 import { ProvinceAdmin } from '../../components/AdminComponents/ProvinceAdmin/ProvinceAdmin'
 import { SizeAdmin } from '../../components/AdminComponents/SizeAdmin/SizeAdmin'
 import { UserAdmin } from '../../components/AdminComponents/UserAdmin/UserAdmin'
@@ -43,7 +43,7 @@ export const AdminScreen = () => {
                 {page === 'bills' && <BillAdmin/>}
                 {page === 'prices' && <PriceAdmin/>}
                 {page === 'promotions' && <PromotionAdmin/>}
-                {page === 'promotionDetails' && <PromotionDetails/>}
+                
             </div>
             <Footer/>
         </div>

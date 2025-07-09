@@ -1,5 +1,5 @@
 
-import type { IRequestPromotionsDetails } from '../types/IPromotionsDetails'
+import type { IRequestPromotionsDetails } from '../types/IPromotion'
 import {BASE_URL} from '../utils/constantes'
 import { createEntity, deleteEntity, getAll, getById, updateEntity } from './crudGeneric'
 

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { IPromotionsDetails } from "../types/IPromotionsDetails";
+import type { IPromotionsDetails } from "../types/IPromotion";
 import { getAllPromotionDetails } from "../cruds/crudPromotionDetails";
 
 

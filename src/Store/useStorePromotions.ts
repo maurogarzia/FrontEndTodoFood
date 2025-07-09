@@ -1,12 +1,13 @@
 import { create } from "zustand";
-import type { IPromotions } from "../types/IPromotions";
+
 import { getAllPromotions } from "../cruds/crudPromotions";
+import type { IPromotion } from "../types/IPromotion";
 
 
 interface IUseStorePromotions {
-    promotions: IPromotions[],
-    activePromotion: IPromotions | null
-    setActivePromotion : (incommingPromotion : IPromotions | null) => void 
+    promotions: IPromotion[],
+    activePromotion: IPromotion | null
+    setActivePromotion : (incommingPromotion : IPromotion | null) => void 
     fetchPromotions : () => Promise<void>
 }
 

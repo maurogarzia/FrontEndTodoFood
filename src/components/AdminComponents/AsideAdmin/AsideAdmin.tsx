@@ -14,7 +14,6 @@ export const AsideAdmin = () => {
             <p onClick={() => setPage('products')}>Productos</p>
             <p onClick={() => setPage('productsDetails')}>Detalle Producto</p>
             <p onClick={() => setPage('promotions')}>Promociones</p>
-            <p onClick={() => setPage('promotionDetails')}>Detalles Promocion</p>
             <p onClick={() => setPage('images')}>Imágenes</p>
             <p onClick={() => setPage('users')}>Usuarios</p>
             <p onClick={() => setPage('branches')}>Sucursales</p>

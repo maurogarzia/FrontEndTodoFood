@@ -108,10 +108,10 @@ export const ModalAdminProductsDetails = () => {
             <form action="" onSubmit={handleSubmit}>
                 <div className={style.containerData}>
                     <label htmlFor="">Stock</label>
-                    <input type="number" name="stock" id="" onChange={handleChange} />
+                    <input type="number" name="stock" value={newDetail.stock} onChange={handleChange} />
 
                     <label htmlFor="">Precio</label>
-                    <select name="price" id="" onChange={handleChange}>
+                    <select name="price" value={newDetail.price.id!} onChange={handleChange}>
                         <option disabled selected>Sin selección</option>
                         {prices.map((price) => (
                             <option key={price.id} value={price.id!} >Compra: {price.purchasePrice}, Venta: {price.salesPrice}</option>
@@ -119,7 +119,7 @@ export const ModalAdminProductsDetails = () => {
                     </select>
 
                     <label htmlFor="">Tamaño</label>
-                    <select name="size" id="" onChange={handleChange}>
+                    <select name="size" value={newDetail.size.id!} onChange={handleChange}>
                         <option disabled selected>Sin selección</option>
                         {sizes.map((size) => (
                             <option key={size.id} value={size.id!}>{size.name}</option>
@@ -127,7 +127,7 @@ export const ModalAdminProductsDetails = () => {
                     </select>
 
                     <label htmlFor="">Producto</label>
-                    <select name="product" id="" onChange={handleChange}>
+                    <select name="product" value={newDetail.product.id!} id="" onChange={handleChange}>
                         <option disabled selected>Sin selección</option>
                         {products.map((product) => (
                             <option key={product.id} value={product.id}>{product.name}</option>
@@ -135,7 +135,7 @@ export const ModalAdminProductsDetails = () => {
                     </select>
 
                     <label htmlFor="">Imagen</label>
-                    <select name="image" id="" onChange={handleChange}>
+                    <select name="image" value={newDetail.image.id!} onChange={handleChange}>
                         <option disabled selected>Sin selección</option>
                         {images.map((image) => (
                             <option key={image.id} value={image.id}>{image.id}</option>
