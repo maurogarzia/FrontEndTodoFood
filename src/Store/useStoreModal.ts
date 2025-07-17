@@ -15,6 +15,7 @@ interface IUseStoreModal {
     viewModalAdminProductDetails : boolean,
     viewModalAdminPromotion : boolean,
     viewModalAdminPromotionDetails : boolean,
+    viewSubModalPromotionDetails : boolean
 
 
 
@@ -57,8 +58,11 @@ interface IUseStoreModal {
     openViewModalAdminPromotion : VoidFunction,
     closeViewModalAdminPromotion : VoidFunction,
 
-    openModalAdminPromotionDetails : VoidFunction,
-    closeSubModalAdminPromotionDetails : VoidFunction
+    openViewModalAdminPromotionDetails : VoidFunction,
+    closeViewModalAdminPromotionDetails : VoidFunction,
+
+    openSubModalPromotionDetails: VoidFunction,
+    closeSubModalPromotionDetails: VoidFunction
 }
 
 
@@ -77,6 +81,7 @@ export const useStoreModal = create<IUseStoreModal>((set) => ({
     viewModalAdminProductDetails : false,
     viewModalAdminPromotion : false,
     viewModalAdminPromotionDetails : false,
+    viewSubModalPromotionDetails : false,
 
     // Pais
     openViewModalAdminCountry : () => set({viewModalAdminCountry : true}),
@@ -131,7 +136,11 @@ export const useStoreModal = create<IUseStoreModal>((set) => ({
     closeViewModalAdminPromotion : () => set({viewModalAdminPromotion : false}),
 
     // Modal de Detalle Promocion
-    openModalAdminPromotionDetails : () => set({viewModalAdminPromotionDetails : true}),
-    closeSubModalAdminPromotionDetails : () => set({viewModalAdminPromotionDetails : false}),
+    openViewModalAdminPromotionDetails : () => set({viewModalAdminPromotionDetails : true}),
+    closeViewModalAdminPromotionDetails : () => set({viewModalAdminPromotionDetails : false}),
+
+    // SubModal de Promocion Detalles
+    openSubModalPromotionDetails : () => set({viewSubModalPromotionDetails : true}),
+    closeSubModalPromotionDetails : () => set({viewSubModalPromotionDetails : false})
 
 }))

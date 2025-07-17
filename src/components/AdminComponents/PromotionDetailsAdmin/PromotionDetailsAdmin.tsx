@@ -8,10 +8,10 @@ import style from './PromotionDetails.module.css'
 export const PromotionDetailsAdmin = () => {
 
     const {promotionsDetails, setActivePromotionDetails} = useStorePromotionDetails()
-    const {openModalAdminPromotionDetails, viewModalAdminPromotionDetails} = useStoreModal()
+    const {openViewModalAdminPromotionDetails, viewModalAdminPromotionDetails} = useStoreModal()
 
     const handleOpen = (promotionDetail : IPromotionDetails | null) =>{
-        openModalAdminPromotionDetails()
+        openViewModalAdminPromotionDetails()
         setActivePromotionDetails(promotionDetail)
     }
 

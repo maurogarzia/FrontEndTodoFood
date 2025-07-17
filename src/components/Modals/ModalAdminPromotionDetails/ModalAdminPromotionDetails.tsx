@@ -6,11 +6,12 @@ import style from './ModalAdminPromotionDetails.module.css'
 import { useStorePromotion } from '../../../Store/useStorePromotions'
 import type { IRequestPromotionDetails } from '../../../types/IPromotionDetails'
 import { createPromotionDetails, updatedPromotionDetails } from '../../../cruds/crudPromotionDetails'
+import { SubModalAdminPromotionDetails } from '../SubModalAdminPromotionDetails/SubModalAdminPromotionDetails'
 
 export const ModalAdminPromotionDetails = () => {
 
     const {activePromotionDetails, fetchPromotionsDetails} = useStorePromotionDetails()
-    const {closeSubModalAdminPromotionDetails} = useStoreModal()
+    const {closeViewModalAdminPromotionDetails, viewSubModalPromotionDetails, openSubModalPromotionDetails} = useStoreModal()
     const {prices, fetchPrice} = useStorePrice()
     const {fetchPromotions, promotions} = useStorePromotion()
 
@@ -26,6 +27,8 @@ export const ModalAdminPromotionDetails = () => {
         price : {id : activePromotionDetails?.price.id || null},
         details : activePromotionDetails?.details?.map((d) => ({id : d.id})) || []
     })
+
+    const [option, setOption] = useState<boolean>(false)
 
 
     const handleChange = (e : React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -56,16 +59,22 @@ export const ModalAdminPromotionDetails = () => {
         try {
             if (activePromotionDetails){
                 await updatedPromotionDetails(promotionDetail, promotionDetail.id!)
-                closeSubModalAdminPromotionDetails()
+                closeViewModalAdminPromotionDetails()
                 fetchPromotionsDetails()
             } else {
                 await createPromotionDetails(promotionDetail)
-                closeSubModalAdminPromotionDetails()
+                closeViewModalAdminPromotionDetails()
                 fetchPromotionsDetails()
             }
         } catch (error:any) {
             console.log(error.message);
         }
+    }
+
+
+    const handleOpen = (selection : boolean) => {
+        setOption(selection)
+        openSubModalPromotionDetails()
     }
 
     return (
@@ -75,10 +84,10 @@ export const ModalAdminPromotionDetails = () => {
                 <div className={style.containerData}>
 
                     <label htmlFor="">Descuento</label>
-                    <input type="number" name="discount" onChange={handleChange}/>
+                    <input type="number" value={promotionDetail.discount} name="discount" onChange={handleChange}/>
 
                     <label htmlFor="">Precio</label>
-                    <select name="price" onChange={handleChange}>
+                    <select name="price" value={promotionDetail.price.id!} onChange={handleChange}>
                         <option value="">Sin selección</option>
                         {prices.map((price) => (
                             <option value={price.id!}>Precio Compra: {price.purchasePrice}, Precio Venta: {price.salesPrice}</option>
@@ -86,22 +95,23 @@ export const ModalAdminPromotionDetails = () => {
                     </select>
 
                     <label htmlFor="">Promoción</label>
-                    <select name="promotion" onChange={handleChange}>
+                    <select name="promotion" value={promotionDetail.promotion.id!} onChange={handleChange}>
                         <option value="">Sin selección</option>
                         {promotions.map((promotion) => (
                             <option value={promotion.id}>{promotion.name}</option>
                         ))}
                     </select>
 
-                    <button>Manejo de Productos</button>
+                    <button type='button' onClick={() => handleOpen(true)}>Agregar Productos</button>
+                    <button type='button' onClick={() => handleOpen(false)}>Eliminar Productos</button>
 
                 </div>
                 <div className={style.containerButtons}>
-                    <button onClick={closeSubModalAdminPromotionDetails}>Cancelar</button>
-                    <button >Aceptar</button>
+                    <button type='submit' onClick={closeViewModalAdminPromotionDetails}>Cancelar</button>
+                    <button>Aceptar</button>
                 </div>
             </form>
-
+            {viewSubModalPromotionDetails && <div className={style.modalBackdrop}><SubModalAdminPromotionDetails option={option} promotionDetail={promotionDetail} setPromotionDetail={setPromotionDetail}/></div>}
         </div>
     )
 }
