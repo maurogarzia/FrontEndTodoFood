@@ -2,6 +2,7 @@ import { deletePromotionDetails } from '../../../cruds/crudPromotionDetails'
 import { useStoreModal } from '../../../Store/useStoreModal'
 import { useStorePromotionDetails } from '../../../Store/useStorePromotionDetails'
 import type { IPromotionDetails } from '../../../types/IPromotionDetails'
+import { ModalAdminPromotionDetails } from '../../Modals/ModalAdminPromotionDetails/ModalAdminPromotionDetails'
 import style from './PromotionDetails.module.css'
 
 export const PromotionDetailsAdmin = () => {
@@ -26,7 +27,7 @@ export const PromotionDetailsAdmin = () => {
     return(
         <div className={style.containerPrincipal}>
             <div className={style.containerTitleAndButton}>
-                <h1>Promociones</h1>
+                <h1>Detalles Promoción</h1>
                 <button onClick={() => handleOpen(null)}>Agregar</button>
             </div>
             <div className={style.entityTable}>
@@ -63,7 +64,7 @@ export const PromotionDetailsAdmin = () => {
                     </tbody>
                 </table>
             </div>
-            {}
+            {viewModalAdminPromotionDetails && <div className={style.modalBackdrop}><ModalAdminPromotionDetails/></div>}
         </div>
     )
 }

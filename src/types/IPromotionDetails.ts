@@ -15,4 +15,5 @@ export interface IRequestPromotionDetails{
     discount : number,
     promotion : {id : number | null},
     price : {id : number | null},
+    details : {id : number | null}[]
 }
