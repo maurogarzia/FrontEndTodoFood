@@ -1,5 +1,6 @@
 
-import type { IRequestPromotionsDetails } from '../types/IPromotion'
+
+import type { IRequestPromotionDetails } from '../types/IPromotionDetails'
 import {BASE_URL} from '../utils/constantes'
 import { createEntity, deleteEntity, getAll, getById, updateEntity } from './crudGeneric'
 
@@ -17,11 +18,11 @@ export const getPromotionDetailsById = (id: number) => {
     return getById(BASE_PROMOTIONS_DETAILS, title, id)
 }
 
-export const createPromotionDetails = async(promotionDetail : IRequestPromotionsDetails) =>{
+export const createPromotionDetails = async(promotionDetail : IRequestPromotionDetails) =>{
     return createEntity(BASE_PROMOTIONS_DETAILS, title, promotionDetail)
 }
 
-export const updatedPromotionDetails = async(newPromotionDetails : IRequestPromotionsDetails, id: number) => {
+export const updatedPromotionDetails = async(newPromotionDetails : IRequestPromotionDetails, id: number) => {
     return updateEntity(BASE_PROMOTIONS_DETAILS, title, newPromotionDetails, id)
 }
 

@@ -25,9 +25,9 @@ export const PromotionAdmin = () => {
     const handleDelete = async(id : number) => {    
         try {
             await deletePromotion(id)
+            fetchPromotions()
         } catch (error : any) {
             console.log(error.message);
-            
         }
     }
 
@@ -47,11 +47,7 @@ export const PromotionAdmin = () => {
                             <th>Fecha Inicio</th>
                             <th>Fecha Final</th>
                             <th>Descripcion</th>
-                            <th>Descuento aplicado</th>
-                            <th>Precio promocional</th>
                             <th>Imagen</th>
-                            <th>Productos</th>
-                            <th>Opciones</th>
                         </tr>
                     </thead>
 
@@ -63,19 +59,8 @@ export const PromotionAdmin = () => {
                                 <td>{promotion.initDate ? String(promotion.initDate) : ''}</td>
                                 <td>{promotion.finallyDate ? String(promotion.finallyDate) : ''}</td>
                                 <td>{promotion.description ? promotion.description : ''}</td>
-                                <td>{promotion.discount ? promotion.discount : ''}</td>
-                                <td>{promotion.price ? promotion.price.id : ''}</td>
-                                <td>{promotion.image ? promotion.image.id : ''}</td>
-                                <td>
-                                    {promotion.products.map((product, index) => (
-                                        <span key={product.id}>
-                                            {product.id}
-                                            {index < promotion.products.length - 1 && ', '}
-                                            </span>
-                                    ))}
-                                </td>
-                                
-
+                                <td>{promotion.image?.id}</td>
+                            
                                 <td>
                                     <div className={style.actionButtons}>
                                         <button onClick={() => handleOpen(promotion)}>Editar</button>

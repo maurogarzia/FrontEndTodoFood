@@ -24,6 +24,7 @@
 }
 .containerData{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 20px;
@@ -40,30 +41,14 @@
     outline: none;
     border: 0.5px solid gray;
 }
-.column{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    
-}
-.column input{
+.containerData textarea{
     width: 100%;
     padding: 10px;
     outline: none;
     border: 0.5px solid gray;
-    height: 40px;
 }
-.column textarea{
-    width: 100%;
-    padding: 10px;
-    outline: none;
-    border: 0.5px solid gray;
-    min-height: 40px;
-    height: 40px;
-}
+
+
 
 .containerButtons{
     display: flex;

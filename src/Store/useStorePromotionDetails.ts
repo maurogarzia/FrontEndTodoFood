@@ -1,12 +1,13 @@
 import { create } from "zustand";
-import type { IPromotionsDetails } from "../types/IPromotion";
+
 import { getAllPromotionDetails } from "../cruds/crudPromotionDetails";
+import type { IPromotionDetails } from "../types/IPromotionDetails";
 
 
 interface IUseStorePromotionsDetails {
-    promotionsDetails: IPromotionsDetails[],
-    activePromotionDetails: IPromotionsDetails | null
-    setActivePromotionDetails : (incommingPromotionDetails : IPromotionsDetails | null) => void 
+    promotionsDetails: IPromotionDetails[],
+    activePromotionDetails: IPromotionDetails | null
+    setActivePromotionDetails : (incommingPromotionDetails : IPromotionDetails | null) => void 
     fetchPromotionsDetails : () => Promise<void>
 }
 

@@ -8,11 +8,13 @@ import { ModalAdminPrice } from '../../Modals/ModalAdminPrice/ModalAdminPrice'
 import { useStoreProductDetails } from '../../../Store/useStoreProductDetails'
 import { ErrorAlert } from '../../../utils/ErrorAlert'
 import { deletePrice } from '../../../cruds/crudPrice'
+import { useStorePromotion } from '../../../Store/useStorePromotions'
 
 export const PriceAdmin = () => {
     const { prices, fetchPrice, setActivePrice } = useStorePrice()
     const {openViewModalAdminPrice, viewModalAdminPrice} = useStoreModal()
     const {productDetails, fetchProductDetails} = useStoreProductDetails()
+    const {promotions, fetchPromotions} = useStorePromotion()
 
     useEffect(() => {
         fetchPrice()
@@ -27,10 +29,19 @@ export const PriceAdmin = () => {
     const handleDelete = async( id : number) => {
 
         fetchProductDetails() // Renderizo los detalles del producto
+        fetchPromotions() // Renderizo las promociones
+        
         const existProductWithPrice = productDetails.some((productDetail) => productDetail.price.id === id)
 
+        const existPromotionWhitPrice = promotions.some((promotion) => promotion.price.id === id)
+
+        if (existPromotionWhitPrice) {
+            ErrorAlert('Error', 'El pecio se encuentra asociado a una promoción') // Promocion con el precio
+            return
+        }
+
         if (existProductWithPrice) {
-            ErrorAlert('Error', 'El precio se encuentra asociado a un producto')
+            ErrorAlert('Error', 'El precio se encuentra asociado a un producto') // Producto con el precio
             return
         }
 

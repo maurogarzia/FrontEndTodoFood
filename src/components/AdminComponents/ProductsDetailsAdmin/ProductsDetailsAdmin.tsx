@@ -46,6 +46,7 @@ export const ProductsDetailsAdmin = () => {
                             <th>Producto</th>
                             <th>Stock</th>
                             <th>Tamaño</th>
+                            <th>Precio</th>
                             <th>Imagen</th>
                             <th>Opciones</th>
                         </tr>
@@ -58,6 +59,7 @@ export const ProductsDetailsAdmin = () => {
                                 <td>{detail.product ? detail.product.id : ''}</td>
                                 <td>{detail.stock ? detail.stock : ''}</td>
                                 <td>{detail.size ? detail.size.name : ''}</td>
+                                <td>{detail.price ? detail.price.id : ''}</td>
                                 <td>{detail.image ? detail.image.id : ''}</td>
                                 
 
