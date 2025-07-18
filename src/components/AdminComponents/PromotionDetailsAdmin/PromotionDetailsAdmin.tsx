@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { deletePromotionDetails } from '../../../cruds/crudPromotionDetails'
 import { useStoreModal } from '../../../Store/useStoreModal'
 import { useStorePromotionDetails } from '../../../Store/useStorePromotionDetails'
@@ -7,8 +8,12 @@ import style from './PromotionDetails.module.css'
 
 export const PromotionDetailsAdmin = () => {
 
-    const {promotionsDetails, setActivePromotionDetails} = useStorePromotionDetails()
+    const {promotionsDetails, setActivePromotionDetails, fetchPromotionsDetails} = useStorePromotionDetails()
     const {openViewModalAdminPromotionDetails, viewModalAdminPromotionDetails} = useStoreModal()
+
+    useEffect(() => {
+        fetchPromotionsDetails()
+    },[])
 
     const handleOpen = (promotionDetail : IPromotionDetails | null) =>{
         openViewModalAdminPromotionDetails()
@@ -39,7 +44,8 @@ export const PromotionDetailsAdmin = () => {
                             <th>Promocion</th>
                             <th>Descuento</th>
                             <th>Precio</th>
-                            <th>Detalles de Producto</th>
+                            <th>Productos</th>
+                            <th>Opciones</th>
                         </tr>
                     </thead>
 
@@ -50,7 +56,11 @@ export const PromotionDetailsAdmin = () => {
                                 <td>{details?.promotion?.name}</td>
                                 <td>{details?.discount}</td>
                                 <td>{details?.price?.id}</td>
-                                <td>{details.details.map(d => d.product.name)}</td>
+                                <td>
+                                    {details.productsDetails.map(d => (
+                                        <p>{d.product.name} {d.size.name}</p>
+                                    ))}
+                                </td>
                             
                                 <td>
                                     <div className={style.actionButtons}>

@@ -7,7 +7,7 @@ export interface IPromotionDetails {
     discount : number,
     promotion : IPromotion,
     price : IPrice,
-    details: IProductsDetails[]
+    productsDetails: IProductsDetails[]
 }
 
 export interface IRequestPromotionDetails{
@@ -15,5 +15,5 @@ export interface IRequestPromotionDetails{
     discount : number,
     promotion : {id : number | null},
     price : {id : number | null},
-    details : {id : number | null}[]
+    productsDetails : {id : number | null}[]
 }
