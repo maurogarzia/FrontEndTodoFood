@@ -29,6 +29,9 @@ export const PromotionDetailsAdmin = () => {
         }
     }
 
+    console.log(promotionsDetails);
+    
+
     return(
         <div className={style.containerPrincipal}>
             <div className={style.containerTitleAndButton}>

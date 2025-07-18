@@ -25,7 +25,7 @@ export const ModalAdminPromotionDetails = () => {
         discount : activePromotionDetails?.discount || 0,
         promotion : {id : activePromotionDetails?.promotion.id || null},
         price : {id : activePromotionDetails?.price.id || null},
-        details : activePromotionDetails?.details?.map((d) => ({id : d.id})) || []
+        productsDetails : activePromotionDetails?.productsDetails?.map((d) => ({id : d.id})) || []
     })
 
     const [option, setOption] = useState<boolean>(false)

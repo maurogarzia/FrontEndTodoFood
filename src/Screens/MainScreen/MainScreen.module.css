@@ -3,6 +3,11 @@
     width: 100%;
     height: 100%;
 }
+.containerPrincipal h1 {
+    color: #E95708;
+    padding: 20px;
+    font-size: 50px;
+}
 .containerFilter{
     display: flex;
     justify-content: end;
@@ -32,4 +37,25 @@
 }
 .image img {
     width: 100%;
+}
+.image p{
+    color: white;
+    font-size: 50px;
+    position: relative;
+    z-index: 2;
+    bottom: 110px;
+    display: flex;
+    justify-content: end;
+    width: 90%;
+    font-weight: bold;
+}
+.image p:hover{
+    cursor: pointer;
+}
+.containerCard{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
 }
