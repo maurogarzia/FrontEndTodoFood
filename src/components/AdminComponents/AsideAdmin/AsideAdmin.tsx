@@ -15,13 +15,13 @@ export const AsideAdmin = () => {
             <p onClick={() => setPage('productsDetails')}>Detalle Producto</p>
             <p onClick={() => setPage('promotions')}>Promociones</p>
             <p onClick={() => setPage('promotionDetails')}>Detalle Promoción</p>
+            <p onClick={() => setPage('unitaryDetails')}>Detalles Unitarios</p>
             <p onClick={() => setPage('images')}>Imágenes</p>
             <p onClick={() => setPage('users')}>Usuarios</p>
             <p onClick={() => setPage('branches')}>Sucursales</p>
             <p onClick={() => setPage('sizes')}>Tamaños</p>
             <p onClick={() => setPage('categories')}>Categorías</p>
             <p onClick={() => setPage('bills')}>Factura</p>
-            <p onClick={() => setPage('prices')}>Precios</p>
 
         </div>
     )

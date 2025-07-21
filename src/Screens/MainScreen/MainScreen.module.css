@@ -59,3 +59,44 @@
     gap: 20px;
     align-items: center;
 }
+
+
+
+
+/* Carrusel */
+.carrusel{
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 100%;
+    max-height: 500px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.carrusel img{
+    width: 500px;
+    height: 400px;
+}
+.buttonCarrusel{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.buttonCarrusel button {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: #E95708;
+    color: white;
+    width: 50px;
+    border: #E95708 3px solid;
+}
+.buttonCarrusel button:hover{
+    transform: scale(1.1);
+    transition: 0.3s ease;
+}

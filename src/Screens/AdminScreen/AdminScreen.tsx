@@ -6,7 +6,6 @@ import { CategoryAdmin } from '../../components/AdminComponents/CategoryAdmin/Ca
 import { CountryAdmin } from '../../components/AdminComponents/CountryAdmin/CountryAdmin'
 import { ImagesAdmin } from '../../components/AdminComponents/ImagesAdmin/ImagesAdmin'
 import { LocalityAdmin } from '../../components/AdminComponents/LocalityAdmin/LocalityAdmin'
-import { PriceAdmin } from '../../components/AdminComponents/PriceAdmin/PriceAdmin'
 import { ProductsAdmin } from '../../components/AdminComponents/ProductsAdmin/ProductsAdmin'
 import { ProductsDetailsAdmin } from '../../components/AdminComponents/ProductsDetailsAdmin/ProductsDetailsAdmin'
 import { PromotionAdmin } from '../../components/AdminComponents/PromotionAdmin/PromotionAdmin'
@@ -14,6 +13,7 @@ import { PromotionDetailsAdmin } from '../../components/AdminComponents/Promotio
 
 import { ProvinceAdmin } from '../../components/AdminComponents/ProvinceAdmin/ProvinceAdmin'
 import { SizeAdmin } from '../../components/AdminComponents/SizeAdmin/SizeAdmin'
+import { UnitaryDetailsAdmin } from '../../components/AdminComponents/UnitaryDetailsAdmin/UnitaryDetailsAdmin'
 import { UserAdmin } from '../../components/AdminComponents/UserAdmin/UserAdmin'
 import { Footer } from '../../components/Footer/Footer'
 import { Header } from '../../components/Header/Header'
@@ -42,9 +42,9 @@ export const AdminScreen = () => {
                 {page === 'sizes' && <SizeAdmin/>}
                 {page === 'categories' && <CategoryAdmin/>}
                 {page === 'bills' && <BillAdmin/>}
-                {page === 'prices' && <PriceAdmin/>}
                 {page === 'promotions' && <PromotionAdmin/>}
                 {page == 'promotionDetails' && <PromotionDetailsAdmin/>}
+                {page == 'unitaryDetails' && <UnitaryDetailsAdmin/>}
             </div>
             <Footer/>
         </div>

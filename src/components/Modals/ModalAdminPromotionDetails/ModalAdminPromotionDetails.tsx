@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useStoreModal } from '../../../Store/useStoreModal'
-import { useStorePrice } from '../../../Store/useStorePrice'
 import { useStorePromotionDetails } from '../../../Store/useStorePromotionDetails'
 import style from './ModalAdminPromotionDetails.module.css'
 import { useStorePromotion } from '../../../Store/useStorePromotions'
@@ -12,11 +11,9 @@ export const ModalAdminPromotionDetails = () => {
 
     const {activePromotionDetails, fetchPromotionsDetails} = useStorePromotionDetails()
     const {closeViewModalAdminPromotionDetails, viewSubModalPromotionDetails, openSubModalPromotionDetails} = useStoreModal()
-    const {prices, fetchPrice} = useStorePrice()
     const {fetchPromotions, promotions} = useStorePromotion()
 
     useEffect(() => {
-        fetchPrice()
         fetchPromotions()
     },[])
 
@@ -24,7 +21,7 @@ export const ModalAdminPromotionDetails = () => {
         id : activePromotionDetails?.id || null,
         discount : activePromotionDetails?.discount || 0,
         promotion : {id : activePromotionDetails?.promotion.id || null},
-        price : {id : activePromotionDetails?.price.id || null},
+        price : activePromotionDetails?.price || 0,
         productsDetails : activePromotionDetails?.productsDetails?.map((d) => ({id : d.id})) || []
     })
 
@@ -34,13 +31,9 @@ export const ModalAdminPromotionDetails = () => {
     const handleChange = (e : React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const {name, value} = e.target
 
-        if (name === 'price' || name === 'promotion') {
+        if (name === 'promotion') {
             setPromotionDetail((prev) => ({
                 ...prev,
-                price : {
-                    ...prev.price,
-                    id : Number(value)
-                },
                 promotion : {
                     ...prev.promotion,
                     id : Number(value)
@@ -87,12 +80,7 @@ export const ModalAdminPromotionDetails = () => {
                     <input type="number" value={promotionDetail.discount} name="discount" onChange={handleChange}/>
 
                     <label htmlFor="">Precio</label>
-                    <select name="price" value={promotionDetail.price.id!} onChange={handleChange}>
-                        <option value="">Sin selección</option>
-                        {prices.map((price) => (
-                            <option value={price.id!}>Precio Compra: {price.purchasePrice}, Precio Venta: {price.salesPrice}</option>
-                        ))}
-                    </select>
+                    <input type="number" name="price" value={promotionDetail.price} placeholder='Precio' onChange={handleChange}/>
 
                     <label htmlFor="">Promoción</label>
                     <select name="promotion" value={promotionDetail.promotion.id!} onChange={handleChange}>

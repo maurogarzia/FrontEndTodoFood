@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useStoreModal } from '../../../Store/useStoreModal'
-import { useStorePrice } from '../../../Store/useStorePrice'
 import { useStoreProductDetails } from '../../../Store/useStoreProductDetails'
 import style from './MOdalAdminProductsDetails.module.css'
 import { useStoreSize } from '../../../Store/useStoreSize'
@@ -12,13 +11,11 @@ import { createProductDetails, updatedProductDetails } from '../../../cruds/crud
 export const ModalAdminProductsDetails = () => {
     const {activeProductDetails, fetchProductDetails} = useStoreProductDetails()
     const {closeViewModalAdminProductDetails} = useStoreModal()
-    const {fetchPrice, prices} = useStorePrice()
     const {fetchSize, sizes} = useStoreSize()
     const {fetchProduct, products} = useStoreProducts()
     const {fetchImage, images} = useStoreImage()
 
     useEffect(() => {
-        fetchPrice()
         fetchSize()
         fetchProduct()
         fetchImage()
@@ -27,9 +24,7 @@ export const ModalAdminProductsDetails = () => {
     const [newDetail, setNewDetail] = useState<IRequestProductsDetails>({
         id : activeProductDetails?.id || null,
         stock : activeProductDetails?.stock || 0,
-        price : {
-            id : activeProductDetails?.price.id || null
-        },
+        price : activeProductDetails?.price || 0,
         size : {
             id : activeProductDetails?.size.id || null
         }, 
@@ -44,15 +39,8 @@ export const ModalAdminProductsDetails = () => {
     const handleChange = (e : React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const {name , value} = e.target
 
-        if (name === 'price'){
-            setNewDetail((prev) => ({
-                ...prev,
-                price : {
-                    ...prev.price,
-                    id : Number(value)
-                }
-            }))
-        } else if (name === 'size') {
+        
+        if (name === 'size') {
             setNewDetail((prev) => ({
                 ...prev,
                 size : {
@@ -111,12 +99,7 @@ export const ModalAdminProductsDetails = () => {
                     <input type="number" name="stock" value={newDetail.stock} onChange={handleChange} />
 
                     <label htmlFor="">Precio</label>
-                    <select name="price" value={newDetail.price.id!} onChange={handleChange}>
-                        <option disabled selected>Sin selección</option>
-                        {prices.map((price) => (
-                            <option key={price.id} value={price.id!} >Compra: {price.purchasePrice}, Venta: {price.salesPrice}</option>
-                        ))}
-                    </select>
+                    <input type="number" name="price" value={newDetail.price} onChange={handleChange} placeholder='Precio'/>
 
                     <label htmlFor="">Tamaño</label>
                     <select name="size" value={newDetail.size.id!} onChange={handleChange}>

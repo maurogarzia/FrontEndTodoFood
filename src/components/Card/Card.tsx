@@ -1,11 +1,10 @@
 import type { FC } from 'react'
 import type { IImage } from '../../types/IImage'
-import type { IPrice } from '../../types/IPrice'
 import style from './Card.module.css'
 
 interface ICard {
     image : IImage,
-    price : IPrice,
+    price : number,
     title : string
 }
 
@@ -17,7 +16,7 @@ export const Card :FC<ICard> = ({image, price, title}) => {
 
             <div className={style.containerButtons}>
                 <button>Pedir</button>
-                <button>{price.salesPrice}</button>
+                <button>{price}</button>
             </div>
         </div>
     )

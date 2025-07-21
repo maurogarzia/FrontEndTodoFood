@@ -58,7 +58,7 @@ export const PromotionDetailsAdmin = () => {
                                 <td>{details.id ? details.id : '' }</td>
                                 <td>{details?.promotion?.name}</td>
                                 <td>{details?.discount}</td>
-                                <td>{details?.price?.id}</td>
+                                <td>{details?.price}</td>
                                 <td>
                                     {details.productsDetails.map(d => (
                                         <p>{d.product.name} {d.size.name}</p>

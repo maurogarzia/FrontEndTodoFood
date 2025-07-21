@@ -1,19 +1,18 @@
-import type { IPrice } from "./IPrice";
-import type { IProductsDetails } from "./IProductsDetails";
 import type { IPromotion } from "./IPromotion";
+import type { IUnitaryDetails } from "./IUnitaryDetails";
 
 export interface IPromotionDetails {
     id: number
     discount : number,
     promotion : IPromotion,
-    price : IPrice,
-    productsDetails: IProductsDetails[]
+    price : number,
+    details: IUnitaryDetails[]
 }
 
 export interface IRequestPromotionDetails{
     id : number | null
     discount : number,
     promotion : {id : number | null},
-    price : {id : number | null},
-    productsDetails : {id : number | null}[]
+    price : number,
+    details : {id : number | null}[]
 }
