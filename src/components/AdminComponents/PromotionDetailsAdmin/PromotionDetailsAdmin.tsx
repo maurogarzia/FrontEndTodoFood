@@ -23,6 +23,7 @@ export const PromotionDetailsAdmin = () => {
     const handleDelete = async(id : number) => {
         try {
             await deletePromotionDetails(id)
+            fetchPromotionsDetails()
         } catch (error : any) {
             console.log(error.message);
             
@@ -57,13 +58,13 @@ export const PromotionDetailsAdmin = () => {
                             <tr key={details.id}>
                                 <td>{details.id ? details.id : '' }</td>
                                 <td>{details?.promotion?.name}</td>
-                                <td>{details?.discount}</td>
-                                <td>{details?.price}</td>
-                                <td>
-                                    {details.productsDetails.map(d => (
-                                        <p>{d.product.name} {d.size.name}</p>
-                                    ))}
-                                </td>
+                                <td>%{details?.discount}</td>
+                                <td>${details?.price}</td>
+                                <td>{details.unitaryDetails.map((d) => (
+                                    <div>
+                                        <p>{d.productDetails.product.name} {d.productDetails.size.name}</p>
+                                    </div>
+                                ))}</td>
                             
                                 <td>
                                     <div className={style.actionButtons}>

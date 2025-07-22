@@ -6,7 +6,7 @@ export interface IPromotionDetails {
     discount : number,
     promotion : IPromotion,
     price : number,
-    details: IUnitaryDetails[]
+    unitaryDetails: IUnitaryDetails[]
 }
 
 export interface IRequestPromotionDetails{
@@ -14,5 +14,5 @@ export interface IRequestPromotionDetails{
     discount : number,
     promotion : {id : number | null},
     price : number,
-    details : {id : number | null}[]
+    unitaryDetails : {id : number | null}[]
 }

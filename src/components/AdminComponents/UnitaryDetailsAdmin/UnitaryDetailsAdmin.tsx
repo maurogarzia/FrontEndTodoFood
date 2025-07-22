@@ -5,11 +5,14 @@ import type { IUnitaryDetails } from '../../../types/IUnitaryDetails'
 import style from './UnitaryDetailsAdmin.module.css'
 import { useStorePromotionDetails } from '../../../Store/useStorePromotionDetails'
 import { ErrorAlert } from '../../../utils/ErrorAlert'
+import { useStoreModal } from '../../../Store/useStoreModal'
+import { ModalAdminUnitaryDetails } from '../../Modals/ModalAdminUnitaryDetails/ModalAdminUnitaryDetails'
 
 export const UnitaryDetailsAdmin = () => {
 
     const {details, setActiveDEtail, fetchDetails} = useStoreUnitaryDetails()
     const {promotionsDetails, fetchPromotionsDetails} = useStorePromotionDetails()
+    const {openModalAdminUnitaryDetails, viewModalAdminUnitaryDetail} = useStoreModal()
 
     useEffect(() => {
         fetchDetails()
@@ -19,6 +22,7 @@ export const UnitaryDetailsAdmin = () => {
 
     const handleOpen = (detail : IUnitaryDetails | null) => {
         setActiveDEtail(detail)
+        openModalAdminUnitaryDetails()
     }
 
     const handleDelete = async(id : number) => {
@@ -62,7 +66,7 @@ export const UnitaryDetailsAdmin = () => {
                             <tr key={detail.id}>
                                 <td>{detail.id ?? ''}</td>
                                 <td>{detail.quantity ?? ''}</td>
-                                <td>{detail.productsDetails.product.name ?? ''} {detail.productsDetails.size.name}</td>
+                                <td>{detail.productDetails.product.name ?? ''} {detail.productDetails.size.name}</td>
 
                                 <td>
                                     <div className={style.actionButtons}>
@@ -75,7 +79,7 @@ export const UnitaryDetailsAdmin = () => {
                     </tbody>
                 </table>
             </div>
-            
+            {viewModalAdminUnitaryDetail && <div className={style.modalBackdrop}><ModalAdminUnitaryDetails/></div>}
         </div>
     )
 }

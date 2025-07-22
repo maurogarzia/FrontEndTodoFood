@@ -5,12 +5,12 @@ import style from './ModalAdminPromotionDetails.module.css'
 import { useStorePromotion } from '../../../Store/useStorePromotions'
 import type { IRequestPromotionDetails } from '../../../types/IPromotionDetails'
 import { createPromotionDetails, updatedPromotionDetails } from '../../../cruds/crudPromotionDetails'
-import { SubModalAdminPromotionDetails } from '../SubModalAdminPromotionDetails/SubModalAdminPromotionDetails'
+
 
 export const ModalAdminPromotionDetails = () => {
 
     const {activePromotionDetails, fetchPromotionsDetails} = useStorePromotionDetails()
-    const {closeViewModalAdminPromotionDetails, viewSubModalPromotionDetails, openSubModalPromotionDetails} = useStoreModal()
+    const {closeViewModalAdminPromotionDetails} = useStoreModal()
     const {fetchPromotions, promotions} = useStorePromotion()
 
     useEffect(() => {
@@ -22,10 +22,10 @@ export const ModalAdminPromotionDetails = () => {
         discount : activePromotionDetails?.discount || 0,
         promotion : {id : activePromotionDetails?.promotion.id || null},
         price : activePromotionDetails?.price || 0,
-        productsDetails : activePromotionDetails?.productsDetails?.map((d) => ({id : d.id})) || []
+        details : activePromotionDetails?.details?.map((d) => ({id : d.id})) || []
     })
 
-    const [option, setOption] = useState<boolean>(false)
+    
 
 
     const handleChange = (e : React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -65,11 +65,6 @@ export const ModalAdminPromotionDetails = () => {
     }
 
 
-    const handleOpen = (selection : boolean) => {
-        setOption(selection)
-        openSubModalPromotionDetails()
-    }
-
     return (
         <div className={style.containerPrincipal}>
             <h1>{activePromotionDetails ? 'Editar Detalle de Promoción' : 'Crear Detalle de Promoción'}</h1>
@@ -90,16 +85,13 @@ export const ModalAdminPromotionDetails = () => {
                         ))}
                     </select>
 
-                    <button type='button' onClick={() => handleOpen(true)}>Agregar Productos</button>
-                    <button type='button' onClick={() => handleOpen(false)}>Eliminar Productos</button>
-
                 </div>
                 <div className={style.containerButtons}>
                     <button type='submit' onClick={closeViewModalAdminPromotionDetails}>Cancelar</button>
                     <button>Aceptar</button>
                 </div>
             </form>
-            {viewSubModalPromotionDetails && <div className={style.modalBackdrop}><SubModalAdminPromotionDetails option={option} promotionDetail={promotionDetail} setPromotionDetail={setPromotionDetail}/></div>}
+            
         </div>
     )
 }

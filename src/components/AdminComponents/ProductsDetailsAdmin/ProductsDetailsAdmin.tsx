@@ -56,7 +56,7 @@ export const ProductsDetailsAdmin = () => {
                         {productDetails.map((detail) => (
                             <tr key={detail.id}>
                                 <td>{detail.id ? detail.id : '' }</td>
-                                <td>{detail.product ? detail.product.id : ''}</td>
+                                <td>{detail.product ? detail.product.name : ''}</td>
                                 <td>{detail.stock ? detail.stock : ''}</td>
                                 <td>{detail.size ? detail.size.name : ''}</td>
                                 <td>{detail.price ? detail.price : ''}</td>

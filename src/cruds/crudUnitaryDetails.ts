@@ -1,6 +1,6 @@
 
-import type { ISize } from '../types/ISize'
-import type { IUnitaryDetails } from '../types/IUnitaryDetails'
+
+import type { IRequestUnitaryDetails } from '../types/IUnitaryDetails'
 import {BASE_URL} from '../utils/constantes'
 import { createEntity, deleteEntity, getAll, getById, updateEntity } from './crudGeneric'
 
@@ -15,11 +15,11 @@ export const getUnitaryDetailsById = (id: number) => {
     return getById(BASE_UNITARY_DETAILS, title, id)
 }
 
-export const createUnitaryDetail = async(size : ISize) =>{
-    return createEntity(BASE_UNITARY_DETAILS, title, size)
+export const createUnitaryDetail = async(unitaryDetial : IRequestUnitaryDetails) =>{
+    return createEntity(BASE_UNITARY_DETAILS, title, unitaryDetial)
 }
 
-export const updatedUnitaryDetail = async(newDetail : IUnitaryDetails, id: number) => {
+export const updatedUnitaryDetail = async(newDetail : IRequestUnitaryDetails, id: number) => {
     return updateEntity(BASE_UNITARY_DETAILS, title, newDetail, id)
 }
 
