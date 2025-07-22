@@ -3,6 +3,7 @@
     flex-direction: column;
     background-color: #585858;
     color: white;
+    height: 100%;
 }
 .containerAdmin{
     display: flex;

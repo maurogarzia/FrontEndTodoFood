@@ -27,7 +27,7 @@ export const AdminScreen = () => {
     return(
         <div className={style.containerPrincipal}>
             <Header/>
-            <div style={{"height" : "100vh", "display" : "flex"}}>
+            <div style={{"height" : "100%", "display" : "flex"}}>
                 <AsideAdmin/>
                 {page === 'admin' && <div className={style.containerAdmin}><h1>ADMINISTRACIÓN</h1></div>}
                 {page === 'country' && <CountryAdmin/>}

@@ -24,7 +24,7 @@ export const ModalAdminPromotionDetails = () => {
         id : activePromotionDetails?.id || null,
         discount : activePromotionDetails?.discount || 0,
         promotion : {id : activePromotionDetails?.promotion.id || null},
-        price : activePromotionDetails?.price || 0,
+        price : activePromotionDetails?.price || null,
         unitaryDetails : activePromotionDetails?.unitaryDetails?.map((d) => ({id : d.id})) || []
     })
 
@@ -80,8 +80,6 @@ export const ModalAdminPromotionDetails = () => {
                     <label htmlFor="">Descuento</label>
                     <input type="number" value={promotionDetail.discount} name="discount" onChange={handleChange}/>
 
-                    <label htmlFor="">Precio</label>
-                    <input type="number" name="price" value={promotionDetail.price} placeholder='Precio' onChange={handleChange}/>
 
                     <label htmlFor="">Promoción</label>
                     <select name="promotion" value={promotionDetail.promotion.id!} onChange={handleChange}>

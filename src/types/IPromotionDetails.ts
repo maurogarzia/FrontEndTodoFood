@@ -13,6 +13,6 @@ export interface IRequestPromotionDetails{
     id : number | null
     discount : number,
     promotion : {id : number | null},
-    price : number,
+    price : number | null,
     unitaryDetails : {id : number | null}[]
 }

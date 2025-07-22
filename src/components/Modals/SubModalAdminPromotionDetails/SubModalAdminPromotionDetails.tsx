@@ -40,6 +40,14 @@ export const SubModalAdminPromotionDetails : FC<ISubModalAdminPromotionDetails> 
         try {
             // Agrego ids al array
             if (option) {
+
+                // Verifico que el producto exista en la promocion
+                const existDetailInPromotion = promotionDetail.unitaryDetails.some(u => u.id === Number(selectedId))
+                if (existDetailInPromotion) {
+                    ErrorAlert('Error', 'El producto ya se encuenra agregado a la promoción ')
+                    return
+                }
+
                 setPromotionDetail((prev) => ({
                     ...prev,
                     unitaryDetails : [...prev.unitaryDetails, {id : Number(selectedId)}]
@@ -95,8 +103,7 @@ export const SubModalAdminPromotionDetails : FC<ISubModalAdminPromotionDetails> 
                     </div>)}
                 </div>
                 <div className={style.containerButtons}>
-                    <button onClick={closeSubModalPromotionDetails}>Cancelar</button>
-                    <button onClick={closeSubModalPromotionDetails}>Aceptar</button>
+                    <button onClick={closeSubModalPromotionDetails}>Cerrar</button>
                 </div>
             </form>
 
