@@ -15,10 +15,7 @@ export const ListProducts = () => {
 
             <div className={style.containerTitleAndButton}>
                 <h1>Productos</h1>
-
-                <div className={style.containerFilter}>
-                    <button>Filtrar</button>
-                </div>
+                <button>Filtrar</button>
             </div>
 
             <div className={style.products}>

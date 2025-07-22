@@ -1,18 +1,17 @@
 .containerPrincipal{
     display: flex;
-    flex-direction: column;
-    border: 1px solid;
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 100%;
     height: 100%;
-    border: none;
 }
 .containerTitleAndButton{
     display: flex;
     align-items: center;
-    justify-content: center;
     width: 100%;
-    padding: 10px;
+    justify-content: center;
+    align-items: center;
 }
 .containerTitleAndButton h1 {
     color: #E95708;
@@ -37,11 +36,9 @@
     border: #E95708 3px solid;
     transition: 0.3s ease;
 }
-.products{
+.promotions{
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: center;
-    align-items: center;
     padding: 20px;
 }
