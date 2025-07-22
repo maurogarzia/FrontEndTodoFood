@@ -5,13 +5,16 @@ import style from './ModalAdminPromotionDetails.module.css'
 import { useStorePromotion } from '../../../Store/useStorePromotions'
 import type { IRequestPromotionDetails } from '../../../types/IPromotionDetails'
 import { createPromotionDetails, updatedPromotionDetails } from '../../../cruds/crudPromotionDetails'
+import { SubModalAdminPromotionDetails } from '../SubModalAdminPromotionDetails/SubModalAdminPromotionDetails'
 
 
 export const ModalAdminPromotionDetails = () => {
 
     const {activePromotionDetails, fetchPromotionsDetails} = useStorePromotionDetails()
-    const {closeViewModalAdminPromotionDetails} = useStoreModal()
+    const {closeViewModalAdminPromotionDetails, openSubModalPromotionDetails, viewSubModalPromotionDetails} = useStoreModal()
     const {fetchPromotions, promotions} = useStorePromotion()
+
+    const [option, setOption] = useState<boolean>(true) // Estado que controla al sub modal
 
     useEffect(() => {
         fetchPromotions()
@@ -22,10 +25,13 @@ export const ModalAdminPromotionDetails = () => {
         discount : activePromotionDetails?.discount || 0,
         promotion : {id : activePromotionDetails?.promotion.id || null},
         price : activePromotionDetails?.price || 0,
-        details : activePromotionDetails?.details?.map((d) => ({id : d.id})) || []
+        unitaryDetails : activePromotionDetails?.unitaryDetails?.map((d) => ({id : d.id})) || []
     })
 
-    
+    const handleOpen = (opt : boolean) => {
+        setOption(opt) // Opcion de eliminar o agregar detalles unitarios
+        openSubModalPromotionDetails()
+    }
 
 
     const handleChange = (e : React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -85,13 +91,16 @@ export const ModalAdminPromotionDetails = () => {
                         ))}
                     </select>
 
+                    <button type='button' onClick={() => handleOpen(true)}>Agregar Detalles Unitarios</button>
+                    <button type='button' onClick={() => handleOpen(false)}>Eliminar Detalles Unitarios</button>
+
                 </div>
                 <div className={style.containerButtons}>
                     <button type='submit' onClick={closeViewModalAdminPromotionDetails}>Cancelar</button>
                     <button>Aceptar</button>
                 </div>
             </form>
-            
+            {viewSubModalPromotionDetails && <div className={style.modalBackdrop}><SubModalAdminPromotionDetails setPromotionDetail={setPromotionDetail} option={option} promotionDetail={promotionDetail}/></div>}
         </div>
     )
 }

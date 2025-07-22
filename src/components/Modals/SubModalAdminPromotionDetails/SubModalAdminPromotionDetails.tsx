@@ -1,91 +1,105 @@
 import React, { useEffect, useState, type FC } from 'react'
-import styles from './SubModalAdminPromotionDetails.module.css'
+import style from './SubModalAdminPromotionDetails.module.css'
 import { useStoreModal } from '../../../Store/useStoreModal'
+import { useStoreUnitaryDetails } from '../../../Store/useStoreUnitaryDetails'
 import type { IRequestPromotionDetails } from '../../../types/IPromotionDetails'
-import { useStoreProductDetails } from '../../../Store/useStoreProductDetails'
-import type { IProductsDetails } from '../../../types/IProductsDetails'
-import { ErrorAlert } from '../../../utils/ErrorAlert'
+import type { IUnitaryDetails } from '../../../types/IUnitaryDetails'
 import { SuccesAlerts } from '../../../utils/SuccesAlert'
+import { ErrorAlert } from '../../../utils/ErrorAlert'
 
 interface ISubModalAdminPromotionDetails {
     option : boolean,
-    promotionDetail : IRequestPromotionDetails,
-    setPromotionDetail: React.Dispatch<React.SetStateAction<IRequestPromotionDetails>>;
+    promotionDetail : IRequestPromotionDetails
+    setPromotionDetail : React.Dispatch<React.SetStateAction<IRequestPromotionDetails>>
 }
 
-export const SubModalAdminPromotionDetails : FC<ISubModalAdminPromotionDetails> = ({option,promotionDetail, setPromotionDetail}) => {
+
+export const SubModalAdminPromotionDetails : FC<ISubModalAdminPromotionDetails> = ({option, promotionDetail, setPromotionDetail}) => {
 
     const {closeSubModalPromotionDetails} = useStoreModal()
-    const {fetchProductDetails, productDetails} = useStoreProductDetails()
-    const [detailsInPromotionDetail, setDetailsInPromotionDetail] = useState<IProductsDetails[]>()
+    const {details, fetchDetails} = useStoreUnitaryDetails()
+    const [listDetails, setListDetails] = useState<IUnitaryDetails[]>()
 
     useEffect(() => {
-        fetchProductDetails()
-        const fetchDetails = async() => {
-                const filterDetails = productDetails.filter(p => 
-                    promotionDetail.productsDetails.some(d => d.id === p.id)
-                )
-                setDetailsInPromotionDetail(filterDetails)
-            }   
         fetchDetails()
+        const fetchedDetails = async() => {
+
+            const listfilter = details.filter(d => 
+                promotionDetail.unitaryDetails.some(u => u.id === d.id)
+            )
+            setListDetails(listfilter)
+        }
+        fetchedDetails()
     },[])
+
 
     const handleChange = (e : React.ChangeEvent<HTMLSelectElement>) => {
 
         const selectedId = e.target.value
 
-        if (option){
-            const alreadyExist = promotionDetail.productsDetails.some(d => d.id === Number(selectedId))
-            if (alreadyExist || !selectedId){
-                ErrorAlert("Error", 'Este producto ya se encuentra en la promoción')
-                return
-            }
+        try {
+            // Agrego ids al array
+            if (option) {
+                setPromotionDetail((prev) => ({
+                    ...prev,
+                    unitaryDetails : [...prev.unitaryDetails, {id : Number(selectedId)}]
+                }))
+                closeSubModalPromotionDetails()
+                SuccesAlerts("Agreado", "Se agregó el detalle correctamente")
+            }else {
+                const filterDetails = promotionDetail.unitaryDetails.filter(u => u.id !== Number(selectedId))
+                setPromotionDetail((prev) => ({
+                    ...prev,
+                    unitaryDetails : filterDetails
+                }))
+                closeSubModalPromotionDetails()
+                SuccesAlerts("Eliminado", "Se eliminó el detalle correctamente")
 
-            setPromotionDetail(prev => ({
-                ...prev,
-                details : [...prev.productsDetails, {id : Number(selectedId)}]
-            }))
-            SuccesAlerts("Agregado", "Producto agregado a la promoción")
-            closeSubModalPromotionDetails()
-        }else{
-            setPromotionDetail(prev => ({
-                ...prev,
-                details : prev.productsDetails.filter(d => d.id !== Number(selectedId))
-            }))
-            SuccesAlerts('Eliminado', 'Producto eliminado de la promoción')
+            }
+        } catch (error : any) {
+            console.log(error.message);
+            ErrorAlert('Error', 'Ocurrió un error al intentar agregar/eliminar un detalle')
             closeSubModalPromotionDetails()
         }
     }
 
     return (
-        <div className={styles.containerPrincipal}>
-            <h1>{option ? 'Agregar Productos a la Promoción' : 'Eliminar Productos a la Promoción'}</h1>
-            <form>
-                <div className={styles.containerData}>
+        <div className={style.containerPrincipal}>
+            <h1>{option ? 'Agregar Detalles Unitarios' : 'Eliminar Detalles Unitarios'}</h1>
+
+            <form action="">
+                <div className={style.containerData}>
                     {option ? 
-                        <div>
-                            <select name="details" onChange={handleChange}>
-                                <option value="">Sin selección</option>
-                                {productDetails.map((detail) => (
-                                    <option value={detail.id}>{detail.product.name} {detail.size.name}</option>
-                                ))}
-                            </select>
-                        </div>
-                        : 
-                        <div>
-                            <select name="details" id="" onChange={handleChange}>
-                                <option value="">Sin selección</option>
-                                {detailsInPromotionDetail?.map(details => (
-                                    <option value={details.id}>{details.product.name} {details.size.name}</option>
-                                ))}
-                            </select>
-                        </div>}
+
+                    // Agrega detalles unitarios
+                    (<div>
+
+                        <select name="unitaryDetails" onChange={handleChange}>
+                            <option disabled selected>Sin selección</option>
+                            {details.map((d) => (
+                                <option key={d.id} value={d.id}>{d.quantity} {d.productDetails.product.name} {d.productDetails.size.name}</option>
+                            ))}
+                        </select>
+
+                    </div> )
+                    : 
+
+                    // Elimina detalles unitarios
+                    (<div>
+                        <select name="unitaryDetails" onChange={handleChange}>
+                            <option value="">Sin selección</option>
+                            {listDetails?.map(l => (
+                                <option key={l.id} value={l.id}>{l.quantity} {l.productDetails.product.name} {l.productDetails.size.name}</option>
+                            ))}
+                        </select>
+                    </div>)}
                 </div>
-                <div className={styles.containerButtons}>
-                    <button onClick={closeSubModalPromotionDetails}>Cerrar</button>
-                    
+                <div className={style.containerButtons}>
+                    <button onClick={closeSubModalPromotionDetails}>Cancelar</button>
+                    <button onClick={closeSubModalPromotionDetails}>Aceptar</button>
                 </div>
             </form>
+
         </div>
     )
 }
