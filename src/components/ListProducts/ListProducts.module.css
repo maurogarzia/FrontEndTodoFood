@@ -1,0 +1,54 @@
+.containerPrincipal{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+.containerTitleAndButton{
+    display: flex;
+    
+    align-items: center;
+    width: 100%;
+}
+.containerTitleAndButton h1 {
+    color: #E95708;
+    padding: 20px;
+    font-size: 50px;
+    padding: 30px;
+    width: 60%;
+    display: flex;
+    justify-content: end;
+}
+.containerFilter{
+    display: flex;
+    justify-content: end;
+    width: 40%;
+    padding: 10px;
+}
+.containerFilter button{
+    background-color: #E95708;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    min-width: 80px;
+    border: 3px solid #E95708;
+}
+.containerFilter button:hover{
+    cursor: pointer;
+    background-color: white;
+    color: #E95708;
+    border: #E95708 3px solid;
+    transition: 0.3s ease;
+}
+.products{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}

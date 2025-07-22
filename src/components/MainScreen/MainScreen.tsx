@@ -1,6 +1,6 @@
 import style from './MainScreen.module.css'
 import image from '../../assets/image.png'
-import { Card } from '../../components/Card/Card'
+import { Card } from '../Card/Card'
 import { useStorePromotionDetails } from '../../Store/useStorePromotionDetails'
 import { useEffect, useState } from 'react'
 import image1 from '../../assets/imagesCarrusel/comida-chatarra-hamburguesas-caseras-de-carne-de-res-sobre-fondo-de-madera-vintage.webp'
@@ -68,11 +68,13 @@ export const MainScreen = () => {
             {/* Promos */}
             <h1>Promos del día</h1>        
             
-            {promotionsDetails.map((detail) => (
-                <div className={style.containerCard}>
-                    <Card price={detail.price} title={detail.promotion.name} image={detail.promotion.image}/>
-                </div>
-            ))}
+            <div className={style.containerCard}>
+                {promotionsDetails.map((detail) => (
+                    <div>
+                        <Card price={detail.price} title={detail.promotion.name} image={detail.promotion.image}/>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }

@@ -25,6 +25,11 @@
     height: 100%;
     border-radius: 10px;
 }
+.containerPrincipal:hover{
+    transform: scale(1.05);
+    transition: 0.3s ease;
+    cursor: pointer;
+}
 .containerButtons{
     width: 100%;
     display: flex;

@@ -16,7 +16,7 @@ export const Card :FC<ICard> = ({image, price, title}) => {
 
             <div className={style.containerButtons}>
                 <button>Pedir</button>
-                <button>{price}</button>
+                <button>${price}</button>
             </div>
         </div>
     )
