@@ -11,8 +11,11 @@ export const ListPromotions = () => {
 
     return (
         <div className={style.containerPrincipal}>
-            <div className={style.containerTitleAndButton}>
+            <div className={style.containerTitle}>
                 <h1>Promociones</h1>
+            </div>
+
+            <div className={style.containerFilter}>
                 <button>Filtrar</button>
             </div>
 

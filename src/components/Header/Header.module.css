@@ -24,10 +24,17 @@
     padding: 10px;
 }
 .containerNav p {
-    
     font-size: 20px;
     cursor: pointer;
     width: 100%;
+    padding: 10px;
+}
+.containerNav p:hover{
+    background-color: #626161;
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease; */
 }
 .searchAndProfile{
     display: flex;

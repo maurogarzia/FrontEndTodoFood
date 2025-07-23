@@ -21,7 +21,8 @@ export const ModalAdminBranch = () => {
         name : activeBranches?.name || '',
         address : {
             id : activeBranches?.address.id || null
-        }
+        },
+        number : activeBranches?.number || 0
     })
 
     const handleChange = (e : React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -47,7 +48,6 @@ export const ModalAdminBranch = () => {
         e.preventDefault()
         console.log(branch);
         
-
         try {
             if (activeBranches) {
                 await updatedBranch(branch, branch.id!)
@@ -73,6 +73,9 @@ export const ModalAdminBranch = () => {
 
                     <label htmlFor="">Nombre</label>
                     <input type="text" name="name" value={branch.name} placeholder='Nombre' onChange={handleChange}/>
+
+                    <label htmlFor="">Teléfono</label>
+                    <input type="number" name="number" onChange={handleChange} />
 
                     <label htmlFor="">Dirección</label>
                     <select name="address" value={branch.address.id!} id="" onChange={handleChange}>

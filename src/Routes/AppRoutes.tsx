@@ -3,6 +3,7 @@ import { Home } from "../Screens/Home/Home"
 import { AdminScreen } from "../Screens/AdminScreen/AdminScreen"
 import { ScreenProducts } from "../Screens/ScreenProducts/ScreenProducts"
 import { ScreenPromotions } from "../Screens/ScreenPromotions/ScreenPromotions"
+import { ScreenBranches } from "../Screens/ScreenBranches/ScreenBranches"
 
 export const AppRoutes = () => {
     return(
@@ -10,6 +11,7 @@ export const AppRoutes = () => {
             <Route path="/" element={<Home/>}></Route>
             <Route path="/products" element={<ScreenProducts/>}></Route>
             <Route path="/promotions" element={<ScreenPromotions/>}></Route>
+            <Route path="/branches" element={<ScreenBranches/>}></Route>
             <Route path="/admin" element={<AdminScreen/>}></Route>
             
         </Routes>

@@ -46,11 +46,39 @@
     border: #E95708 3px solid;
     transition: 0.3s ease;
 }
-.products{
+.branches{
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
+    gap: 10px;
     padding: 20px;
+}
+.containerBranch{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background-color: #2F2E2E;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+}
+.containerBranch h2{
+    color: #E95708;
+    font-size: 40px;
+}
+.containerBranch button {
+    background-color: #E95708;
+    color: white;
+    padding: 10px;
+    border : 3px solid #E95708;
+    width: 100%;
+    border-radius: 10px;
+    font-size: 15px;
+}
+.containerBranch button:hover {
+    transform: scale(1.08);
+    transition: 0.3s ease;
+    cursor: pointer;
 }

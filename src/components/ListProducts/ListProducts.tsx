@@ -13,8 +13,11 @@ export const ListProducts = () => {
     return (
         <div className={style.containerPrincipal}>
 
-            <div className={style.containerTitleAndButton}>
+            <div className={style.containerTitle}>
                 <h1>Productos</h1>
+            </div>
+
+            <div className={style.containerFilter}>
                 <button>Filtrar</button>
             </div>
 

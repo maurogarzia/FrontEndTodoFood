@@ -44,6 +44,7 @@ export const BranchAdmin = () => {
                             <th>Calle</th>
                             <th>Número</th>
                             <th>Localidad</th>
+                            <th>Teléfono</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -55,6 +56,7 @@ export const BranchAdmin = () => {
                                 <td>{branch.address?.street || ''}</td>
                                 <td>{branch.address?.number || ''}</td>
                                 <td>{branch.address?.locality.name || ''}</td>
+                                <td>{branch.number}</td>
                                 <td>
                                     <div className={style.actionButtons}>
                                         <button onClick={() => handleOpen(branch)}>Editar</button>
