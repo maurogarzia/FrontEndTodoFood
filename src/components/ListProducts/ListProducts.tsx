@@ -1,14 +1,25 @@
-import { useEffect } from 'react'
-import { useStoreProductDetails } from '../../Store/useStoreProductDetails'
+import { useEffect} from 'react'
 import style from './ListProducts.module.css'
 import { Card } from '../Card/Card'
+import { useStoreProductDetails } from '../../Store/useStoreProductDetails'
 
 export const ListProducts = () => {
 
-    const {productDetails, fetchProductDetails} = useStoreProductDetails()
+    const {
+        fetchAccompaniment, fetchBurguers, fetchDrinks, fetchVegetarian, accompaniment, drinks, burguers, vegetarian
+    } = useStoreProductDetails()
+    
 
-    useEffect(() => {fetchProductDetails()},[])
+    useEffect(() => {
+        fetchAccompaniment(),
+        fetchBurguers(),
+        fetchDrinks(),
+        fetchVegetarian()
+        
+    },[])
 
+    console.log(burguers);
+    
 
     return (
         <div className={style.containerPrincipal}>
@@ -22,10 +33,57 @@ export const ListProducts = () => {
             </div>
 
             <div className={style.products}>
-                {productDetails.map(p => (
-                    <Card title={p.product.name} price={p.price} image={p.image}/>
-                ))}
+                <h1>Hamburguesas</h1>
+                {burguers?.length === 0 
+                ? 
+                <p>No hay hamburguesas en stock</p> 
+                : 
+                <div className={style.productList}>
+                    {burguers?.map(b => (
+                        <Card price={b.price} title={b.product.name} image={b.image}/>
+                    ))}
+                </div>}
             </div>
+
+            <div className={style.products}>
+                <h1>Acompañamiento</h1>
+                {accompaniment?.length === 0 
+                ? 
+                <p>No hay acompañamiento en stock</p> 
+                : 
+                <div className={style.productList}>
+                    {accompaniment?.map(b => (
+                        <Card price={b.price} title={b.product.name} image={b.image}/>
+                    ))}
+                </div>}
+            </div>
+
+            <div className={style.products}>
+                <h1>Bebidas</h1>
+                {drinks?.length === 0 
+                ? 
+                <p>No hay bebidas en stock</p> 
+                : 
+                <div className={style.productList}>
+                    {drinks?.map(b => (
+                        <Card price={b.price} title={b.product.name} image={b.image}/>
+                    ))}
+                </div>}
+            </div>
+
+            <div className={style.products}>
+                <h1>Vegetariano</h1>
+                {vegetarian?.length === 0 
+                ? 
+                <p>No hay menú vegetariano en stock</p> 
+                : 
+                <div className={style.productList}>
+                    {vegetarian?.map(b => (
+                        <Card price={b.price} title={b.product.name} image={b.image}/>
+                    ))}
+                </div>}
+            </div>
+
         </div>
     )
 }

@@ -1,3 +1,4 @@
+import axios from 'axios'
 import type { IRequestProductsDetails } from '../types/IProductsDetails'
 import {BASE_URL} from '../utils/constantes'
 import { createEntity, deleteEntity, getAll, getById, updateEntity } from './crudGeneric'
@@ -26,4 +27,13 @@ export const updatedProductDetails = async(newProductDetails : IRequestProductsD
 
 export const deleteProductDetails = async(id : number) => {
     return deleteEntity(BASE_PRODUCTS_DETAILS, title, id)
+}
+
+export const getProductsDetailsByCategory = async (name : string) => {
+    try {
+        const response = await axios.get(`${BASE_PRODUCTS_DETAILS}/by-category?name=${name}`)
+        return response.data
+    } catch (error : any) {
+        console.log('Ocurrio un error en el findByCategory de ProductsDetails');
+    }
 }

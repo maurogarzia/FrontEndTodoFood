@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { useStoreBranch } from '../../Store/UseStoreBranch'
 import style from './ListBranches.module.css'
 import type { IBranch } from '../../types/IBranch'
-import type { IAddress } from '../../types/IAddress'
 
 export const ListBranches = () => {
 

@@ -3,8 +3,6 @@ import {BASE_URL} from '../utils/constantes'
 import { createEntity, deleteEntity, getAll, getById, updateEntity } from './crudGeneric'
 
 
-
-
 const BASE_PRODUCTS = `${BASE_URL}/product`
 const title = 'Productos'
 
@@ -27,3 +25,4 @@ export const updatedProduct = async(newProduct : IRequestProducts, id: number) =
 export const deleteProduct = async(id : number) => {
     return deleteEntity(BASE_PRODUCTS, title, id)
 }
+
