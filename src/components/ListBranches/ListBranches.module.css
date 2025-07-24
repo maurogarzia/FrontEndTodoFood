@@ -55,9 +55,7 @@
 }
 .containerBranch{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;    
     gap: 15px;
     background-color: #2F2E2E;
     padding: 20px;

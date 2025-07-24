@@ -30,7 +30,7 @@ export const Header = () => {
                         </span>
 
                         {/* Circulo del perfil */}
-                        <span className="material-symbols-outlined">
+                        <span onClick={() => handleNavigate('/profile')} className="material-symbols-outlined">
                             account_circle
                         </span>
 

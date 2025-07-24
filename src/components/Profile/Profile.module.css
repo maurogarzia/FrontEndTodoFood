@@ -1,0 +1,77 @@
+.containerPrincipal{
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    padding: 20px;
+    gap: 100px;
+    justify-content: center;
+}
+.containerProfile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(240, 240, 240);
+    padding: 20px;
+    gap: 15px;
+    height: 300px;
+    width: 35%;
+}
+.containerProfile button{
+    padding: 10px;
+    font-size: 15px;
+    background-color: rgb(22, 22, 22);
+    color: white;
+    border: 3px solid rgb(22, 22, 22);
+}
+.containerProfile button:hover{
+    background-color: white;
+    color:#585858;
+    border: #585858 3px solid;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+.containerData{
+    width: 65%;
+    min-height: 100vh;
+    background-color: rgb(240, 240, 240);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.data{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.title{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+}
+.title button{
+    background-color: #585858;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+    border: 3px solid #585858;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.title button:hover{
+    background-color: white;
+    color: #585858;
+    border: #585858 3px solid;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+.info{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+    
+}
