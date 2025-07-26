@@ -2,6 +2,7 @@
     background-color: #585858;
     width: 100%;
     height: 100%;
+
 }
 .containerPrincipal h1 {
     color: #E95708;
@@ -32,6 +33,7 @@
     transition: 0.3s ease;
 }
 .image{
+    
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -65,8 +67,6 @@
 
 /* Carrusel */
 .carrusel{
-    margin-left: 20px;
-    margin-right: 20px;
     width: 100%;
     max-height: 500px;
     margin-bottom: 30px;
@@ -79,7 +79,7 @@
 .carrusel img{
     width: 500px;
     height: 400px;
-    
+    animation: deslizarDerecha 0.5s ease-in-out forwards;
 }
 .buttonCarrusel{
     display: flex;
@@ -87,14 +87,33 @@
     justify-content: center;
     align-items: center;
 }
-.buttonCarrusel button {
+.selectedButton{
+    cursor: pointer;
+    border-radius: 100%;
+    height: 20px;
+    width: 20px;
+    background-color: rgb(246, 246, 246);
+    border: none;
+}
+.notSelectedBUtton{
     cursor: pointer;
     border-radius: 100%;
     height: 20px;
     width: 20px;
     background-color: rgb(169, 170, 172);border: none;
 }
-.buttonCarrusel button:hover{
+.notSelectedBUtton button:hover{
     transform: scale(1.1);
     transition: 0.3s ease;
+}
+
+@keyframes deslizarDerecha {
+  0% {
+    transform: translateX(20%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }

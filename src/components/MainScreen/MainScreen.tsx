@@ -18,10 +18,12 @@ export const MainScreen = () => {
 
     const [index, setIndex] = useState<number>(0)
     
+    
     // UseEffect para que cambie de imagen cada 5s
     useEffect(() => {
         const interval = setInterval(() => {
             setIndex((prevIndex) => (prevIndex + 1) % carruselArray.length)
+            
         }, 5000)
 
         return () => clearInterval(interval)
@@ -38,6 +40,7 @@ export const MainScreen = () => {
     // Funcion que controla el movimiento del carrusel
     const handleIndex = (number : number) => {
         setIndex(number)
+        
     }
     
     return (
@@ -54,12 +57,12 @@ export const MainScreen = () => {
             
             {/* Carrusel aqui */}
             <div className={style.carrusel}>
-                <img src={carruselArray[index]} alt="" />
+                <img key={index}  src={carruselArray[index]} alt="" />
 
                 <div className={style.buttonCarrusel}>
-                    <button onClick={() => handleIndex(0)}></button>
-                    <button onClick={() => handleIndex(1)}></button>
-                    <button onClick={() => handleIndex(2)}></button>
+                    <button className={index === 0 ? style.selectedButton : style.notSelectedBUtton} onClick={() => handleIndex(0)}></button>
+                    <button className={index === 1 ? style.selectedButton : style.notSelectedBUtton} onClick={() => handleIndex(1)}></button>
+                    <button className={index === 2 ? style.selectedButton : style.notSelectedBUtton} onClick={() => handleIndex(2)}></button>
                 </div>
 
             </div>
