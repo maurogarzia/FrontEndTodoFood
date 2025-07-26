@@ -5,7 +5,7 @@ import { useStorePromotionDetails } from '../../Store/useStorePromotionDetails'
 import { useEffect, useState } from 'react'
 import image1 from '../../assets/imagesCarrusel/comida-chatarra-hamburguesas-caseras-de-carne-de-res-sobre-fondo-de-madera-vintage.webp'
 import image2 from '../../assets/imagesCarrusel/depositphotos_254299240-stock-photo-tasty-meat-burgers-melted-cheese.webp'
-import image3 from '../../assets/imagesCarrusel/depositphotos_254299240-stock-photo-tasty-meat-burgers-melted-cheese.webp'
+import image3 from '../../assets/imagesCarrusel/tres-mini-hamburguesas-queso-carne_960508-6.webp'
 
 
 export const MainScreen = () => {
@@ -16,21 +16,28 @@ export const MainScreen = () => {
         fetchPromotionsDetails()
     },[])
 
-    const [index, setIndex] = useState(0)
+    const [index, setIndex] = useState<number>(0)
     
+    // UseEffect para que cambie de imagen cada 5s
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setIndex((prevIndex) => (prevIndex + 1) % carruselArray.length)
+        }, 5000)
+
+        return () => clearInterval(interval)
+    }, [])
+    
+    console.log(index);
     // Array de imagenes para el carrusel
     const carruselArray = [
         image1,
         image2,
-        image3
+        image3,
     ]
     
-    const prevSlide = () => {
-        setIndex((prev) => (prev === 0) ? carruselArray.length -1 : prev -1)
-    }
-
-    const nextSlide = () => {
-        setIndex((prev) => (prev === carruselArray.length - 1 ? 0 : prev + 1))
+    // Funcion que controla el movimiento del carrusel
+    const handleIndex = (number : number) => {
+        setIndex(number)
     }
     
     return (
@@ -50,17 +57,9 @@ export const MainScreen = () => {
                 <img src={carruselArray[index]} alt="" />
 
                 <div className={style.buttonCarrusel}>
-                    <button onClick={prevSlide}>
-                        <span className="material-symbols-outlined">
-                            arrow_back
-                        </span>
-                    </button>
-
-                    <button onClick={nextSlide}>
-                        <span className="material-symbols-outlined">
-                            arrow_forward
-                        </span> 
-                    </button>
+                    <button onClick={() => handleIndex(0)}></button>
+                    <button onClick={() => handleIndex(1)}></button>
+                    <button onClick={() => handleIndex(2)}></button>
                 </div>
 
             </div>
