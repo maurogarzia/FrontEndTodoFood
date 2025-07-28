@@ -47,7 +47,6 @@ export const ProductsDetailsAdmin = () => {
                             <th>Stock</th>
                             <th>Tamaño</th>
                             <th>Precio</th>
-                            <th>Imagen</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -60,7 +59,7 @@ export const ProductsDetailsAdmin = () => {
                                 <td>{detail.stock ? detail.stock : ''}</td>
                                 <td>{detail.size ? detail.size.name : ''}</td>
                                 <td>{detail.price ? detail.price : ''}</td>
-                                <td>{detail.image ? detail.image.id : ''}</td>
+                                
                                 
 
                                 <td>

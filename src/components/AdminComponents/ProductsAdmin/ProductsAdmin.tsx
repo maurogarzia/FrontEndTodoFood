@@ -43,6 +43,8 @@ export const ProductsAdmin = () => {
                             <th>Id</th>
                             <th>Nombre</th>
                             <th>Categoría</th>
+                            <td>Imagen</td>
+                            <th>Descripción</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -53,6 +55,9 @@ export const ProductsAdmin = () => {
                                 <td>{product.id ? product.id : '' }</td>
                                 <td>{product.name ? product.name : ''}</td>
                                 <td>{product.category ? product.category.name : ''}</td>
+                                <td>{product.image ? product.image.id : ''}</td>
+                                <td>{product.description ? product.description : 'Sin descripción'}</td>
+                                
                                 
                                 <td>
                                     <div className={style.actionButtons}>

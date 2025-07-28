@@ -5,23 +5,28 @@ import { useStoreProducts } from '../../../Store/useStoreProducts'
 import style from './ModalAdminProduct.module.css'
 import type { IRequestProducts } from '../../../types/IProducts'
 import { createProduct, updatedProduct } from '../../../cruds/crudProducts'
+import { useStoreImage } from '../../../Store/useStoreImages'
 
 export const ModalAdminProduct = () => {
     const {activeProduct, fetchProduct} = useStoreProducts()
     const {closeViewModalAdminProduct} = useStoreModal()    
     const {categories, fetchCategory} = useStoreCategory()
+    const {fetchImage, images} = useStoreImage()
 
     useEffect(() => {
         fetchCategory()
+        fetchImage()
     },[])
 
     const [product, setProduct] = useState<IRequestProducts>({
         id : activeProduct?.id || null,
         name : activeProduct?.name || '',
-        category : {id : activeProduct?.category.id || null}
+        category : {id : activeProduct?.category.id || null},
+        description : activeProduct?.description || '',
+        image : {id : activeProduct?.image.id || null}
     })
 
-    const handleChange = (e : React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const handleChange = (e : React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const {name , value} = e.target
 
         if (name === 'category') {
@@ -29,6 +34,14 @@ export const ModalAdminProduct = () => {
                 ...prev,
                 category : {
                     ...prev.category,
+                    id : Number(value)
+                }
+            }))
+        } else if(name === 'image'){
+            setProduct((prev) => ({
+                ...prev,
+                image : {
+                    ...prev.image,
                     id : Number(value)
                 }
             }))
@@ -76,6 +89,17 @@ export const ModalAdminProduct = () => {
                             <option key={category.id} value={category.id!}>{category.name}</option>
                         ))}
                     </select>
+
+                    <label htmlFor="">Imagen</label>
+                    <select name="image" value={product.image.id!} onChange={handleChange}>
+                        <option disabled selected>Sin selección</option>
+                        {images.map(i => (
+                            <option key={i.id} value={i.id}>{i.id}</option>
+                        ))}
+                    </select>
+
+                    <label htmlFor="">Descripción</label>
+                    <textarea name="description" onChange={handleChange}></textarea>
 
                 </div>
 

@@ -4,7 +4,6 @@ import { useStoreProductDetails } from '../../../Store/useStoreProductDetails'
 import style from './MOdalAdminProductsDetails.module.css'
 import { useStoreSize } from '../../../Store/useStoreSize'
 import { useStoreProducts } from '../../../Store/useStoreProducts'
-import { useStoreImage } from '../../../Store/useStoreImages'
 import type { IRequestProductsDetails } from '../../../types/IProductsDetails'
 import { createProductDetails, updatedProductDetails } from '../../../cruds/crudProductDetails'
 
@@ -13,12 +12,12 @@ export const ModalAdminProductsDetails = () => {
     const {closeViewModalAdminProductDetails} = useStoreModal()
     const {fetchSize, sizes} = useStoreSize()
     const {fetchProduct, products} = useStoreProducts()
-    const {fetchImage, images} = useStoreImage()
+    
 
     useEffect(() => {
         fetchSize()
         fetchProduct()
-        fetchImage()
+        
     },[])
 
     const [newDetail, setNewDetail] = useState<IRequestProductsDetails>({
@@ -27,10 +26,7 @@ export const ModalAdminProductsDetails = () => {
         price : activeProductDetails?.price || 0,
         size : {
             id : activeProductDetails?.size.id || null
-        }, 
-        image : {
-            id : activeProductDetails?.image.id || null
-        }, 
+        },  
         product : {
             id : activeProductDetails?.product.id || null
         }
@@ -53,14 +49,6 @@ export const ModalAdminProductsDetails = () => {
                 ...prev,
                 product : {
                     ...prev.product,
-                    id : Number(value)
-                }
-            }))
-        } else if (name === 'image'){
-            setNewDetail((prev) => ({
-                ...prev,
-                image : {
-                    ...prev.image,
                     id : Number(value)
                 }
             }))
@@ -117,13 +105,7 @@ export const ModalAdminProductsDetails = () => {
                         ))}
                     </select>
 
-                    <label htmlFor="">Imagen</label>
-                    <select name="image" value={newDetail.image.id!} onChange={handleChange}>
-                        <option disabled selected>Sin selección</option>
-                        {images.map((image) => (
-                            <option key={image.id} value={image.id}>{image.id}</option>
-                        ))}
-                    </select>
+                    
                 </div>
                 <div className={style.containerButtons}>
                     <button onClick={closeViewModalAdminProductDetails}>Cancelar</button>

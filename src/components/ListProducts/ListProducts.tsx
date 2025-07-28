@@ -1,13 +1,15 @@
 import { useEffect} from 'react'
 import style from './ListProducts.module.css'
 import { Card } from '../Card/Card'
-import { useStoreProductDetails } from '../../Store/useStoreProductDetails'
+import { useStoreProducts } from '../../Store/useStoreProducts'
+
 
 export const ListProducts = () => {
 
     const {
         fetchAccompaniment, fetchBurguers, fetchDrinks, fetchVegetarian, accompaniment, drinks, burguers, vegetarian
-    } = useStoreProductDetails()
+    } = useStoreProducts()
+    
     
 
     useEffect(() => {
@@ -17,10 +19,7 @@ export const ListProducts = () => {
         fetchVegetarian()
         
     },[])
-
-    console.log(burguers);
     
-
     return (
         <div className={style.containerPrincipal}>
 
@@ -40,7 +39,7 @@ export const ListProducts = () => {
                 : 
                 <div className={style.productList}>
                     {burguers?.map(b => (
-                        <Card price={b.price} title={b.product.name} image={b.image}/>
+                        <Card products={b} promotion={null}/>
                     ))}
                 </div>}
             </div>
@@ -53,7 +52,7 @@ export const ListProducts = () => {
                 : 
                 <div className={style.productList}>
                     {accompaniment?.map(b => (
-                        <Card price={b.price} title={b.product.name} image={b.image}/>
+                        <Card products={b} promotion={null}/>
                     ))}
                 </div>}
             </div>
@@ -66,7 +65,7 @@ export const ListProducts = () => {
                 : 
                 <div className={style.productList}>
                     {drinks?.map(b => (
-                        <Card price={b.price} title={b.product.name} image={b.image}/>
+                        <Card products={b} promotion={null}/>
                     ))}
                 </div>}
             </div>
@@ -79,7 +78,7 @@ export const ListProducts = () => {
                 : 
                 <div className={style.productList}>
                     {vegetarian?.map(b => (
-                        <Card price={b.price} title={b.product.name} image={b.image}/>
+                        <Card products={b} promotion={null}/>
                     ))}
                 </div>}
             </div>

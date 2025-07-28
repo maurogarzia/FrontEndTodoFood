@@ -6,10 +6,12 @@ import { useEffect, useState } from 'react'
 import image1 from '../../assets/imagesCarrusel/comida-chatarra-hamburguesas-caseras-de-carne-de-res-sobre-fondo-de-madera-vintage.webp'
 import image2 from '../../assets/imagesCarrusel/depositphotos_254299240-stock-photo-tasty-meat-burgers-melted-cheese.webp'
 import image3 from '../../assets/imagesCarrusel/tres-mini-hamburguesas-queso-carne_960508-6.webp'
+import { useNavigate } from 'react-router'
 
 
 export const MainScreen = () => {
 
+    const navigate = useNavigate()
     const {promotionsDetails, fetchPromotionsDetails} = useStorePromotionDetails()
 
     useEffect(() => {
@@ -42,6 +44,10 @@ export const MainScreen = () => {
         setIndex(number)
         
     }
+
+    const handleClik = () => {
+        navigate('/add-product')
+    }
     
     return (
         <div className={style.containerPrincipal}>
@@ -71,11 +77,8 @@ export const MainScreen = () => {
             <h1>Promos del día</h1>        
             
             <div className={style.containerCard}>
-                {promotionsDetails.map((detail) => (
-                    <div>
-                        <Card price={detail.price} title={detail.promotion.name} image={detail.promotion.image}/>
-                    </div>
-                ))}
+                
+                
             </div>
         </div>
     )

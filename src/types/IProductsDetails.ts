@@ -1,4 +1,4 @@
-import type { IImage } from "./IImage"
+
 import type { IProducts } from "./IProducts"
 import type { ISize } from "./ISize"
 
@@ -7,7 +7,7 @@ export interface IProductsDetails{
     stock: number,
     price: number,
     size: ISize,
-    image: IImage
+    
     product : IProducts
 }
 
@@ -16,6 +16,6 @@ export interface IRequestProductsDetails {
     stock: number,
     price: number,
     size: {id: number | null},
-    image: {id: number | null}
+    
     product : {id : number | null}
 }

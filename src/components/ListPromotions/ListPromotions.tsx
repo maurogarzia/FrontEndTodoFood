@@ -6,8 +6,8 @@ import { Card } from '../Card/Card'
 export const ListPromotions = () => {
 
     const {promotionsDetails, fetchPromotionsDetails} = useStorePromotionDetails()
-
     useEffect(() => {fetchPromotionsDetails()},[])
+
 
     return (
         <div className={style.containerPrincipal}>
@@ -21,7 +21,9 @@ export const ListPromotions = () => {
 
             <div className={style.promotions}>
                 {promotionsDetails.map(p => (
-                    <Card price={p.price} title={p.promotion.name} image={p.promotion.image}/>
+                    <div >
+                        <Card products={null} promotion={p}/>
+                    </div>
                 ))}
             </div>
         </div>

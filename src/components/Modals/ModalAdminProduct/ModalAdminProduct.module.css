@@ -28,6 +28,12 @@
     outline: none;
     border: 0.5px solid gray;
 }
+.containerData textarea {
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: 0.5px solid gray;
+}
 .containerData select {
     width: 100%;
     padding: 10px;
