@@ -1,18 +1,17 @@
 import style from './MainScreen.module.css'
 import image from '../../assets/image.png'
-import { Card } from '../Card/Card'
 import { useStorePromotionDetails } from '../../Store/useStorePromotionDetails'
 import { useEffect, useState } from 'react'
 import image1 from '../../assets/imagesCarrusel/comida-chatarra-hamburguesas-caseras-de-carne-de-res-sobre-fondo-de-madera-vintage.webp'
 import image2 from '../../assets/imagesCarrusel/depositphotos_254299240-stock-photo-tasty-meat-burgers-melted-cheese.webp'
 import image3 from '../../assets/imagesCarrusel/tres-mini-hamburguesas-queso-carne_960508-6.webp'
-import { useNavigate } from 'react-router'
+
 
 
 export const MainScreen = () => {
 
-    const navigate = useNavigate()
-    const {promotionsDetails, fetchPromotionsDetails} = useStorePromotionDetails()
+    
+    const {fetchPromotionsDetails} = useStorePromotionDetails()
 
     useEffect(() => {
         fetchPromotionsDetails()
@@ -43,10 +42,6 @@ export const MainScreen = () => {
     const handleIndex = (number : number) => {
         setIndex(number)
         
-    }
-
-    const handleClik = () => {
-        navigate('/add-product')
     }
     
     return (

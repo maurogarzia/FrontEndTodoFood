@@ -31,3 +31,31 @@
 .social span{
     font-size: 25px;
 }
+
+@media (min-height : 600px) {
+    .containerPrincipal{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .title h1{
+        font-size: 30px;
+        display: flex;
+        justify-content: center;
+        padding: 5px;
+    }
+    .column{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+        align-items: center;
+    }
+    .column h1{
+        font-size: 20px;
+    }
+    .column p{
+        font-size: 15px;
+    }
+}

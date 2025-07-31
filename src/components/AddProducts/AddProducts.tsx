@@ -11,59 +11,40 @@ export const AddProducts = () => {
     const {activeProduct} = useStoreProducts()
     const {activePromotion} = useStorePromotion()
     const {productDetails, fetchProductDetails} = useStoreProductDetails()
-    const {drinks, accompaniment, fetchAccompaniment, fetchDrinks} = useStoreProducts()
 
 
     const [detailsSize, setDetailsSize] = useState<IProductsDetails[]>()
-    const [detailsDrinks, setDetailsDrinks] = useState<IProductsDetails[]>()
-    const [detailsAccompaniment, setDetailsAccompaniments] = useState<IProductsDetails[]>()
-    const [counter, setCounter] = useState<number>(0) // Estado para el contador 
+    const [price, setPrice] = useState<number>(0)
+    const [counter, setCounter] = useState<number>(1) // Estado para el contador 
 
     useEffect(() => {
         fetchProductDetails()
-        fetchAccompaniment()
-        fetchDrinks()
 
         // Busco los detalles degun el tamaño
         const searchDetailsSize = () => {
             const handleDetails = productDetails.filter(p => p.product.id === activeProduct?.id)
             setDetailsSize(handleDetails)
         }
-
-        // Busco detalles segun la bebida
-        const searchDrinks = () => {
-            const handleDetailsDrink = productDetails.filter(p => 
-                drinks.some(d => d.id === p.product.id)
-            )
-            setDetailsDrinks(handleDetailsDrink)
-        }
-
-        // Busco detalles segun acompañamiento
-        const searchAccompaniment = () => {
-            const handleDetailsAccompaniment = productDetails.filter(p => 
-                accompaniment.some(a => a.id === p.product.id)
-            )
-            setDetailsAccompaniments(handleDetailsAccompaniment)
-        }
         searchDetailsSize()
-        searchDrinks()
-        searchAccompaniment()
-    },[activeProduct])
+    },[])
 
     
     // Funcion para manejar el contador
     const handleCounter = (action : string) => {
         if (action === 'add'){
             setCounter(counter + 1)
+            handlePrice(price)
         } else if (action === 'remove'){
-            if (counter === 0) return
+            if (counter === 1) return
             setCounter(counter - 1)
+            handlePrice(price)
         }
     }
 
-    
-    console.log(drinks);
-    
+    const handlePrice = (priceDetail : number) => {
+        console.log(priceDetail);
+        setPrice(counter * priceDetail)
+    }
     
     
     return (
@@ -82,7 +63,7 @@ export const AddProducts = () => {
                         </div>
 
                         <div className={style.price}>
-                            <p>$ </p>
+                            <p>$ {price}</p>
                         </div>
                         
                     </div>
@@ -95,28 +76,16 @@ export const AddProducts = () => {
 
                     <div className={style.containerOption}>
                         <h2>Seleccionar Tamaño</h2>
-                        {detailsSize?.map(p => (
-                            <button>{p.size.name}</button>
-                        ))}
+                        
+                            {detailsSize?.map(p => (
+                                <button key={p.id} onClick={() => handlePrice(p.price)}>{p.size.name}</button>        
+                            ))}
+                        
                     </div>
                 </div>
 
             </div>
-            <div className={style.containerBottom}>
-                <div className={style.containerOption}>
-                    <h2>Seleccionar Bebidas</h2>
-                    {detailsDrinks?.map(d => (
-                        <button>{d.product.name} ({d.size.name})</button>
-                    ))}
-                </div>
-
-                <div className={style.containerOption}>
-                    <h2>Seleccionar Acompañamientos</h2>
-                    {detailsAccompaniment?.map(a =>
-                        <button>{a.product.name} ({a.size.name})</button>
-                    )}
-                </div>
-            </div>
+            
         </div>
     )
 } 

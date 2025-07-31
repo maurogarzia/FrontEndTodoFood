@@ -14,6 +14,14 @@ export const Header = () => {
                 <nav className={styles.containerItems}>
                     <h1 onClick={() => handleNavigate('/')}>TodoFood</h1>
 
+                    {/* menu para responsivo */}
+                    <div className={styles.menu}>
+                        <span className="material-symbols-outlined">
+                        menu
+                    </span>
+
+                    </div>
+
                     <div className={styles.containerNav}>
                         <p onClick={() => handleNavigate('/promotions')}>Promociones</p>
                         <p onClick={() => handleNavigate('/products')}>Productos</p>
