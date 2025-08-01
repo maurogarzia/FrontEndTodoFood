@@ -6,6 +6,7 @@ import { ScreenPromotions } from "../Screens/ScreenPromotions/ScreenPromotions"
 import { ScreenBranches } from "../Screens/ScreenBranches/ScreenBranches"
 import { ScreenProfile } from "../Screens/ScreenProfile/ScreenProfile"
 import { ScreenAddProducts } from "../Screens/ScreenAddProducts/ScreenAddProducts"
+import { ScreenCart } from "../Screens/ScreenCart/ScreenCart"
 
 export const AppRoutes = () => {
     return(
@@ -17,6 +18,7 @@ export const AppRoutes = () => {
             <Route path="/admin" element={<AdminScreen/>}></Route>
             <Route path="/profile" element={<ScreenProfile/>}></Route>
             <Route path="/add-product" element={<ScreenAddProducts/>}></Route>
+            <Route path="/cart" element={<ScreenCart/>}></Route>
         </Routes>
     )
 }

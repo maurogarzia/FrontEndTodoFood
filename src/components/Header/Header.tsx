@@ -51,7 +51,7 @@ export const Header = () => {
                         </span>
 
                         {/* Carrito */}
-                        <span className="material-symbols-outlined">
+                        <span onClick={() => handleNavigate('/cart')} className="material-symbols-outlined">
                             shopping_cart
                         </span>
 
@@ -73,7 +73,7 @@ export const Header = () => {
                             <p onClick={() => handleNavigate('/products')}>Productos</p>
                             <p onClick={() => handleNavigate('/branches')}>Sucursales</p>
                             <p onClick={() => handleNavigate('/profile')}>Perfil</p>
-                            <p>Carrito</p>
+                            <p onClick={() => handleNavigate('/cart')}>Carrito</p>
 
                         </div>
 

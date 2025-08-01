@@ -1,0 +1,32 @@
+.containerPrincipal{
+    height: 100%;
+    width: 100%;
+    min-height: 100vh;
+}
+.title{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    background-color: #2F2E2E;
+    color: #E95708;
+    font-style: italic;
+    font-size: 50px;
+}
+.containerAdd{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.containerAdd h2{
+    padding: 20px;
+    color: #E95708;
+    font-weight: bold;
+}
+.list{
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    overflow-x: auto;
+}

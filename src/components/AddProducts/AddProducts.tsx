@@ -5,19 +5,23 @@ import { useStoreProducts } from '../../Store/useStoreProducts'
 import { useStorePromotion } from '../../Store/useStorePromotions'
 import { useStoreProductDetails } from '../../Store/useStoreProductDetails'
 import type { IProductsDetails } from '../../types/IProductsDetails'
+import { useStoreSize } from '../../Store/useStoreSize'
 
 export const AddProducts = () => {
 
     const {activeProduct} = useStoreProducts()
     const {activePromotion} = useStorePromotion()
     const {productDetails, fetchProductDetails} = useStoreProductDetails()
+    const {fetchSize} = useStoreSize()
 
 
     const [detailsSize, setDetailsSize] = useState<IProductsDetails[]>()
     const [price, setPrice] = useState<number>(0)
     const [counter, setCounter] = useState<number>(1) // Estado para el contador 
 
+
     useEffect(() => {
+        fetchSize()
         fetchProductDetails()
 
         // Busco los detalles degun el tamaño

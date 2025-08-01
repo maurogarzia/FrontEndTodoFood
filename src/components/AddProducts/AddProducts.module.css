@@ -122,3 +122,65 @@
     cursor: pointer;
     background-color: rgb(114, 114, 114);
 }
+
+@media (max-width: 1024px) {
+    .containerPrincipal {
+        min-height: 100vh;
+        padding: 10px;
+    }
+
+    .containerTop {
+        flex-direction: column;
+        padding: 10px;
+        align-items: center;
+    }
+
+    .conainerImage {
+        width: 100%;
+        padding: 10px;
+        gap: 20px;
+        border: none;
+    }
+
+    .conainerImage img {
+        width: 100%;
+        height: auto;
+        max-width: 300px;
+    }
+
+    .conainerImage button {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .quantityAndPrice {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .counter, .price {
+        width: 100%;
+    }
+
+    .containerData {
+        width: 100%;
+        padding: 10px;
+        gap: 20px;
+    }
+
+    .containerData h1 {
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .containerData p {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .containerOption button {
+        font-size: 16px;
+    }
+}
+
