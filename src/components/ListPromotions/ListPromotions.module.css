@@ -52,3 +52,18 @@
     gap: 20px;
     padding: 20px;
 }
+
+@media (max-width : 800px) {
+    .containerTitle h1{
+        font-size: 30px;
+    }
+     .containerFilter {
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .containerFilter button {
+        width: 100%;
+        font-size: 16px;
+    }
+}

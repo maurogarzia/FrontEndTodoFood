@@ -1,8 +1,8 @@
 .containerPrincipal{
     background-color: #585858;
     width: 100%;
-    height: 100%;
-
+    min-height: 100vh;
+    
 }
 .containerPrincipal h1 {
     color: #E95708;
@@ -106,20 +106,20 @@
 }
 
 @keyframes deslizarDerecha {
-  0% {
-    transform: translateX(20%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
+    0% {
+        transform: translateX(20%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
-@media (min-height: 600px) {
+@media (max-width: 800px) {
     .containerPrincipal{
         width: 100%;
-        height: 100%;
+        min-height: 100%;
     }
     .containerPrincipal h1 {
         font-size: 30px;

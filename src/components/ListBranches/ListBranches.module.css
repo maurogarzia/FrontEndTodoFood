@@ -12,7 +12,7 @@
 .containerTitle{
     display: flex;
     align-items: center;
-    width: 100%;
+    min-width: 100%;
     padding: 20px;
     background-color: #2F2E2E;
 
@@ -82,4 +82,59 @@
     cursor: pointer;
     min-width: 300px;
     
+}
+
+@media (max-width: 768px) {
+    .containerPrincipal {
+        min-width: 100%; 
+        
+    }
+
+    .containerTitle {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .containerTitle h1 {
+        font-size: 32px;
+        text-align: left;
+    }
+
+    .containerFilter {
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .containerFilter button {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .branches {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .containerBranch {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .containerBranch h2 {
+        font-size: 28px;
+    }
+
+    .containerBranch button {
+        width: 100%;
+        font-size: 14px;
+    }
+    .containerBranch button:hover {
+        transform: scale(1.03);
+        transition: 0.3s ease;
+        cursor: pointer;
+        
+    
+}
 }
