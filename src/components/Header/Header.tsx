@@ -1,14 +1,22 @@
-import { useNavigate } from 'react-router'
+
 import styles from './Header.module.css'
 import { useState } from 'react'
+import { isLogged } from '../../utils/isLogged'
+import { useStoreModal } from '../../Store/useStoreModal'
+import { handleNavigate } from '../../Routes/navigationService'
 
 export const Header = () => {
-    const navigate = useNavigate()
+    
     const [menu, setMenu] = useState<boolean>(false) // Estado que controla el menu responsivo
+    const {openViewModalRegister} = useStoreModal()
 
-    // fuuncion para navegar entre paginas
-    const handleNavigate = (parameter : string) => {
-        navigate(parameter)
+    // Funcion que verifica si estas logueado
+    const handleIsLogged = (route : string) => {
+        if (isLogged()) {
+            handleNavigate(route)
+        } else {
+            openViewModalRegister()
+        }
     }
 
     // Funcion para desplegar menu responsivo
@@ -46,12 +54,12 @@ export const Header = () => {
                         </span>
 
                         {/* Circulo del perfil */}
-                        <span onClick={() => handleNavigate('/profile')} className="material-symbols-outlined">
+                        <span onClick={() => handleIsLogged('/profile')} className="material-symbols-outlined">
                             account_circle
                         </span>
 
                         {/* Carrito */}
-                        <span onClick={() => handleNavigate('/cart')} className="material-symbols-outlined">
+                        <span onClick={() => handleIsLogged('/cart')} className="material-symbols-outlined">
                             shopping_cart
                         </span>
 

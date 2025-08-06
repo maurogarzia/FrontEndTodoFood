@@ -19,11 +19,12 @@
 .containerLogin{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     gap: 20px;
     padding: 10px;
-    width: 100%;
+    min-width: 250px;
+    height: 300px;
+    min-height: 300px;
 }
 .containerLogin input{
     border: 1px solid gray;
@@ -39,7 +40,9 @@
     align-items: center;
     gap: 20px;
     padding: 10px;
-    width: 100%;
+    min-width: 250px;
+    height: 300px;
+    min-height: 300px;
 }
 .containerRegister input{
     border: 1px solid gray;
@@ -66,4 +69,18 @@
     border: 2px solid #E95708;
     color: #E95708;
     transition: 0.3s ease;
+}
+.containerInitSession{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+.letter:hover {
+    cursor: pointer;
+    color: #E95708
 }

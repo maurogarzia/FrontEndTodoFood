@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { BASE_URL } from '../../utils/constantes'
-import { useNavigate } from 'react-router'
+import { handleNavigate } from '../../Routes/navigationService'
 
 
-const navigate = useNavigate()
+
 
 // Crear insatncia base
 
@@ -33,7 +33,7 @@ axiosInstance.interceptors.response.use(
     (error) => {
         if (error.response?.status === 401) {
             localStorage.removeItem('jwtToken')
-            navigate('/login')
+            handleNavigate('/')
         }
         return Promise.reject(error)
     }
