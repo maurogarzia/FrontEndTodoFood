@@ -4,6 +4,7 @@ import { Footer } from '../../components/Footer/Footer'
 import { MainScreen } from '../../components/MainScreen/MainScreen'
 
 
+
 export const Home = () => {
     return (
         <div className={style.containerPrincipal}>

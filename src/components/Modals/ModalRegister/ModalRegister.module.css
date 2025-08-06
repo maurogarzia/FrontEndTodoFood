@@ -1,0 +1,69 @@
+.containerPrincipal{
+    display: flex;
+    background-color: white;
+    box-shadow: 5px 5px 10px black;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 550px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    border-radius: 10px;
+}
+.containerPrincipal h1 {
+    padding: 20px;
+}
+.containerLogin{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    width: 100%;
+}
+.containerLogin input{
+    border: 1px solid gray;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 15px;
+}
+.containerRegister{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 10px;
+    width: 100%;
+}
+.containerRegister input{
+    border: 1px solid gray;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 15px;
+}
+.containerButtons{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.containerButtons button{
+    padding: 10px;
+    font-size: 15px;
+    background-color: #E95708;
+    border: 2px solid #E95708;
+    color: white;
+}
+.containerButtons button:hover{
+    cursor: pointer;
+    background-color: white;
+    border: 2px solid #E95708;
+    color: #E95708;
+    transition: 0.3s ease;
+}

@@ -19,17 +19,17 @@
     background-color: #E95708;
     color: white;
     padding: 10px;
-    border: none;
-    border-radius: 10px;
+    border: 2px solid #E95708;
     font-size: 15px;
     min-width: 80px;
-    border: 1px solid #E95708;
+    border: 2px solid #E95708;
 }
 .containerFilter button:hover{
     cursor: pointer;
     background-color: white;
     color: #E95708;
     transition: 0.3s ease;
+    border: 2px solid #E95708;
 }
 .image{
     margin-left: 20px;

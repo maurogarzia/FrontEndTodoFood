@@ -11,7 +11,6 @@ export const ListProducts = () => {
     } = useStoreProducts()
     
     
-
     useEffect(() => {
         fetchAccompaniment(),
         fetchBurguers(),

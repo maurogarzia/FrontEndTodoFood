@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from '../components/interceptors/axiosInstance'
 import { ErrorAlert } from "../utils/ErrorAlert";
 import { SuccesAlerts } from "../utils/SuccesAlert";
 
