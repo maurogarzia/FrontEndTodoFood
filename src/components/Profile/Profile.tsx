@@ -1,12 +1,20 @@
+import { handleNavigate } from '../../Routes/navigationService'
 import style from './Profile.module.css'
 
 export const Profile = () => {
+
+    // Funcion para desloguear
+    const handelLogout = () => {
+        localStorage.removeItem('token')
+        handleNavigate('/')
+    }
+
     return (
         <div className={style.containerPrincipal}>
             <div className={style.containerProfile}>
                 <p>Nombre y Apellido</p>
                 <p>Username</p>
-                <button>Cerrar Sesión</button>
+                <button onClick={handelLogout}>Cerrar Sesión</button>
             </div>
 
             <div className={style.containerData}>

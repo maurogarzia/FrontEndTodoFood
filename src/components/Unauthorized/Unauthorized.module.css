@@ -1,0 +1,40 @@
+.containerPrincipal{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    min-height: 100vh;
+    min-width: 100vw;
+    color: white;
+    background-color: #585858;
+}
+.containerPrincipal h1{
+    margin-top: 20px;
+    color: red;
+    background-color: white;
+    width:max-content;
+    padding: 10px;
+    font-size: 100px;
+    border-radius: 10px;
+}
+.containerPrincipal p{
+    margin-top: 20px;
+    font-size: 50px;
+}
+.containerButton{
+    display: flex;
+    width: 100%;
+    padding: 10px;
+}
+.containerPrincipal button:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: 0.3s ease;
+}
+.containerPrincipal span {
+    color: #E95708;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}

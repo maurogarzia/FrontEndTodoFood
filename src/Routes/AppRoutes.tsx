@@ -1,6 +1,6 @@
 import { Route, Routes, useNavigate } from "react-router"
 import { Home } from "../Screens/Home/Home"
-import { AdminScreen } from "../Screens/AdminScreen/AdminScreen"
+
 import { ScreenProducts } from "../Screens/ScreenProducts/ScreenProducts"
 import { ScreenPromotions } from "../Screens/ScreenPromotions/ScreenPromotions"
 import { ScreenBranches } from "../Screens/ScreenBranches/ScreenBranches"
@@ -9,6 +9,12 @@ import { ScreenAddProducts } from "../Screens/ScreenAddProducts/ScreenAddProduct
 import { ScreenCart } from "../Screens/ScreenCart/ScreenCart"
 import { useEffect } from "react"
 import { setNavigateFn } from "./navigationService"
+import { PrivateRoute } from "../utils/PrivateRoute"
+import { AdminRoute } from "../utils/AdminRouter"
+import { AdminScreen } from "../Screens/AdminScreen/AdminScreen"
+import { Unauthorized } from "../components/Unauthorized/Unauthorized"
+
+
 
     const  InitNavigation = () => {
         const navigate = useNavigate();
@@ -24,14 +30,33 @@ export const AppRoutes = () => {
         <>
             <InitNavigation />
             <Routes>
+
                 <Route path="/" element={<Home/>}></Route>
                 <Route path="/products" element={<ScreenProducts/>}></Route>
                 <Route path="/promotions" element={<ScreenPromotions/>}></Route>
                 <Route path="/branches" element={<ScreenBranches/>}></Route>
-                <Route path="/admin" element={<AdminScreen/>}></Route>
-                <Route path="/profile" element={<ScreenProfile/>}></Route>
                 <Route path="/add-product" element={<ScreenAddProducts/>}></Route>
-                <Route path="/cart" element={<ScreenCart/>}></Route>
+                <Route path="/unauthorized" element={<Unauthorized />} />
+                
+                {/* Rutas protegidas */}
+                <Route path="/profile" element={
+                    <PrivateRoute>
+                        <ScreenProfile />
+                    </PrivateRoute>
+                } />
+                
+                <Route path="/cart" element={
+                    <PrivateRoute>
+                        <ScreenCart/>
+                    </PrivateRoute>
+                }/>
+
+                {/* Rutas de admin */}
+                <Route path="/admin" element={
+                    <AdminRoute>
+                        <AdminScreen />
+                    </AdminRoute>
+                }/>
             </Routes>
         </>
     )   

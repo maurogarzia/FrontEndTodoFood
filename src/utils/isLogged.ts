@@ -1,4 +1,4 @@
 export const isLogged = () : boolean => {
-    const token = localStorage.getItem('jwtToken')
+    const token = localStorage.getItem('token')
     return !!token
 }
