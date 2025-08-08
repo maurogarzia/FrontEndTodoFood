@@ -1,11 +1,15 @@
 import { handleNavigate } from '../../Routes/navigationService'
+import { useStoreUser } from '../../Store/useStoreUsers'
 import style from './Profile.module.css'
 
 export const Profile = () => {
 
+    const {setActiveUser} = useStoreUser()
+
     // Funcion para desloguear
     const handelLogout = () => {
         localStorage.removeItem('token')
+        setActiveUser(null)
         handleNavigate('/')
     }
 

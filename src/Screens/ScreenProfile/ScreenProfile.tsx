@@ -7,7 +7,7 @@ export const ScreenProfile = () => {
     return (
         <div className={style.containerPrincipal}>
             <Header/>
-            <Profile/>
+                <Profile/>
             <Footer/>
         </div>
     )

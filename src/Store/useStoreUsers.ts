@@ -5,6 +5,8 @@ import { getAllUsers } from "../cruds/crudUsers";
 interface IUseStoreUsers {
     users : IUser[]
     activeUser: IUser | null
+    loginUser : IUser | null
+    setLoginUSer : (incommingUSer : IUser | null) => void
     setActiveUser : (incommingUser : IUser | null) => void,
     fetchUser : () => Promise<void>
 }
@@ -12,6 +14,11 @@ interface IUseStoreUsers {
 export const useStoreUser = create<IUseStoreUsers>((set) => ({
     users : [],
     activeUser: null,
+    loginUser : null, // Usuario logueado
+    
+
+    setLoginUSer : (incommingUser) => set({loginUser : incommingUser}), 
+
 
     setActiveUser : (incommingUser) => set({activeUser: incommingUser}),
 

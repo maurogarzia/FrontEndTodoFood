@@ -16,14 +16,14 @@ export const ModalRegister : FC<IModalRegister> = ({type}) => {
     const [newType, setType] = useState<boolean>(type)
 
     const [userLogin, setUserLogin] = useState<ILogin>({ // Estado para loguearse
-        userName : '',
+        username : '',
         password : ''
     })
 
     const [userRegister, setuserRegister] = useState<IRegister>({
         name : '',
-        lastName: '',
-        userName: '',
+        lastname: '',
+        username: '',
         password: '',
         role: null,
         email: ''
@@ -83,15 +83,15 @@ export const ModalRegister : FC<IModalRegister> = ({type}) => {
                 {newType ? 
                 
                     <div className={style.containerLogin}>
-                        <input type="text" name="userName" id="" placeholder='Nombre de Usuario' onChange={handleChange}/>
+                        <input type="text" name="username" id="" placeholder='Nombre de Usuario' onChange={handleChange}/>
                         <input type="text" name="password" id="" placeholder='Contraseña' onChange={handleChange}/>
                         
                     </div>
                 :
                     <div className={style.containerRegister}>
                         <input type="text" name="name" id="" placeholder='Nombre' onChange={handleChange}/>
-                        <input type="text" name="lastName" id="" placeholder='Apellido' onChange={handleChange}/>
-                        <input type="text" name='userName'placeholder='Nombre Usuario' onChange={handleChange}/>
+                        <input type="text" name="lastname" id="" placeholder='Apellido' onChange={handleChange}/>
+                        <input type="text" name='username'placeholder='Nombre Usuario' onChange={handleChange}/>
                         <input type="text" name="password" id="" placeholder='Contraseña ' onChange={handleChange}/>
                         <input type="text" name="email" id="" placeholder='Email' onChange={handleChange}/>
 

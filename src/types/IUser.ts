@@ -9,8 +9,9 @@ export interface IUser {
     password: string,
     rol: Rol,
     email: string,
-    dni: number,
-    address: IAddress
+    address: IAddress,
+    username : string
+    phone : number
 }
 
 export interface IRequestUser {
@@ -21,5 +22,7 @@ export interface IRequestUser {
     rol: Rol,
     email: string,
     dni: number,
-    address: {id: number | null}
+    address: {id: number | null},
+    username : string
+    phone : number
 }
