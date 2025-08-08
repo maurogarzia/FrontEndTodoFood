@@ -32,6 +32,9 @@ export const login = async(userLogin : ILogin) => {
             localStorage.setItem("user", JSON.stringify(user))
         }
 
+        console.log(user);
+        
+
         return response.data
     } catch (error : any) {
         ErrorAlert('Error','No se pudo loguear el usuario')

@@ -1,24 +1,41 @@
+import { useEffect } from 'react'
 import { handleNavigate } from '../../Routes/navigationService'
-import { useStoreUser } from '../../Store/useStoreUsers'
 import style from './Profile.module.css'
+import { jwtDecode } from 'jwt-decode'
+import type { IUser } from '../../types/IUser'
+import { useStoreUser } from '../../Store/useStoreUsers'
+
+
+interface userLogin {
+    sub : string | null
+}
 
 export const Profile = () => {
 
-    const {setActiveUser} = useStoreUser()
+    const {setLoginUSer, loginUser} = useStoreUser()
+    
+    useEffect(() => {
+        const token = localStorage.getItem("token")
+        const decode = jwtDecode<userLogin>(token ? token : '')
+        setLoginUSer(decode.sub)
+
+    },[])
+
+    
+    
 
     // Funcion para desloguear
-    const handelLogout = () => {
+    const handleLogout = () => {
         localStorage.removeItem('token')
-        setActiveUser(null)
         handleNavigate('/')
     }
 
     return (
         <div className={style.containerPrincipal}>
             <div className={style.containerProfile}>
-                <p>Nombre y Apellido</p>
-                <p>Username</p>
-                <button onClick={handelLogout}>Cerrar Sesión</button>
+                <p>{loginUser?.name || "Nombre"} {loginUser?.lastname || "Apellido"}</p>
+                <p>{loginUser?.username || "Username"}</p>
+                <button onClick={handleLogout}>Cerrar Sesión</button>
             </div>
 
             <div className={style.containerData}>

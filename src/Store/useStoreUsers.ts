@@ -1,12 +1,12 @@
 import { create } from "zustand";
 import type { IUser } from "../types/IUser";
-import { getAllUsers } from "../cruds/crudUsers";
+import { getAllUsers, getByUsername } from "../cruds/crudUsers";
 
 interface IUseStoreUsers {
     users : IUser[]
     activeUser: IUser | null
     loginUser : IUser | null
-    setLoginUSer : (incommingUSer : IUser | null) => void
+    setLoginUSer : (incommingUSer : string | null) => void
     setActiveUser : (incommingUser : IUser | null) => void,
     fetchUser : () => Promise<void>
 }
@@ -15,10 +15,15 @@ export const useStoreUser = create<IUseStoreUsers>((set) => ({
     users : [],
     activeUser: null,
     loginUser : null, // Usuario logueado
-    
 
-    setLoginUSer : (incommingUser) => set({loginUser : incommingUser}), 
-
+    setLoginUSer : async(incommingUser) => {
+        if (incommingUser === null){
+            set({loginUser : null})
+        } else {
+            const fetchedUser = await getByUsername(incommingUser)
+            set({loginUser : fetchedUser})
+        }
+    }, 
 
     setActiveUser : (incommingUser) => set({activeUser: incommingUser}),
 
