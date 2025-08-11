@@ -1,11 +1,12 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { handleNavigate } from '../../Routes/navigationService'
 import style from './Profile.module.css'
 import { jwtDecode } from 'jwt-decode'
-import type { IUser } from '../../types/IUser'
 import { useStoreUser } from '../../Store/useStoreUsers'
+import { useStoreModal } from '../../Store/useStoreModal'
+import { ModalEditUser } from '../Modals/ModalEditUser/ModalEditUser'
 
-
+// Interface para manejar el username del token
 interface userLogin {
     sub : string | null
 }
@@ -13,6 +14,7 @@ interface userLogin {
 export const Profile = () => {
 
     const {setLoginUSer, loginUser} = useStoreUser()
+    const {openViewModalEditUser, viewModalEditUser} = useStoreModal()
     
     useEffect(() => {
         const token = localStorage.getItem("token")
@@ -21,13 +23,19 @@ export const Profile = () => {
 
     },[])
 
-    
+    const [option, setOption] = useState<string>('')
     
 
     // Funcion para desloguear
     const handleLogout = () => {
         localStorage.removeItem('token')
+        setLoginUSer(null)
         handleNavigate('/')
+    }
+
+    const handleOpenModalEditUSer = (option : string) => {
+        setOption(option)
+        openViewModalEditUser()
     }
 
     return (
@@ -43,63 +51,65 @@ export const Profile = () => {
                 <div className={style.data}>
                     <div className={style.title}>
                         <h1>Tus Datos</h1>
-                        <button>
+                        <button onClick={() => handleOpenModalEditUSer('fiscalData')}>
                             <span className="material-symbols-outlined">
                                 edit
                             </span>
                         </button>
                     </div>
                     <div className={style.info}>
-                        <p>Teléfono: 2616928706</p>
-                        <p>Fecha Nacimiento: 9/12/18</p>
+                        <p>Nombre: {loginUser?.name || "No hay nombre"}</p>
+                        <p>Apellido: {loginUser?.lastname || "No hay apellido"}</p>
+                        <p>Teléfono: {loginUser?.phone || "No hay telefonos agregados"}</p>
                     </div>
                 </div>
 
                 <div className={style.data}>
                     <div className={style.title}>
                         <h1>Dirección</h1>
-                        <button>
+                        <button onClick={() => handleOpenModalEditUSer('address')}>
                             <span className="material-symbols-outlined">
                                     edit
                             </span>
                         </button>
                     </div>
                     <div className={style.info}>
-                        <p>No hay direcciones cargadas</p>
+                        {loginUser?.address?.id == null ?
+                            <div>
+                                <p>No hay direcciones cargadas</p>    
+                            </div> 
+                            : 
+                            <div>
+                                <p>
+                                    {loginUser?.address.street || ''} 
+                                    {loginUser?.address.number || ''}
+                                    {`${loginUser?.address.locality.name}` || ''}
+                                </p>
+                            </div>}
                     </div>
                 </div>
 
                 <div className={style.data}>
                     <div className={style.title}>
                         <h1>Datos de acceso</h1>
-                        <button>    
+                        <button onClick={() => handleOpenModalEditUSer('accessData')}>    
                             <span className="material-symbols-outlined">
                                     edit
                             </span>
                         </button>
                     </div>
                     <div className={style.info}>
-                        <p>Email: user@gmail.com</p>
-                        <p>Contraseña: *******</p>
+                        <p>Nombre de Usuario: {loginUser?.username || "No hay nombre de usuario"}</p>
+                        <p>Correo: {loginUser?.email}</p>
+                        <p>Contraseña: {loginUser?.password}</p>
                     </div>
                 </div>
 
-                <div className={style.data}>
-                    <div className={style.title}>
-                        <h1>Historial de pedidos</h1>
-                        <button>
-                            <span className="material-symbols-outlined">
-                                    edit
-                            </span>
-                        </button>
-                    </div>
-                    <div className={style.info}>
-                        <p>No has realizado ningun pedido</p>
-                    </div>
-                </div>
+                
 
 
             </div>
+            {viewModalEditUser && <div className={style.modalBackdrop}><ModalEditUser option={option}/></div>}
         </div>
     )
 }

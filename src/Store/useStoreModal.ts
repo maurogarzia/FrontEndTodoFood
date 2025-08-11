@@ -17,7 +17,10 @@ interface IUseStoreModal {
     viewModalAdminPromotionDetails : boolean,
     viewModalAdminUnitaryDetail : boolean,
     viewSubModalPromotionDetails : boolean,
-    viewModalRegister : boolean
+    viewModalRegister : boolean,
+
+    viewModalEditUser : boolean,
+    viewSubModalAddress : boolean,
 
 
 
@@ -70,7 +73,13 @@ interface IUseStoreModal {
     closeSubModalPromotionDetails: VoidFunction,
 
     openViewModalRegister : VoidFunction,
-    closeViewModalRegister : VoidFunction
+    closeViewModalRegister : VoidFunction,
+
+    openViewModalEditUser : VoidFunction,
+    closeViewModalEditUser : VoidFunction
+
+    openViewSubModalAddress : VoidFunction,
+    closeViewSubModalAddress : VoidFunction
 }
 
 
@@ -92,6 +101,9 @@ export const useStoreModal = create<IUseStoreModal>((set) => ({
     viewModalAdminUnitaryDetail: false,
     viewSubModalPromotionDetails : false,
     viewModalRegister : false,
+
+    viewModalEditUser : false,
+    viewSubModalAddress : false,
 
     // Pais
     openViewModalAdminCountry : () => set({viewModalAdminCountry : true}),
@@ -157,7 +169,15 @@ export const useStoreModal = create<IUseStoreModal>((set) => ({
     openSubModalPromotionDetails : () => set({viewSubModalPromotionDetails : true}),
     closeSubModalPromotionDetails : () => set({viewSubModalPromotionDetails : false}),
 
+    // Modal de registro
     openViewModalRegister : () => set({viewModalRegister : true}),
-    closeViewModalRegister : () => set({viewModalRegister : false})
+    closeViewModalRegister : () => set({viewModalRegister : false}),
+
+    // Modal para editar usuario
+    openViewModalEditUser : () => set({viewModalEditUser : true}),
+    closeViewModalEditUser : () => set({viewModalEditUser : false}),
+
+    openViewSubModalAddress : () => set({viewSubModalAddress : true}),
+    closeViewSubModalAddress : () => set({viewSubModalAddress : false})
 
 }))

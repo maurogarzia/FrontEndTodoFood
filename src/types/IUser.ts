@@ -19,10 +19,9 @@ export interface IRequestUser {
     name: string
     lastname : string
     password: string,
-    rol: Rol,
+    rol: Rol | null,
     email: string,
-    dni: number,
     address: {id: number | null},
     username : string
-    phone : number
+    phone : number 
 }

@@ -1,0 +1,105 @@
+.containerPrincipal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 550px;
+    box-shadow: 5px 5px 7px rgb(62, 62, 62);
+    padding: 10px;
+    border-radius: 10px;
+}
+.containerData{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.containerData input{
+    width: 100%;
+    border: 1px solid #585858;
+    padding: 10px;
+}
+.containerData select{
+    width: 100%;
+    border: 1px solid #585858;
+    padding: 10px;
+}
+.existAddress{
+    display: flex;
+    padding: 10px;
+    width: 100%;
+    gap: 10px;
+}
+.address{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 20px;
+}
+.address button{
+    padding: 10px;
+    border: #E95708 2px solid;
+    font-size: 15px;
+    background-color: #E95708;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.address button:hover{
+    background-color: white;
+    border: #E95708 2px solid;
+    color: #E95708;
+    cursor: pointer;
+    transition: 0.3s ease;
+    
+}
+.containerButtons{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-top: 20px;
+    width: 100%;
+    
+}
+.containerButtons button{
+    width: 75px;
+    padding: 10px;
+    border: white 2px solid;
+    font-size: 15px;
+    background-color: #585858;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.containerButtons button:hover{
+    cursor: pointer;
+    transition: 0.3s ease;
+    background-color: white;
+    color: #585858;
+    border: #585858 2px solid;
+}
+.modalBackdrop{
+    position: fixed;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
