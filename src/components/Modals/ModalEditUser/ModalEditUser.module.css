@@ -36,6 +36,12 @@
     padding: 10px;
     width: 100%;
     gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.existAddress span {
+    color: red;
+    cursor: pointer;
 }
 .address{
     display: flex;
@@ -44,6 +50,7 @@
     justify-content: center;
     width: 100%;
     gap: 20px;
+    
 }
 .address button{
     padding: 10px;

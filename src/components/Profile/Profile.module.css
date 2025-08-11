@@ -91,7 +91,14 @@
     overflow-x: auto;
     padding: 10px;
 }
-
+.containerAddress{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.containerAddress p{
+    padding: 0;
+}
 .modalBackdrop{
     position: fixed;
     top:50%;

@@ -79,12 +79,10 @@ export const Profile = () => {
                                 <p>No hay direcciones cargadas</p>    
                             </div> 
                             : 
-                            <div>
-                                <p>
-                                    {loginUser?.address.street || ''} 
-                                    {loginUser?.address.number || ''}
-                                    {`${loginUser?.address.locality.name}` || ''}
-                                </p>
+                            <div className={style.containerAddress}>
+                                <p>{loginUser?.address.street || ''}</p>
+                                <p>{loginUser?.address.number || ''}</p>
+                                <p>{`${loginUser?.address.locality.name}` || ''}</p>  
                             </div>}
                     </div>
                 </div>
