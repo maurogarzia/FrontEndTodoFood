@@ -15,7 +15,7 @@ export const MainScreen = () => {
 
     useEffect(() => {
         fetchPromotionsDetails()
-    },[])
+    },[])    
 
     const [index, setIndex] = useState<number>(0)
     

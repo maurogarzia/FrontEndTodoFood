@@ -6,6 +6,7 @@ import type { ILogin, IRegister } from '../../../types/auth'
 import { login, register } from '../../../cruds/crudAuth'
 import { SuccesAlerts } from '../../../utils/SuccesAlert'
 import { ErrorAlert } from '../../../utils/ErrorAlert'
+import { useStoreUser } from '../../../Store/useStoreUsers'
 
 interface IModalRegister {
     type : boolean
@@ -14,6 +15,7 @@ interface IModalRegister {
 export const ModalRegister : FC<IModalRegister> = ({type}) => {
 
     const {closeViewModalRegister} = useStoreModal()
+    const {setLoginUSer} = useStoreUser()
     const [newType, setType] = useState<boolean>(type)
 
     // Estado para login
@@ -75,6 +77,7 @@ export const ModalRegister : FC<IModalRegister> = ({type}) => {
                 }
                 SuccesAlerts('Logueado', 'Usuario o contraseña inválido')
                 closeViewModalRegister()
+                setLoginUSer(`${userLogin.username}`)
             } else {
                 await register(userRegister)
                 closeViewModalRegister()

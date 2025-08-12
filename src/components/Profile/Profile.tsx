@@ -1,27 +1,18 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { handleNavigate } from '../../Routes/navigationService'
 import style from './Profile.module.css'
-import { jwtDecode } from 'jwt-decode'
+
 import { useStoreUser } from '../../Store/useStoreUsers'
 import { useStoreModal } from '../../Store/useStoreModal'
 import { ModalEditUser } from '../Modals/ModalEditUser/ModalEditUser'
 
-// Interface para manejar el username del token
-interface userLogin {
-    sub : string | null
-}
 
 export const Profile = () => {
 
     const {setLoginUSer, loginUser} = useStoreUser()
     const {openViewModalEditUser, viewModalEditUser} = useStoreModal()
     
-    useEffect(() => {
-        const token = localStorage.getItem("token")
-        const decode = jwtDecode<userLogin>(token ? token : '')
-        setLoginUSer(decode.sub)
-
-    },[])
+    
 
     const [option, setOption] = useState<string>('')
     
@@ -99,6 +90,7 @@ export const Profile = () => {
                     <div className={style.info}>
                         <p>Nombre de Usuario: {loginUser?.username || "No hay nombre de usuario"}</p>
                         <p>Correo: {loginUser?.email}</p>
+                        
 
                         <div className={style.password}>
                             <p>Contraseña</p>

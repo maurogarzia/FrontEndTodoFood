@@ -9,7 +9,7 @@ interface IUseStoreUsers {
     setLoginUSer : (incommingUSer : string | null) => void
     setActiveUser : (incommingUser : IUser | null) => void,
     fetchUser : () => Promise<void>
-    fetchLoginUser : (username : string) => Promise<void>
+    
 }
 
 export const useStoreUser = create<IUseStoreUsers>((set) => ({
@@ -38,9 +38,6 @@ export const useStoreUser = create<IUseStoreUsers>((set) => ({
         
     },
 
-    fetchLoginUser: async (username) => {
-        const fetchedUser = await getByUsername(username)
-        set({loginUser : fetchedUser})
-    }
+    
 
 }))

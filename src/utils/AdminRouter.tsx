@@ -1,26 +1,24 @@
 import { Navigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
+import { Rol } from "../types/enums/Rol";
+import { useStoreUser } from "../Store/useStoreUsers";
 
 // Interface que tendra para componente admin
 interface Props {
     children: React.ReactNode;
 }
 
-interface DecodedToken {
-    role: string;
-}
-
 export const AdminRoute = ({ children }: Props) => {
+    const {loginUser} = useStoreUser()
     const token = localStorage.getItem("token"); // Busco el token
 
-    if (!token) {
+    if (!token || loginUser === null) {
         return <Navigate to="/unauthorized" replace />; // Si no hay token marco que no puede entrar
     }
 
     try {
-        const decoded = jwtDecode<DecodedToken>(token); // Le pongo la interface al decoded para que typescript sepa que hay un rol
+        
 
-        if (decoded.role !== "admin") {
+        if (loginUser.rol !== Rol.admin ) {
             return <Navigate to="/unauthorized" replace />; // Si el rol no es admin no puede entrar
         }
 

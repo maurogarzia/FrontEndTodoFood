@@ -62,11 +62,7 @@
     color: white;
     font-size: 20px;
 }
-.containerBranch h2{
-    color: #E95708;
-    font-size: 40px;
-}
-.containerBranch button {
+.containerBranch a {
     background-color: #E95708;
     color: white;
     padding: 10px;
@@ -74,8 +70,15 @@
     min-width: 300px;
     border-radius: 10px;
     font-size: 15px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
 }
-.containerBranch button:hover {
+.containerBranch h2{
+    color: #E95708;
+    font-size: 40px;
+}   
+.containerBranch a:hover {
     transform: scale(1.08);
     transition: 0.3s ease;
     cursor: pointer;
@@ -125,11 +128,11 @@
         font-size: 28px;
     }
 
-    .containerBranch button {
+    .containerBranch a {
         width: 100%;
         font-size: 14px;
     }
-    .containerBranch button:hover {
+    .containerBranch a:hover {
         transform: scale(1.03);
         transition: 0.3s ease;
         cursor: pointer;

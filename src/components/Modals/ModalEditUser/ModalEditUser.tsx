@@ -20,7 +20,7 @@ export const ModalEditUser : FC<IModalEditUser> = ({option}) => {
     
     const {closeViewModalEditUser, openViewSubModalAddress, viewSubModalAddress} = useStoreModal()
     
-    const {loginUser, fetchLoginUser, setLoginUSer} = useStoreUser()
+    const {loginUser, setLoginUSer} = useStoreUser()
     
     // Estadp para el cambio de inputs del usuario
     const [user, setUser] = useState<IRequestUser>({ 
@@ -96,7 +96,7 @@ export const ModalEditUser : FC<IModalEditUser> = ({option}) => {
             address : null
             
         }))
-        fetchLoginUser(`${user.username}`) // Refresco el estado del user
+        setLoginUSer(user.username)
         await updatedUser(user, user.id!) 
         closeViewModalEditUser()
         SuccesAlerts('Eliminado','Se elimino la direccion')
@@ -129,7 +129,7 @@ export const ModalEditUser : FC<IModalEditUser> = ({option}) => {
             }else { // Sino usa el endpoint de editar
 
                 await updatedUser(user, user.id!)
-                fetchLoginUser(`${user.username}`)
+                setLoginUSer(user.username)
                 closeViewModalEditUser()
             }
         } catch (error : any) {

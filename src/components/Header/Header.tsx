@@ -5,16 +5,30 @@ import { isLogged } from '../../utils/isLogged'
 import { useStoreModal } from '../../Store/useStoreModal'
 import { handleNavigate } from '../../Routes/navigationService'
 
+import { Rol } from '../../types/enums/Rol'
+import { useStoreUser } from '../../Store/useStoreUsers'
+
+
+
+
 export const Header = () => {
     
     const [menu, setMenu] = useState<boolean>(false) // Estado que controla el menu responsivo
     const {openViewModalRegister} = useStoreModal()
-    const [isAdmin, setIsAmind] = useState<boolean>(false)
+    const [isAdmin, setIsAdmin] = useState<boolean>()
+    const {loginUser, setLoginUSer} = useStoreUser()
 
     useEffect(() => {
         const token = localStorage.getItem("token")
-        token
-    },[])
+        if (loginUser === null || !token) return
+        if (loginUser?.rol === Rol.admin){
+            setIsAdmin(true)
+            setLoginUSer(loginUser.username)
+        } else {
+            setIsAdmin(false)
+        }
+        
+    },[loginUser])
 
     // Funcion que verifica si estas logueado
     const handleIsLogged = (route : string) => {
@@ -39,8 +53,8 @@ export const Header = () => {
                     {/* menu para responsivo */}
                     <div className={styles.menu}>
                         <span onClick={() => handleDisplayMenu(true)} className="material-symbols-outlined">
-                        menu
-                    </span>
+                            menu
+                        </span>
 
                     </div>
 
@@ -51,6 +65,11 @@ export const Header = () => {
                     </div>
 
                     <div className={styles.searchAndProfile}>
+                        {isAdmin && 
+                            <span onClick={() => handleNavigate('/admin')} className="material-symbols-outlined">
+                                admin_panel_settings
+                            </span>}
+
                         {/* Barra de busqueda */}
                         <input type="text" name="" id="" placeholder='Buscar'/>
 
