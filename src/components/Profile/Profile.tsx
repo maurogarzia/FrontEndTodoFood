@@ -99,7 +99,11 @@ export const Profile = () => {
                     <div className={style.info}>
                         <p>Nombre de Usuario: {loginUser?.username || "No hay nombre de usuario"}</p>
                         <p>Correo: {loginUser?.email}</p>
-                        <p>Contraseña: {loginUser?.password}</p>
+
+                        <div className={style.password}>
+                            <p>Contraseña</p>
+                            <button onClick={() => handleOpenModalEditUSer('password')}>Cambiar contraseña</button> 
+                        </div>
                     </div>
                 </div>
 

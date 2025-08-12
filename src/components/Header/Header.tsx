@@ -1,6 +1,6 @@
 
 import styles from './Header.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { isLogged } from '../../utils/isLogged'
 import { useStoreModal } from '../../Store/useStoreModal'
 import { handleNavigate } from '../../Routes/navigationService'
@@ -9,6 +9,12 @@ export const Header = () => {
     
     const [menu, setMenu] = useState<boolean>(false) // Estado que controla el menu responsivo
     const {openViewModalRegister} = useStoreModal()
+    const [isAdmin, setIsAmind] = useState<boolean>(false)
+
+    useEffect(() => {
+        const token = localStorage.getItem("token")
+        token
+    },[])
 
     // Funcion que verifica si estas logueado
     const handleIsLogged = (route : string) => {

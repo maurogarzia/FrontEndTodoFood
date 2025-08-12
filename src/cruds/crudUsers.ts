@@ -28,6 +28,7 @@ export const deleteUser = async(id : number) => {
     return deleteEntity(BASE_USERS, title, id)
 }
 
+// endpoint para ver a un user por su username
 export const getByUsername = async(username : string) => {
     try {
         const response = await axios.get(`${BASE_USERS}/username/${username}`)
@@ -36,5 +37,16 @@ export const getByUsername = async(username : string) => {
         console.log(error.message);
         ErrorAlert('Error', "No se pudo mostrar el usuario")
         
+    }
+}
+
+// endpoint para actualizar una password
+export const updatePassword = async (id : number, data : {oldPassword : string, newPassword : string}) => {
+    try {
+        const response = await axios.put(`${BASE_USERS}/${id}/password`, data)
+        return response.data
+    } catch (error : any) {
+        console.log(error.message);
+        ErrorAlert('Error', 'No se pudo actualizar la contrseña')
     }
 }

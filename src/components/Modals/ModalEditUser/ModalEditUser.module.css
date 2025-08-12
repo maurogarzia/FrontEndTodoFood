@@ -70,6 +70,17 @@
     transition: 0.3s ease;
     
 }
+.containerPassword{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-left: 35px;
+}
+.containerPassword span{
+    color: gray;
+    cursor: pointer;
+}
 .containerButtons{
     display: flex;
     align-items: center;

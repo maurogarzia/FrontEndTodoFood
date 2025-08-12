@@ -3,8 +3,12 @@ import style from './ModalEditUser.module.css'
 import { useStoreModal } from '../../../Store/useStoreModal'
 import { useStoreUser } from '../../../Store/useStoreUsers'
 import type { IRequestUser} from '../../../types/IUser'
-import { updatedUser } from '../../../cruds/crudUsers'
+import { updatedUser, updatePassword } from '../../../cruds/crudUsers'
 import { SubModalAddress } from '../SubModalAddress/SubModalAddress'
+import { SuccesAlerts } from '../../../utils/SuccesAlert'
+
+import { ErrorAlert } from '../../../utils/ErrorAlert'
+import { handleNavigate } from '../../../Routes/navigationService'
 
 
 
@@ -16,9 +20,10 @@ export const ModalEditUser : FC<IModalEditUser> = ({option}) => {
     
     const {closeViewModalEditUser, openViewSubModalAddress, viewSubModalAddress} = useStoreModal()
     
-    const {loginUser} = useStoreUser()
+    const {loginUser, fetchLoginUser, setLoginUSer} = useStoreUser()
     
-    const [user, setUser] = useState<IRequestUser>({
+    // Estadp para el cambio de inputs del usuario
+    const [user, setUser] = useState<IRequestUser>({ 
         id : loginUser?.id,
         name : loginUser?.name || '',
         username : loginUser?.username || '',
@@ -33,22 +38,100 @@ export const ModalEditUser : FC<IModalEditUser> = ({option}) => {
         
     })
 
+    // Estado para mostrar la contrasenia
+    const [showPassword, setShowPassword] = useState({
+        oldPassword : false,
+        newPassword : false,
+        confirmPassword : false
+    })
+
+    // Funcion para controlar todos los inputs
+    const handleShowPassword = (field : 'oldPassword' | 'newPassword' | 'confirmPassword') => {
+        setShowPassword((prev) => ({
+            ...prev,
+            [field] : !prev[field]
+        }))
+    }
+
+    // Funcion para desloguear
+        const handleLogout = () => {
+            localStorage.removeItem('token')
+            setLoginUSer(null)
+            handleNavigate('/')
+        }
+
+    // Estado para el manejo de la nueva contraseña
+    const [data, setData] = useState({
+        oldPassword : '',
+        newPassword : '',
+        confirmPassword : ''
+    })
+
+
+    // Maneja cambio de inputs
     const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => { 
         const {name, value} = e.target
+
+        if (option === 'password'){
+
+            setData((prev) => ({
+                ...prev,
+                [name] : value
+            }))
+
+        }else{
+
+            setUser((prev) => ({
+                ...prev,
+                [name] : Number(value) ? Number(value) : value
+            }))
+        }
         
+    }
+    
+    // Funcion para eliminar la direccion
+    const handleDelete = async() => {
         setUser((prev) => ({
             ...prev,
-            [name] : Number(value) ? Number(value) : value
+            address : null
+            
         }))
-
+        fetchLoginUser(`${user.username}`) // Refresco el estado del user
+        await updatedUser(user, user.id!) 
+        closeViewModalEditUser()
+        SuccesAlerts('Eliminado','Se elimino la direccion')
     }
         
+
+    // Envia cambios al back
     const handleSubmit = async(e : React.FormEvent) => {
         e.preventDefault()
         try {
-            await updatedUser(user, user.id!)
-            
-            closeViewModalEditUser()
+
+            // Si el cambio es de la contrase;a uso un endpoint diferente
+            if (option === 'password'){
+
+                // Si la contrasenia no coincide retorna
+                if (data.newPassword !== data.confirmPassword){
+                    ErrorAlert('Error', 'Las contraseñas no coinciden')
+                    closeViewModalEditUser()
+                    return
+                }
+                const {oldPassword, newPassword} = data
+                const updatedPassword = await updatePassword(user.id!, {oldPassword, newPassword})
+
+                // Si se concreta correctamente el cambio de contrase;a remuevo el token para que se deba volver a loguear
+                if (updatedPassword){
+                    SuccesAlerts('Actualizado', 'Se actualizo la contraseña, vuelvete a loguear por favor')
+                    handleLogout() // Deslogueo
+                    closeViewModalEditUser()
+                }
+            }else { // Sino usa el endpoint de editar
+
+                await updatedUser(user, user.id!)
+                fetchLoginUser(`${user.username}`)
+                closeViewModalEditUser()
+            }
         } catch (error : any) {
             console.log(error.message);
             
@@ -87,7 +170,7 @@ export const ModalEditUser : FC<IModalEditUser> = ({option}) => {
                                 <p>{loginUser?.address?.street}</p>
                                 <p>{loginUser?.address?.number}</p>
                                 <p>({loginUser?.address?.locality.name})</p>
-                                <span className="material-symbols-outlined">
+                                <span onClick={handleDelete} className="material-symbols-outlined">
                                     delete
                                 </span>
                                 
@@ -109,10 +192,46 @@ export const ModalEditUser : FC<IModalEditUser> = ({option}) => {
                         <label htmlFor="">Correo</label>
                         <input type="text" value={user.email} name="email" id="" onChange={handleChange}/>
 
-                        <label htmlFor="">Contraseña</label>
-                        <input type="text" value={user.password} name="password" id="" onChange={handleChange}/>
+                    </div>
+
+                }
+
+                {option === 'password' && 
+                    <div className={style.containerData}>
+                        <h1>Editar Contraseña</h1>
+                        <label htmlFor="">Anterior contraseña</label>
+
+                        <div className={style.containerPassword}>
+                            <input type={showPassword.oldPassword ? 'text' : 'password'} name="oldPassword" value={data.oldPassword} placeholder='Anterior contraseña' onChange={handleChange}/>
+                            <span onClick={() => handleShowPassword('oldPassword')}  className="material-symbols-outlined">
+                                {showPassword.oldPassword ? 'visibility' : 'visibility_off'}
+                            </span>
+                                
+                        </div>
+
+
+                        <label htmlFor="">Nueva contraseña</label>
+                        <div className={style.containerPassword}>
+                            <input type={showPassword.newPassword ? 'text' : 'password'} name="newPassword" id="" value={data.newPassword} placeholder='Nueva contraseña' onChange={handleChange}/>
+
+                            <span onClick={() => handleShowPassword('newPassword')}  className="material-symbols-outlined">
+                                {showPassword.newPassword ? 'visibility' : 'visibility_off'}
+                            </span>
+                        </div>
+
+                        <label htmlFor="">Confirmar contraseña</label>
+                        <div className={style.containerPassword}>
+                            <input type={showPassword.confirmPassword ? 'text' : 'password'} name="confirmPassword" id="" value={data.confirmPassword} placeholder='Confirmar contraseña'onChange={handleChange}/>
+                            
+                            <span onClick={() => handleShowPassword('confirmPassword')} className="material-symbols-outlined">
+                                {showPassword.confirmPassword ? 'visibility' : 'visibility_off'}
+                            </span>
+
+                        </div>
                     </div>
                 }
+
+
                 <div className={style.containerButtons}>
                     <button onClick={closeViewModalEditUser}>Cancelar</button>
                     <button >Aceptar</button>

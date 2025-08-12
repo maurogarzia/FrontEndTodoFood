@@ -5,6 +5,7 @@ import { useStoreModal } from '../../../Store/useStoreModal'
 import type { ILogin, IRegister } from '../../../types/auth'
 import { login, register } from '../../../cruds/crudAuth'
 import { SuccesAlerts } from '../../../utils/SuccesAlert'
+import { ErrorAlert } from '../../../utils/ErrorAlert'
 
 interface IModalRegister {
     type : boolean
@@ -15,11 +16,13 @@ export const ModalRegister : FC<IModalRegister> = ({type}) => {
     const {closeViewModalRegister} = useStoreModal()
     const [newType, setType] = useState<boolean>(type)
 
-    const [userLogin, setUserLogin] = useState<ILogin>({ // Estado para loguearse
+    // Estado para login
+    const [userLogin, setUserLogin] = useState<ILogin>({ 
         username : '',
         password : ''
     })
 
+    // Estado para registro
     const [userRegister, setuserRegister] = useState<IRegister>({
         name : '',
         lastname: '',
@@ -33,6 +36,10 @@ export const ModalRegister : FC<IModalRegister> = ({type}) => {
     const handleType = () => {
         setType(!newType)
     }
+
+
+    // Estado para ver la contrasenia
+    const [showPassword, setShowPassword] = useState<boolean>(false)
 
 
     const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
@@ -60,9 +67,14 @@ export const ModalRegister : FC<IModalRegister> = ({type}) => {
         e.preventDefault()
         try {
             if (newType) {
-                await login(userLogin)
+                const logued = await login(userLogin)
+                if (!logued){
+                    ErrorAlert('Error', 'No se pudo loguear')
+                    closeViewModalRegister()
+                    return
+                }
+                SuccesAlerts('Logueado', 'Usuario o contraseña inválido')
                 closeViewModalRegister()
-                SuccesAlerts('Logueado', 'Sesión iniciada correctamente')
             } else {
                 await register(userRegister)
                 closeViewModalRegister()
@@ -78,13 +90,18 @@ export const ModalRegister : FC<IModalRegister> = ({type}) => {
         <div className={style.containerPrincipal}>
             <h1>{newType ? 'Iniciar Sesión' : "Regístrate"}</h1>
 
-            <form action="" onSubmit={handleSubmit}>
+            <form  onSubmit={handleSubmit}>
                 
                 {newType ? 
                 
                     <div className={style.containerLogin}>
                         <input type="text" name="username" id="" placeholder='Nombre de Usuario' onChange={handleChange}/>
-                        <input type="text" name="password" id="" placeholder='Contraseña' onChange={handleChange}/>
+                        <div className={style.containerPassword}>
+                            <input type={showPassword ? 'text' : 'password'} name="password" id="" placeholder='Contraseña' onChange={handleChange}/>
+                            <span onClick={() => setShowPassword(!showPassword)} className="material-symbols-outlined">
+                                {showPassword ? 'visibility' : 'visibility_off'}
+                            </span>
+                        </div>
                         
                     </div>
                 :
@@ -92,8 +109,13 @@ export const ModalRegister : FC<IModalRegister> = ({type}) => {
                         <input type="text" name="name" id="" placeholder='Nombre' onChange={handleChange}/>
                         <input type="text" name="lastname" id="" placeholder='Apellido' onChange={handleChange}/>
                         <input type="text" name='username'placeholder='Nombre Usuario' onChange={handleChange}/>
-                        <input type="text" name="password" id="" placeholder='Contraseña ' onChange={handleChange}/>
                         <input type="text" name="email" id="" placeholder='Email' onChange={handleChange}/>
+                        <div className={style.containerPassword}>
+                            <input type={showPassword ? 'text' : 'password'} name="password" id="" placeholder='Contraseña' onChange={handleChange}/>
+                            <span onClick={() => setShowPassword(!showPassword)} className="material-symbols-outlined">
+                                {showPassword ? 'visibility' : 'visibility_off'}
+                            </span>
+                        </div>
 
                     </div>}
 

@@ -50,6 +50,7 @@
     align-items: center;
     padding: 10px;
     font-size: 15px;
+    
 }
 .containerButtons{
     display: flex;
@@ -83,4 +84,16 @@
 .letter:hover {
     cursor: pointer;
     color: #E95708
+}
+.containerPassword{
+    display: flex;
+    margin-left: 35px;
+    align-items: center;
+    gap: 10px;
+    
+}
+.containerPassword span{
+    cursor: pointer;
+    color: gray;
+    
 }
