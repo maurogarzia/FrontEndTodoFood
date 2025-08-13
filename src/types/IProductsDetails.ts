@@ -7,7 +7,6 @@ export interface IProductsDetails{
     stock: number,
     price: number,
     size: ISize,
-    
     product : IProducts
 }
 

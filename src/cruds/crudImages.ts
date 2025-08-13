@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from '../components/interceptors/axiosInstance'
 import {BASE_URL} from '../utils/constantes'
 import { ErrorAlert } from '../utils/ErrorAlert'
 import { deleteEntity, getAll, getById } from './crudGeneric'

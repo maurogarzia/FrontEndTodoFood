@@ -51,7 +51,7 @@ export const CountryAdmin = () => {
                 <h1>Países</h1>
                 <button onClick={() => handleOpen(null)}>Agregar</button>
             </div>
-            <div className={style.countryTable}>
+            <div className={style.entityTable}>
 
                 <table className={style.table}>
                     <thead>

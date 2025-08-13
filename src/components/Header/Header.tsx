@@ -16,19 +16,18 @@ export const Header = () => {
     const [menu, setMenu] = useState<boolean>(false) // Estado que controla el menu responsivo
     const {openViewModalRegister} = useStoreModal()
     const [isAdmin, setIsAdmin] = useState<boolean>()
-    const {loginUser, setLoginUSer} = useStoreUser()
+    const {loginUser} = useStoreUser()
 
     useEffect(() => {
         const token = localStorage.getItem("token")
         if (loginUser === null || !token) return
         if (loginUser?.rol === Rol.admin){
             setIsAdmin(true)
-            setLoginUSer(loginUser.username)
         } else {
             setIsAdmin(false)
         }
         
-    },[loginUser])
+    },[])
 
     // Funcion que verifica si estas logueado
     const handleIsLogged = (route : string) => {
@@ -107,6 +106,7 @@ export const Header = () => {
                             <p onClick={() => handleNavigate('/branches')}>Sucursales</p>
                             <p onClick={() => handleNavigate('/profile')}>Perfil</p>
                             <p onClick={() => handleNavigate('/cart')}>Carrito</p>
+                            {isAdmin && <p onClick={() => handleNavigate('/admin')}>Admin</p>}
 
                         </div>
 

@@ -101,16 +101,17 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
+    
 }
 .containerButton button{
     padding: 5px;
-        font-size: 15px;
-        background-color: red;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
+    font-size: 15px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 @media (max-width : 800px) {
     .containerPrincipal {

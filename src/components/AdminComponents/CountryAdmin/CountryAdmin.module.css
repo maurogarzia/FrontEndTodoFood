@@ -29,13 +29,15 @@
     color: white;
     transition: 0.2s ease;
 }
-.countryTable {
-    
+.entityTable {
     width: 100%;
-    overflow-x: auto;
     margin: 0 auto;
     margin-top: 10px;
     color: black;
+    max-width: 82vw;
+    overflow: auto;
+    max-height: 86vh;
+    overflow-y: auto;
 }
 .table {
     width: 100%;

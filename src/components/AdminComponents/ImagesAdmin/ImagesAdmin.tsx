@@ -5,14 +5,14 @@ import { useStoreModal } from '../../../Store/useStoreModal'
 import { ModalAdminImage } from '../../Modals/ModalAdminImage/ModalAdminImage'
 import type { IImage } from '../../../types/IImage'
 import { deleteImages } from '../../../cruds/crudImages'
-import { useStoreProductDetails } from '../../../Store/useStoreProductDetails'
 import { ErrorAlert } from '../../../utils/ErrorAlert'
+import { useStoreProducts } from '../../../Store/useStoreProducts'
 
 export const ImagesAdmin = () => {
 
     const {fetchImage, images, setActiveImage} = useStoreImage()
     const {openViewModalAdminImage, viewModalAdminImage} = useStoreModal()
-    const {productDetails, fetchProductDetails} = useStoreProductDetails()
+    const {fetchProduct, products} = useStoreProducts()
 
     useEffect(() => {
         fetchImage()
@@ -25,8 +25,8 @@ export const ImagesAdmin = () => {
 
     const handleDelete = async(id : number) => {
 
-        fetchProductDetails() // Renderizo los detalles
-        const existingProductWithImage = productDetails.some((productDetail) => productDetail.image.id === id)
+        fetchProduct() // Renderizo los productos
+        const existingProductWithImage = products.some((product) => product.image.id === id)
 
         if (existingProductWithImage) {
             ErrorAlert('Error', 'La imágen se encuentra asociada a un producto')

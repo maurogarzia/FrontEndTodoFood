@@ -45,10 +45,8 @@ export const UserAdmin = () => {
                             <th>Id</th>
                             <th>Nombre</th>
                             <th>Apellido</th>
-                            <th>Contraseña</th>
                             <th>Email</th>
                             <th>Rol</th>
-                            <th>DNI</th>
                             <th>Dirección</th>
                             <th>Opciones</th>
                         </tr>
@@ -59,16 +57,16 @@ export const UserAdmin = () => {
                             <tr key={user.id}>
                                 <td>{user.id ? user.id : '' }</td>
                                 <td>{user.name ? user.name : ''}</td>
-                                <td>{user.password ? user.password : ''}</td>
+                                <td>{user?.lastname || ''}</td>
                                 <td>{user.email ? user.email : ''}</td>
                                 <td>{user.rol ? user.rol : ''}</td>
-                                <td>{user.dni ? user.dni : ''}</td>
+                                
                                 <td>{user.address ? 
                                     <div>
                                         <p>{user.address.street}</p> <p>{user.address.number}</p>
                                     </div> 
                                     : 
-                                    ''}
+                                    'Sin direccion agregada'}
                                 </td>
 
 

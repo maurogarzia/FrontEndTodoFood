@@ -1,18 +1,95 @@
+
 .containerPrincipal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.containerOpenMenu{
+    display: none;
+}
+.containerAside{
     display: flex;
     flex-direction: column;
     background-color: #292929;
     color: white;
     padding: 10px;
     min-width: 200px;
+    min-height: 100vh;
+    max-height: 100vh;
 }
-.containerPrincipal p {
+.containerAside p {
     display: flex;
     padding: 10px;
     align-items: center;
     height: 100%;
 }
-.containerPrincipal p:hover{
+.containerAside p:hover{
     cursor: pointer;
     background-color: #4b4b4b;
+}
+
+.modalBackdrop{
+    position: fixed;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-height: 100vh;
+    min-width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 0;
+}
+
+@media (max-width : 800px) {
+    .containerAside{
+        display: none;
+    }
+    .containerOpenMenu{
+        border: none;
+        display: inherit;
+        width: 100%;
+        padding: 10px;
+    }
+    .containerOpenMenu span{
+        cursor: pointer;
+    }
+    .containerDisplay {
+        position: absolute;
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%, 0);
+        background-color: #292929;
+        border: 1px solid;
+        width: 100%;
+    }
+    .containerDisplay p{
+        width: 100%;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .containerDisplay p:hover{
+        cursor: pointer;
+        background-color: #4b4b4b;
+    }
+    .containerButton{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .containerDisplay button{
+        background-color: red;
+        color: white;
+        padding: 10px;
+        font-size: 15px;
+        border: 2px solid red;
+        margin-top: 0;
+        width: 100%;
+        cursor: pointer;
+    }
 }
