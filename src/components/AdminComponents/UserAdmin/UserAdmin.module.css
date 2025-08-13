@@ -80,3 +80,9 @@
     background-color: #E95708;
     color: white;
 }
+
+@media (max-width : 800px) {
+    .containerTitleAndButton h1{
+        width: 50%;
+    }
+}

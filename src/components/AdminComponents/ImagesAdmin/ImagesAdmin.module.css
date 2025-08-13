@@ -104,3 +104,9 @@
     max-width: 200px;
     overflow-x: auto;
 }
+
+@media (max-width : 800px) {
+    .containerTitleAndButton h1{
+        width: 50%;
+    }
+}
