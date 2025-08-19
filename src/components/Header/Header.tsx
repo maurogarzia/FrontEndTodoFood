@@ -104,7 +104,7 @@ export const Header = () => {
                             <p onClick={() => handleNavigate('/promotions')}>Promociones</p>
                             <p onClick={() => handleNavigate('/products')}>Productos</p>
                             <p onClick={() => handleNavigate('/branches')}>Sucursales</p>
-                            <p onClick={() => handleNavigate('/profile')}>Perfil</p>
+                            <p onClick={() => handleIsLogged('/profile')}>Perfil</p>
                             <p onClick={() => handleNavigate('/cart')}>Carrito</p>
                             {isAdmin && <p onClick={() => handleNavigate('/admin')}>Admin</p>}
 

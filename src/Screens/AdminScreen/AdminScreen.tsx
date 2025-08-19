@@ -32,7 +32,7 @@ export const AdminScreen = () => {
 
                     <AsideAdmin/>
                 </div>
-                {page === 'admin' && <div className={style.containerAdmin}><h1>ADMINISTRACIÓN</h1></div>}
+                {page === 'admin' && <div className={style.adminEmpty}><h1>ADMINISTRACIÓN</h1></div>}
                 {page === 'country' && <CountryAdmin/>}
                 {page === 'province' && <ProvinceAdmin/>}
                 {page === 'locality' && <LocalityAdmin/>}

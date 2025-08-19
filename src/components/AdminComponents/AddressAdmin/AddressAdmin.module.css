@@ -94,3 +94,12 @@
     align-items: center;
     z-index: 1000;
 }
+
+@media (max-width : 800px) {
+    .containerPrincipal{
+        min-height: 100vh;
+    }
+    .containerTitleAndButton h1{
+        width: 50%;
+    }
+}

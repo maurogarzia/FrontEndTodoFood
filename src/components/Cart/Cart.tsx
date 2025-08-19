@@ -1,13 +1,18 @@
 import { useEffect } from 'react'
 import { useStoreProducts } from '../../Store/useStoreProducts'
-import { Card } from '../Card/Card'
+
 import style from './Cart.module.css'
 import { useStorePromotion } from '../../Store/useStorePromotions'
+import { useStoreCart } from '../../Store/useStoreCart'
+import { CardProduct } from '../CardProduct/CardProduct'
+import { CardPromotion } from '../CardPromotion/CardPromotion'
+
 
 export const Cart = () => {
 
     const {products, fetchProduct} = useStoreProducts()
     const {promotions, fetchPromotions} = useStorePromotion()
+    const {listProducts} = useStoreCart()
 
     useEffect(() => {
         fetchProduct()
@@ -18,6 +23,11 @@ export const Cart = () => {
         <div className={style.containerPrincipal}>
 
             <h1 className={style.title}>Carrito</h1>
+            <div className={style.containerCart}>
+                {listProducts.map(p => (
+                    <p>{p.id}</p>
+                ))}
+            </div>
 
             <div className={style.containerAdd}>
                 <h2>Agregar algo más?</h2>
@@ -26,14 +36,14 @@ export const Cart = () => {
 
                     {products.map(p => (
                         
-                        <Card products={p} promotion={null}/>
+                        <CardProduct products={p}/>
                     ))}
                 </div>
 
                 <h2>Promociones</h2>
                 <div className={style.list}>
                     {promotions.map(p => (
-                        <Card products={null} promotion={p}/>
+                        <CardPromotion promotion={p}/>
                     ))}
                 </div>
             </div>

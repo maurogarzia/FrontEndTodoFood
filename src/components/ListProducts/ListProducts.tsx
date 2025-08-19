@@ -1,6 +1,6 @@
 import { useEffect} from 'react'
 import style from './ListProducts.module.css'
-import { Card } from '../Card/Card'
+import { CardProduct } from '../CardProduct/CardProduct'
 import { useStoreProducts } from '../../Store/useStoreProducts'
 
 
@@ -38,7 +38,7 @@ export const ListProducts = () => {
                 : 
                 <div className={style.productList}>
                     {burguers?.map(b => (
-                        <Card products={b} promotion={null}/>
+                        <CardProduct products={b}/>
                     ))}
                 </div>}
             </div>
@@ -51,7 +51,7 @@ export const ListProducts = () => {
                 : 
                 <div className={style.productList}>
                     {accompaniment?.map(b => (
-                        <Card products={b} promotion={null}/>
+                        <CardProduct products={b}/>
                     ))}
                 </div>}
             </div>
@@ -64,7 +64,7 @@ export const ListProducts = () => {
                 : 
                 <div className={style.productList}>
                     {drinks?.map(b => (
-                        <Card products={b} promotion={null}/>
+                        <CardProduct products={b}/>
                     ))}
                 </div>}
             </div>
@@ -77,7 +77,7 @@ export const ListProducts = () => {
                 : 
                 <div className={style.productList}>
                     {vegetarian?.map(b => (
-                        <Card products={b} promotion={null}/>
+                        <CardProduct products={b}/>
                     ))}
                 </div>}
             </div>

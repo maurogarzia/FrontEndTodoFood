@@ -101,6 +101,9 @@
 }
 
 @media (max-width : 800px) {
+    .containerPrincipal{
+        min-height: 100vh;
+    }
     .containerTitleAndButton h1{
         width: 50%;
     }

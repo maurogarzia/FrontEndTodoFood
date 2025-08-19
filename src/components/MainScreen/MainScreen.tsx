@@ -8,6 +8,7 @@ import image3 from '../../assets/imagesCarrusel/tres-mini-hamburguesas-queso-car
 
 
 
+
 export const MainScreen = () => {
 
     
@@ -17,7 +18,10 @@ export const MainScreen = () => {
         fetchPromotionsDetails()
     },[])    
 
-    const [index, setIndex] = useState<number>(0)
+    
+    const [index, setIndex] = useState<number>(0) // Estado para controlar el indice del carrusel
+    
+
     
     
     // UseEffect para que cambie de imagen cada 5s
@@ -48,9 +52,7 @@ export const MainScreen = () => {
     return (
         <div className={style.containerPrincipal}>
 
-            <div className={style.containerFilter}>
-                <button>Filtrar</button>
-            </div>
+            
 
             <div className={style.image}>
                 <img src={image} alt="" />
@@ -76,6 +78,7 @@ export const MainScreen = () => {
                 
                 
             </div>
+            
         </div>
     )
 }

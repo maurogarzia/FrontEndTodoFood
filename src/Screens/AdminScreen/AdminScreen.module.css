@@ -9,6 +9,16 @@
     display: flex;
     justify-content: center;
 }
+.adminEmpty{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+}
+.adminEmpty h1{
+    padding: 20px;
+    font-size: 100px;
+}
 
 @media (max-width : 800px){
     .containerAdmin{
@@ -16,5 +26,11 @@
         overflow-x: auto;
         display: flex;
         flex-direction: column;
+    }
+    .adminEmpty{
+        min-height: 50vh;
+    }
+    .adminEmpty h1{
+        font-size: 40px;
     }
 }

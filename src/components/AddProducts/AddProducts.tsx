@@ -1,55 +1,81 @@
 import { useEffect, useState } from 'react'
-
 import style from './AddProducts.module.css'
 import { useStoreProducts } from '../../Store/useStoreProducts'
 import { useStorePromotion } from '../../Store/useStorePromotions'
-import { useStoreProductDetails } from '../../Store/useStoreProductDetails'
 import type { IProductsDetails } from '../../types/IProductsDetails'
-import { useStoreSize } from '../../Store/useStoreSize'
+import { getAllProductsDetails } from '../../cruds/crudProductDetails'
+import type { IPromotionDetails } from '../../types/IPromotionDetails'
+import { getAllPromotionDetails } from '../../cruds/crudPromotionDetails'
+
 
 export const AddProducts = () => {
 
-    const {activeProduct} = useStoreProducts()
-    const {activePromotion} = useStorePromotion()
-    const {productDetails, fetchProductDetails} = useStoreProductDetails()
-    const {fetchSize} = useStoreSize()
+    const {activeProduct, setActiveProduct} = useStoreProducts()
+    const {activePromotion, setActivePromotion} = useStorePromotion()
 
-
-    const [detailsSize, setDetailsSize] = useState<IProductsDetails[]>()
+    const [detailsProduct, setDetailsProduct] = useState<IProductsDetails[]>() // Estado para detalles del producto
+    const [detailsPromotion, setDetailsPromotion] = useState<IPromotionDetails[]>() // Estado para detalles de la promocion
     const [price, setPrice] = useState<number>(0)
     const [counter, setCounter] = useState<number>(1) // Estado para el contador 
 
 
     useEffect(() => {
-        fetchSize()
-        fetchProductDetails()
 
-        // Busco los detalles degun el tamaño
-        const searchDetailsSize = () => {
-            const handleDetails = productDetails.filter(p => p.product.id === activeProduct?.id)
-            setDetailsSize(handleDetails)
+        const searchDetails = async() => {
+            // Busco los detalles del producto
+            if (activeProduct && !activePromotion){
+                const search = await getAllProductsDetails()
+                setDetailsProduct(search.filter((s : IProductsDetails) => s.product.id === activeProduct.id))
+
+            // Busco los detalle de promocion
+            } else if(!activeProduct && activePromotion){
+                const search = await getAllPromotionDetails()
+                setDetailsPromotion(search.filter((s : IPromotionDetails) => s.promotion.id === activePromotion?.id))
+            }
         }
-        searchDetailsSize()
-    },[])
+        
+        searchDetails()
+        
+    },[activeProduct, activePromotion])
+
+    const [basePrice, setBasePrice] = useState<number>(0)
+
+    useEffect(() => {
+        const savedProduct = localStorage.getItem("productOption") 
+        const savedPromotion = localStorage.getItem("promotionOption")
+
+        if (savedProduct) {
+            setActiveProduct(JSON.parse(savedProduct))
+            setActivePromotion(null) // limpiar la promo si había
+        } else if (savedPromotion) {
+            setActivePromotion(JSON.parse(savedPromotion))
+            setActiveProduct(null) // limpiar el producto si había
+        }
+
+        setPrice(counter * basePrice)
+    }, [counter, basePrice])
+
+
 
     
     // Funcion para manejar el contador
     const handleCounter = (action : string) => {
         if (action === 'add'){
-            setCounter(counter + 1)
-            handlePrice(price)
+            const newCounter = counter + 1
+            setCounter(newCounter)
+            handlePrice(newCounter)
         } else if (action === 'remove'){
             if (counter === 1) return
-            setCounter(counter - 1)
-            handlePrice(price)
+            const newCounter = counter - 1
+            setCounter(newCounter)
+            handlePrice(newCounter)
         }
     }
 
     const handlePrice = (priceDetail : number) => {
         console.log(priceDetail);
         setPrice(counter * priceDetail)
-    }
-    
+    } 
     
     return (
         <div className={style.containerPrincipal}>
@@ -78,14 +104,24 @@ export const AddProducts = () => {
                     <h1>{activeProduct !== null ? activeProduct.name : activePromotion?.name}</h1>
                     <p>{activeProduct !== null ? activeProduct.description : activePromotion?.description}</p>
 
-                    <div className={style.containerOption}>
-                        <h2>Seleccionar Tamaño</h2>
-                        
-                            {detailsSize?.map(p => (
-                                <button key={p.id} onClick={() => handlePrice(p.price)}>{p.size.name}</button>        
+                    {activeProduct ? 
+                        <div className={style.containerOption}>
+                            <h2>Seleccionar Tamaño</h2>
+
+                            {detailsProduct?.map((d) => (
+                                <button key={d.id} onClick={() => setBasePrice(d.price)}>{d.size.name}</button>
                             ))}
+                        </div>
+                        : 
+                        <div className={style.containerOption}>
+                            <h2>Componentes</h2>
+                            {detailsPromotion?.map(d => (
+                                d.unitaryDetails.map((det) => (
+                                    <button>{det.quantity} {det.productDetails.product.name} {det.productDetails.product.name}</button>
+                                ))
+                            ))}
+                        </div>}
                         
-                    </div>
                 </div>
 
             </div>

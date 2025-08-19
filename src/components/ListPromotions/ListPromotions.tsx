@@ -1,12 +1,14 @@
 import { useEffect } from 'react'
-import { useStorePromotionDetails } from '../../Store/useStorePromotionDetails'
+
 import style from './ListPromotions.module.css'
-import { Card } from '../Card/Card'
+
+import { useStorePromotion } from '../../Store/useStorePromotions'
+import { CardPromotion } from '../CardPromotion/CardPromotion'
 
 export const ListPromotions = () => {
 
-    const {promotionsDetails, fetchPromotionsDetails} = useStorePromotionDetails()
-    useEffect(() => {fetchPromotionsDetails()},[])
+    const {promotions, fetchPromotions} = useStorePromotion()
+    useEffect(() => {fetchPromotions()},[])
 
 
     return (
@@ -20,9 +22,9 @@ export const ListPromotions = () => {
             </div>
 
             <div className={style.promotions}>
-                {promotionsDetails.map(p => (
+                {promotions.map(p => (
                     <div >
-                        <Card products={null} promotion={p}/>
+                        <CardPromotion promotion={p}/>
                     </div>
                 ))}
             </div>
