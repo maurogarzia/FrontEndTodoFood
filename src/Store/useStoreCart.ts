@@ -1,32 +1,36 @@
 import { create } from "zustand";
-import type { IProductsDetails } from "../types/IProductsDetails";
-import type { IPromotionDetails } from "../types/IPromotionDetails";
+import type { ICart } from "../types/ICart";
 
 
 
 interface IUseStoreCart {
-    listProducts : (IProductsDetails | IPromotionDetails) []
-    addProduct : (product : IProductsDetails | IPromotionDetails) => void
-    deleteProduct : (product : IProductsDetails | IPromotionDetails) => void
+    listCart : ICart [],
+    addProduct : (product : ICart ) => void
+    deleteProduct : (product : ICart) => void
     emptyCart: () => void
 }
 
 export const useStoreCart = create<IUseStoreCart>((set) => ({
-    listProducts : [],
+    
+    listCart : [],
 
     addProduct: (product) => {
         set((state) => ({
-            listProducts : [...state.listProducts, product]
+            listCart : [...state.listCart, product]
         }))
     },
 
-    deleteProduct : (product) => {
+    deleteProduct: (product: ICart) => {
         set((state) => ({
-            listProducts: state.listProducts.filter((p : any) => p.id !== product.id) 
+            listCart: state.listCart.filter(
+                (p: ICart) => !(p.detail?.id === product.detail?.id && p.type === product.type)
+            )
         }))
     },
 
-    emptyCart: () => set({listProducts : []})
+
+
+    emptyCart: () => set({listCart : []})
 
 
 }))

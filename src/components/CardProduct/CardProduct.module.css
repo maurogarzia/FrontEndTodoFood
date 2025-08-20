@@ -53,3 +53,8 @@
     color: #E95708;border: #E95708 3px solid;
     transition: 0.3s ease;
 }
+@media (max-width : 800px) {
+    .containerPrincipal{
+        min-width: 300px;
+    }
+}

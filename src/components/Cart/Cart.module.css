@@ -30,3 +30,147 @@
     padding: 10px;
     overflow-x: auto;
 }
+.emptyCart{
+    color: white;
+    padding: 20px;
+    font-size: 50px;
+    font-style: italic;
+    width: 70%;
+}
+.containerCart{
+    display: flex;
+    margin-top: 20px;
+    padding: 20px;
+    gap: 10px;
+}
+.containerObject{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.object{
+    display: flex;
+    align-items: center;
+    background-color: #2F2E2E;
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+}
+.object span {
+    background-color: white;
+    color: red;
+    padding: 8px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.object span:hover{
+    cursor: pointer;
+    background-color: red;
+    color: white;
+    transition: 0.3s ease;
+}
+.object p {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.containerTotal{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #2F2E2E;
+    padding: 10px;
+}
+.containerTotal h3{
+    color:#E95708;
+    background-color: #2F2E2E;
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.containerTotal h2{
+    color:#E95708;
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.containerTotal p {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+.containerButton{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerButton button{
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #E95708;
+    background-color: #E95708;
+    color: white;
+    font-size: 15px;
+    
+}
+
+.containerButton button:hover{
+    cursor: pointer;
+    border: 2px solid white;
+    background-color: white;
+    color: #E95708;
+    transition: 0.3s ease;
+    
+}
+
+@media (max-width : 800px) {
+    .containerCart {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .emptyCart{
+        width: 100%;
+        font-size: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .containerTotal{
+        width: 100%;
+    }
+    .containerObject{
+        width: 100%;
+        padding: 0;
+        margin-bottom: 10px;
+    }
+    .object{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .object p{
+        width: 100%;
+    }
+    .object sapn{
+        width: 100%;
+    }
+}

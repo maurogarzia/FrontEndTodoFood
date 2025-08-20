@@ -26,9 +26,7 @@ export const ListProducts = () => {
                 <h1>Productos</h1>
             </div>
 
-            <div className={style.containerFilter}>
-                <button>Filtrar</button>
-            </div>
+            
 
             <div className={style.products}>
                 <h1>Hamburguesas</h1>

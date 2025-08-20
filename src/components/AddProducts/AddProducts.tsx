@@ -6,19 +6,28 @@ import type { IProductsDetails } from '../../types/IProductsDetails'
 import { getAllProductsDetails } from '../../cruds/crudProductDetails'
 import type { IPromotionDetails } from '../../types/IPromotionDetails'
 import { getAllPromotionDetails } from '../../cruds/crudPromotionDetails'
+import type { ICart } from '../../types/ICart'
+import { ErrorAlert } from '../../utils/ErrorAlert'
+import { useStoreCart } from '../../Store/useStoreCart'
+import { SuccesAlerts } from '../../utils/SuccesAlert'
+import { handleNavigate } from '../../Routes/navigationService'
 
 
 export const AddProducts = () => {
 
     const {activeProduct, setActiveProduct} = useStoreProducts()
     const {activePromotion, setActivePromotion} = useStorePromotion()
+    const {addProduct} = useStoreCart()
 
     const [detailsProduct, setDetailsProduct] = useState<IProductsDetails[]>() // Estado para detalles del producto
     const [detailsPromotion, setDetailsPromotion] = useState<IPromotionDetails[]>() // Estado para detalles de la promocion
+
+    const [detail, setDetail] = useState<IProductsDetails | IPromotionDetails>()
     const [price, setPrice] = useState<number>(0)
     const [counter, setCounter] = useState<number>(1) // Estado para el contador 
 
 
+    // UseEffect para que buscar los detalles
     useEffect(() => {
 
         const searchDetails = async() => {
@@ -30,8 +39,15 @@ export const AddProducts = () => {
             // Busco los detalle de promocion
             } else if(!activeProduct && activePromotion){
                 const search = await getAllPromotionDetails()
-                setDetailsPromotion(search.filter((s : IPromotionDetails) => s.promotion.id === activePromotion?.id))
-            }
+                const filtered = search.filter((s : IPromotionDetails) => s.promotion.id === activePromotion?.id)
+
+                setDetailsPromotion(filtered)
+                if (filtered.length > 0) {
+                    setDetail(filtered[0])  // usar directamente el resultado
+                    setBasePrice(filtered[0].price)
+                }
+}
+
         }
         
         searchDetails()
@@ -40,6 +56,7 @@ export const AddProducts = () => {
 
     const [basePrice, setBasePrice] = useState<number>(0)
 
+    // UseEffect para que al refrescar no se pierda el producto
     useEffect(() => {
         const savedProduct = localStorage.getItem("productOption") 
         const savedPromotion = localStorage.getItem("promotionOption")
@@ -54,9 +71,7 @@ export const AddProducts = () => {
 
         setPrice(counter * basePrice)
     }, [counter, basePrice])
-
-
-
+    
     
     // Funcion para manejar el contador
     const handleCounter = (action : string) => {
@@ -72,11 +87,52 @@ export const AddProducts = () => {
         }
     }
 
+    // Funcion para controlar el precio
     const handlePrice = (priceDetail : number) => {
         console.log(priceDetail);
         setPrice(counter * priceDetail)
     } 
-    
+
+    const handleAddToCart = () => {
+
+        if (!detail) return ErrorAlert('Error', 'No se eligio un tamaño')
+
+        if (activeProduct && !activePromotion) {
+
+            // Armo carrito
+            const cart : ICart = {
+                quantity : counter,
+                price : price,
+                type: 'product',
+                detail : detail
+            }
+            
+            console.log(cart);
+            
+            addProduct(cart!)
+
+            SuccesAlerts('Agregado!', 'Agregado al carrito')
+            handleNavigate('/cart')
+
+        } else if (!activeProduct && activePromotion){
+
+            // Amo carrito
+            const cart : ICart = {   
+                quantity: counter,
+                price: price,
+                type: 'promotion',
+                detail: detail
+            }
+
+            console.log();
+            
+            addProduct(cart!)
+
+            SuccesAlerts('Agregado!', 'Agregado al carrito')
+            handleNavigate('/cart')
+        }
+    }
+ 
     return (
         <div className={style.containerPrincipal}>
             <div className={style.containerTop}>
@@ -97,7 +153,7 @@ export const AddProducts = () => {
                         </div>
                         
                     </div>
-                    <button>Añadir al Carrito</button>
+                    <button onClick={handleAddToCart}>Añadir al Carrito</button>
                 </div>
 
                 <div className={style.containerData}>
@@ -109,7 +165,7 @@ export const AddProducts = () => {
                             <h2>Seleccionar Tamaño</h2>
 
                             {detailsProduct?.map((d) => (
-                                <button key={d.id} onClick={() => setBasePrice(d.price)}>{d.size.name}</button>
+                                <button key={d.id} onClick={() => {setBasePrice(d.price), setDetail(d)}}>{d.size.name}</button>
                             ))}
                         </div>
                         : 
@@ -117,7 +173,7 @@ export const AddProducts = () => {
                             <h2>Componentes</h2>
                             {detailsPromotion?.map(d => (
                                 d.unitaryDetails.map((det) => (
-                                    <button>{det.quantity} {det.productDetails.product.name} {det.productDetails.product.name}</button>
+                                    <button >{det.quantity} {det.productDetails.product.name} {det.productDetails.product.name}</button>
                                 ))
                             ))}
                         </div>}

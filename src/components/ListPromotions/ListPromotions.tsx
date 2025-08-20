@@ -17,9 +17,7 @@ export const ListPromotions = () => {
                 <h1>Promociones</h1>
             </div>
 
-            <div className={style.containerFilter}>
-                <button>Filtrar</button>
-            </div>
+            
 
             <div className={style.promotions}>
                 {promotions.map(p => (
