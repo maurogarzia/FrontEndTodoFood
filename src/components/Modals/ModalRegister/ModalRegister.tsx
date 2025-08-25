@@ -75,7 +75,7 @@ export const ModalRegister : FC<IModalRegister> = ({type}) => {
                     closeViewModalRegister()
                     return
                 }
-                SuccesAlerts('Logueado', 'Usuario o contraseña inválido')
+                SuccesAlerts('Logueado', 'Usuario logueado')
                 closeViewModalRegister()
                 setLoginUSer(`${userLogin.username}`)
             } else {

@@ -21,6 +21,7 @@ interface IUseStoreModal {
 
     viewModalEditUser : boolean,
     viewSubModalAddress : boolean,
+    viewSubModalUpdatePassword : boolean
 
 
 
@@ -80,6 +81,9 @@ interface IUseStoreModal {
 
     openViewSubModalAddress : VoidFunction,
     closeViewSubModalAddress : VoidFunction
+
+    openViewSubModalUpdatePassword : VoidFunction,
+    closeViewSubModalUpdatePassword : VoidFunction,
 }
 
 
@@ -104,6 +108,7 @@ export const useStoreModal = create<IUseStoreModal>((set) => ({
 
     viewModalEditUser : false,
     viewSubModalAddress : false,
+    viewSubModalUpdatePassword : false,
 
     // Pais
     openViewModalAdminCountry : () => set({viewModalAdminCountry : true}),
@@ -177,7 +182,12 @@ export const useStoreModal = create<IUseStoreModal>((set) => ({
     openViewModalEditUser : () => set({viewModalEditUser : true}),
     closeViewModalEditUser : () => set({viewModalEditUser : false}),
 
+    // Modal para editar direccion de usuario
     openViewSubModalAddress : () => set({viewSubModalAddress : true}),
-    closeViewSubModalAddress : () => set({viewSubModalAddress : false})
+    closeViewSubModalAddress : () => set({viewSubModalAddress : false}),
+
+    // Modal para editar contrasenia de usuario
+    openViewSubModalUpdatePassword : () => set({viewSubModalUpdatePassword : true}),
+    closeViewSubModalUpdatePassword : () => set({viewSubModalUpdatePassword : false})
 
 }))

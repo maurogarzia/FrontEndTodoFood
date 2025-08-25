@@ -46,6 +46,7 @@ export const UserAdmin = () => {
                             <th>Nombre</th>
                             <th>Apellido</th>
                             <th>Email</th>
+                            <th>Nombre de usuario</th>
                             <th>Rol</th>
                             <th>Dirección</th>
                             <th>Opciones</th>
@@ -59,7 +60,8 @@ export const UserAdmin = () => {
                                 <td>{user.name ? user.name : ''}</td>
                                 <td>{user?.lastname || ''}</td>
                                 <td>{user.email ? user.email : ''}</td>
-                                <td>{user.rol ? user.rol : ''}</td>
+                                <td>{user.username}</td>
+                                <td>{user.role ? user.role : ''}</td>
                                 
                                 <td>{user.address ? 
                                     <div>

@@ -5,11 +5,11 @@ import { useStoreLocality } from '../../../Store/useStoreLocality'
 import { useEffect, useState, type FC } from 'react'
 import { useStoreModal } from '../../../Store/useStoreModal'
 import { createAddress } from '../../../cruds/crudAddress'
-import type { IRequestUser } from '../../../types/IUser'
+import type { IPatchUser } from '../../../types/IUser'
 
 
 interface ISubModalAddress {
-    setUser : React.Dispatch<React.SetStateAction<IRequestUser>>
+    setUser : React.Dispatch<React.SetStateAction<IPatchUser>>
 }
 
 export const SubModalAddress : FC<ISubModalAddress> = ({setUser}) => {

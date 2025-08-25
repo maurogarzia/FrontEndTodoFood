@@ -2,8 +2,8 @@ import React, { useState, type FC } from 'react'
 import style from './ModalEditUser.module.css'
 import { useStoreModal } from '../../../Store/useStoreModal'
 import { useStoreUser } from '../../../Store/useStoreUsers'
-import type { IRequestUser} from '../../../types/IUser'
-import { updatedUser, updatePassword } from '../../../cruds/crudUsers'
+import type { IPatchUser} from '../../../types/IUser'
+import { patchUser, updatePassword } from '../../../cruds/crudUsers'
 import { SubModalAddress } from '../SubModalAddress/SubModalAddress'
 import { SuccesAlerts } from '../../../utils/SuccesAlert'
 
@@ -23,20 +23,23 @@ export const ModalEditUser : FC<IModalEditUser> = ({option}) => {
     const {loginUser, setLoginUSer} = useStoreUser()
     
     // Estadp para el cambio de inputs del usuario
-    const [user, setUser] = useState<IRequestUser>({ 
-        id : loginUser?.id,
+    const [user, setUser] = useState<IPatchUser>({ 
+        
         name : loginUser?.name || '',
         username : loginUser?.username || '',
         lastname : loginUser?.lastname || '',
         email : loginUser?.email || '',
-        password : loginUser?.password || '',
-        phone : loginUser?.phone || 0,
+        
+        phone : String(loginUser?.phone) || '',
         address : {
             id : loginUser?.address?.id || null
         },
-        rol : loginUser?.rol || null
+        role : loginUser?.role!
         
     })
+
+    console.log(loginUser);
+    
 
     // Estado para mostrar la contrasenia
     const [showPassword, setShowPassword] = useState({
@@ -69,38 +72,56 @@ export const ModalEditUser : FC<IModalEditUser> = ({option}) => {
 
 
     // Maneja cambio de inputs
-    const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => { 
-        const {name, value} = e.target
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => { 
+    const { name, value } = e.target;
 
-        if (option === 'password'){
-
-            setData((prev) => ({
-                ...prev,
-                [name] : value
-            }))
-
-        }else{
-
+    if (option === 'password') {
+        setData((prev) => ({
+            ...prev,
+            [name]: value
+        }));
+    } else {
+        // Solo convertir a número si el input es numérico real
+        if (name === 'address') {
             setUser((prev) => ({
                 ...prev,
-                [name] : Number(value) ? Number(value) : value
-            }))
+                address : {
+                    ...prev.address,
+                    id: Number(value)
+                }
+            }));
+        } else {
+            setUser((prev) => ({
+                ...prev,
+                [name]: value
+            }));
         }
-        
     }
+}
+
     
     // Funcion para eliminar la direccion
-    const handleDelete = async() => {
-        setUser((prev) => ({
-            ...prev,
-            address : null
-            
-        }))
-        setLoginUSer(user.username)
-        await updatedUser(user, user.id!) 
-        closeViewModalEditUser()
-        SuccesAlerts('Eliminado','Se elimino la direccion')
+    const handleDelete = async () => {
+        // Crear el nuevo objeto con address.id = null
+        const updatedUser = {
+            ...user,
+            address: null
+        };
+
+        // Actualizamos el estado local
+        setUser(updatedUser);
+
+        // Llamamos al backend con el objeto actualizado
+        await patchUser(loginUser?.id!, updatedUser);
+
+        // Actualizamos el store si hace falta
+        setLoginUSer(user.username);
+
+        // Cerramos modal y mostramos alerta
+        closeViewModalEditUser();
+        SuccesAlerts('Eliminado', 'Se eliminó la dirección');
     }
+
         
 
     // Envia cambios al back
@@ -118,7 +139,7 @@ export const ModalEditUser : FC<IModalEditUser> = ({option}) => {
                     return
                 }
                 const {oldPassword, newPassword} = data
-                const updatedPassword = await updatePassword(user.id!, {oldPassword, newPassword})
+                const updatedPassword = await updatePassword(loginUser?.id!, {oldPassword, newPassword})
 
                 // Si se concreta correctamente el cambio de contrase;a remuevo el token para que se deba volver a loguear
                 if (updatedPassword){
@@ -128,9 +149,10 @@ export const ModalEditUser : FC<IModalEditUser> = ({option}) => {
                 }
             }else { // Sino usa el endpoint de editar
 
-                await updatedUser(user, user.id!)
+                await patchUser(loginUser?.id!, user)
                 setLoginUSer(user.username)
                 closeViewModalEditUser()
+                SuccesAlerts('Actualizado', 'Se actualizaron los datos del usuario')
             }
         } catch (error : any) {
             console.log(error.message);
@@ -233,8 +255,8 @@ export const ModalEditUser : FC<IModalEditUser> = ({option}) => {
 
 
                 <div className={style.containerButtons}>
-                    <button onClick={closeViewModalEditUser}>Cancelar</button>
-                    <button >Aceptar</button>
+                    <button type='button' onClick={closeViewModalEditUser}>Cancelar</button>
+                    <button type='submit'>Aceptar</button>
                 </div>
             </form>
             {viewSubModalAddress && <div className={style.modalBackdrop}><SubModalAddress setUser={setUser}/></div>}

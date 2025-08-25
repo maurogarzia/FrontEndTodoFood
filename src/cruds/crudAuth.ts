@@ -1,10 +1,13 @@
 import axiosInstance from "../components/interceptors/axiosInstance";
 import type { ILogin, IRegister } from "../types/auth";
+
 import { BASE_URL } from "../utils/constantes";
 import { ErrorAlert } from "../utils/ErrorAlert"
 
-const BASE_REGISTER = `${BASE_URL}/auth/register`
-const BASE_LOGIN = `${BASE_URL}/auth/login`
+const BASE_AUTH = `${BASE_URL}/auth`
+const BASE_REGISTER = `${BASE_AUTH}/register`
+const BASE_LOGIN = `${BASE_AUTH}/login`
+
 
 export const register = async(userRegister : IRegister) => {
     try {

@@ -18,7 +18,7 @@ export const AdminRoute = ({ children }: Props) => {
     try {
         
 
-        if (loginUser.rol !== Rol.admin ) {
+        if (loginUser.role !== Rol.admin ) {
             return <Navigate to="/unauthorized" replace />; // Si el rol no es admin no puede entrar
         }
 

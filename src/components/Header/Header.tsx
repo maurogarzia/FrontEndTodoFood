@@ -21,7 +21,7 @@ export const Header = () => {
     useEffect(() => {
         const token = localStorage.getItem("token")
         if (loginUser === null || !token) return
-        if (loginUser?.rol === Rol.admin){
+        if (loginUser?.role === Rol.admin){
             setIsAdmin(true)
         } else {
             setIsAdmin(false)

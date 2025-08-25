@@ -1,6 +1,7 @@
 
+import axiosInstance from '../components/interceptors/axiosInstance'
 import axios from '../components/interceptors/axiosInstance'
-import type { IRequestUser } from '../types/IUser'
+import type { IPatchUser, IRequestUser } from '../types/IUser'
 import {BASE_URL} from '../utils/constantes'
 import { ErrorAlert } from '../utils/ErrorAlert'
 import { createEntity, deleteEntity, getAll, getById, updateEntity } from './crudGeneric'
@@ -43,10 +44,32 @@ export const getByUsername = async(username : string) => {
 // endpoint para actualizar una password
 export const updatePassword = async (id : number, data : {oldPassword : string, newPassword : string}) => {
     try {
-        const response = await axios.put(`${BASE_USERS}/${id}/password`, data)
+        const response = await axiosInstance.put(`${BASE_USERS}/${id}/password`, data)
         return response.data
     } catch (error : any) {
         console.log(error.message);
         ErrorAlert('Error', 'No se pudo actualizar la contrseña')
+    }
+}
+
+// endpoint para el patch
+export const patchUser = async(id : number, newUser : IPatchUser) => {
+    try {
+        const  response = await axiosInstance.patch(`${BASE_USERS}/${id}`, newUser)
+        return response.data
+    } catch (error : any) {
+        console.log(error.message);
+        ErrorAlert('Error', 'No se pudo editar el usuario')
+    }
+}
+
+// endpoint para cambiar la contrasenia
+export const updatePasswordByAdmin = async( id : number, data: {newPassword : string}) => {
+    try {
+        const response = await axiosInstance.put(`${BASE_USERS}/${id}/password/admin`, data)
+        return response.data
+    } catch (error : any) {
+        console.log(error.message);
+        ErrorAlert('Error', 'No se pudo actualizar la contraseña')
     }
 }
