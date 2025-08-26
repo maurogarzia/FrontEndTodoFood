@@ -11,6 +11,7 @@ import { ErrorAlert } from '../../utils/ErrorAlert'
 import { useStoreCart } from '../../Store/useStoreCart'
 import { SuccesAlerts } from '../../utils/SuccesAlert'
 import { handleNavigate } from '../../Routes/navigationService'
+import { useStoreUser } from '../../Store/useStoreUsers'
 
 
 export const AddProducts = () => {
@@ -18,6 +19,7 @@ export const AddProducts = () => {
     const {activeProduct, setActiveProduct} = useStoreProducts()
     const {activePromotion, setActivePromotion} = useStorePromotion()
     const {addProduct} = useStoreCart()
+    const {loginUser} = useStoreUser()
 
     const [detailsProduct, setDetailsProduct] = useState<IProductsDetails[]>() // Estado para detalles del producto
     const [detailsPromotion, setDetailsPromotion] = useState<IPromotionDetails[]>() // Estado para detalles de la promocion
@@ -96,6 +98,7 @@ export const AddProducts = () => {
     const handleAddToCart = () => {
 
         if (!detail) return ErrorAlert('Error', 'No se eligio un tamaño')
+        if (!loginUser) return ErrorAlert('Error', 'Debes loguearte para agregar productos al carrito')
 
         if (activeProduct && !activePromotion) {
 

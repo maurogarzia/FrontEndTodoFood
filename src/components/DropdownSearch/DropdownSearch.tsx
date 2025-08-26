@@ -1,4 +1,4 @@
-import { type FC } from 'react'
+import { useState, type FC } from 'react'
 import style from './DropdownSearch.module.css'
 import type { IProducts } from '../../types/IProducts'
 import type { IPromotion } from '../../types/IPromotion'
@@ -10,13 +10,16 @@ import { handleNavigate } from '../../Routes/navigationService'
 interface IDropdownSearch {
     listProducts : IProducts[]
     listPromotions : IPromotion[]
+    menu : boolean
 }
 
-export const DropdownSearch : FC<IDropdownSearch>  = ({listProducts, listPromotions}) => {
+export const DropdownSearch : FC<IDropdownSearch>  = ({listProducts, listPromotions, menu}) => {
 
 
     const {setActiveProduct} = useStoreProducts()
     const {setActivePromotion} = useStorePromotion()
+
+    const [] = useState()
 
     // Funcion que envia a la pagina de pedir de productos
         const handleClickProduct = (item : IProducts | null) => {
@@ -46,7 +49,7 @@ export const DropdownSearch : FC<IDropdownSearch>  = ({listProducts, listPromoti
     }
 
     return (
-        <div className={style.containerPrincipal}>
+        <div className={ !menu ? style.containerPrincipal : style.containerPrincipalResponsive}>
             {listProducts.length < 0 && listPromotions.length < 0 ? (
                 <div className={style.containerItem}>
                     <p>No hay coincidencias</p>
@@ -56,14 +59,14 @@ export const DropdownSearch : FC<IDropdownSearch>  = ({listProducts, listPromoti
             : 
             
             (
-                <div className={style.containerItem}>
+                <div className={!menu ? style.containerItem : style.containerItemResponsive}>
                     {listProducts.length === 0 ? null : listProducts.map((l) => (
-                        <div onClick={() => handleClickProduct(l)} className={style.item}>
+                        <div onClick={() => handleClickProduct(l)} className={!menu ? style.item : style.itemResponsive}>
                             <p>{l.name}</p>
                         </div>
                     ))}
                     {listPromotions.length === 0 ? null : listPromotions.map((l) => (
-                        <div onClick={() => handleClickPromotion(l)} className={style.item}>
+                        <div onClick={() => handleClickPromotion(l)} className={!menu ? style.item : style.itemResponsive}>
                             <p>{l.name}</p>
                         </div>
                     ))}

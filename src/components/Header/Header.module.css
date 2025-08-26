@@ -134,11 +134,10 @@
     .containerItems h1{
         font-size: 30px;
         display: flex;
-        
         align-items: center;
         width: 100%;
     }
-    .menu{
+    .menu {
         display: flex;
         justify-content: end;
         align-items: center;
@@ -156,5 +155,9 @@
     }
     .searchAndProfile{
         display: none;
+    }
+    .searchBar {
+        width: 100%;
+        border: 1px solid;
     }
 }

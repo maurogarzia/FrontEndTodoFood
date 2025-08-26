@@ -7,7 +7,6 @@ import { handleNavigate } from '../../Routes/navigationService'
 
 import { Rol } from '../../types/enums/Rol'
 import { useStoreUser } from '../../Store/useStoreUsers'
-import { useStorePromotionDetails } from '../../Store/useStorePromotionDetails'
 import { DropdownSearch } from '../DropdownSearch/DropdownSearch'
 import { useStoreProducts } from '../../Store/useStoreProducts'
 import { useStorePromotion } from '../../Store/useStorePromotions'
@@ -104,7 +103,7 @@ export const Header = () => {
                         {/* Barra de busqueda */}
                         <div className={styles.searchBar}>
                             <input type="text" name="search" value={query} placeholder='Buscar' onChange={(e) => setQuery(e.target.value)}/>
-                            {showDropdown && <DropdownSearch listProducts={filteredProducts} listPromotions={filteredPromotions}/>}
+                            {showDropdown && <DropdownSearch menu={menu} listProducts={filteredProducts} listPromotions={filteredPromotions}/>}
                         </div>
 
                         {/* Lupa */}
@@ -130,11 +129,16 @@ export const Header = () => {
                     <div className={styles.containerMenu}>
                         <div className={styles.containerSelection}>
                             <div className={styles.containerSearchMenu}>
-                                <input type="" name="" id="" placeholder='Buscar'/>{/* Lupa */}
+                                
+                                <input type="text" name="search" value={query} placeholder='Buscar' onChange={(e) => setQuery(e.target.value)}/>
+
+                                {/* Lupa */}
                                 <span className="material-symbols-outlined">
                                     search
                                 </span>
+
                             </div>
+                            {showDropdown && <DropdownSearch menu={menu} listProducts={filteredProducts} listPromotions={filteredPromotions}/>}
                             
                             <p onClick={() => handleNavigate('/promotions')}>Promociones</p>
                             <p onClick={() => handleNavigate('/products')}>Productos</p>

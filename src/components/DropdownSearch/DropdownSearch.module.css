@@ -7,7 +7,6 @@
 }
 .containerItem{
     color: gray;
-    
     font-size: 12px;
     display: flex;
     flex-direction: column;
@@ -20,3 +19,12 @@
     background-color: #E95708;
     color: white;
 }
+
+/* Parte responsiva */
+
+.containerItemResponsive{
+    background-color: rgb(208, 206, 206);
+    color: rgb(113, 113, 113);
+    font-size: 12px;
+}
+
