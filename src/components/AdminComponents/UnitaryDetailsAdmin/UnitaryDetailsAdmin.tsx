@@ -28,7 +28,7 @@ export const UnitaryDetailsAdmin = () => {
     const handleDelete = async(id : number) => {
 
         const existDetailsInpromotion = promotionsDetails.some(p =>
-            p.details.some(d => d.id === id)
+            p.unitaryDetails.some(d => d.id === id)
         )
 
         if (existDetailsInpromotion) {

@@ -41,7 +41,7 @@
 }
 .image p{
     color: white;
-    font-size: 50px;
+    font-size: 40px;
     position: relative;
     z-index: 2;
     bottom: 110px;
@@ -50,15 +50,13 @@
     width: 90%;
     font-weight: bold;
 }
-.image p:hover{
-    cursor: pointer;
-}
 .containerCard{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    
     gap: 20px;
     align-items: center;
+    padding: 10px;
 }
 
 

@@ -24,6 +24,7 @@
     width: 100%;
     height: 100%;
     border-radius: 10px;
+    max-height: 290px;
 }
 .containerPrincipal:hover{
     transform: scale(1.05);

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import image1 from '../../assets/imagesCarrusel/comida-chatarra-hamburguesas-caseras-de-carne-de-res-sobre-fondo-de-madera-vintage.webp'
 import image2 from '../../assets/imagesCarrusel/depositphotos_254299240-stock-photo-tasty-meat-burgers-melted-cheese.webp'
 import image3 from '../../assets/imagesCarrusel/tres-mini-hamburguesas-queso-carne_960508-6.webp'
+import { CardPromotion } from '../CardPromotion/CardPromotion'
 
 
 
@@ -12,7 +13,7 @@ import image3 from '../../assets/imagesCarrusel/tres-mini-hamburguesas-queso-car
 export const MainScreen = () => {
 
     
-    const {fetchPromotionsDetails} = useStorePromotionDetails()
+    const {fetchPromotionsDetails, promotionsDetails} = useStorePromotionDetails()
 
     useEffect(() => {
         fetchPromotionsDetails()
@@ -21,20 +22,25 @@ export const MainScreen = () => {
     
     const [index, setIndex] = useState<number>(0) // Estado para controlar el indice del carrusel
     
+    const today = new Date()
 
+    const filtered = promotionsDetails.filter((p) => {
+        const promotionDate = new Date(p.promotion.finallyDate)
+        return promotionDate >= today
+})
+    
     
     
     // UseEffect para que cambie de imagen cada 5s
     useEffect(() => {
         const interval = setInterval(() => {
             setIndex((prevIndex) => (prevIndex + 1) % carruselArray.length)
-            
         }, 5000)
 
         return () => clearInterval(interval)
     }, [])
     
-    console.log(index);
+    
     // Array de imagenes para el carrusel
     const carruselArray = [
         image1,
@@ -56,7 +62,7 @@ export const MainScreen = () => {
 
             <div className={style.image}>
                 <img src={image} alt="" />
-                <p>Pide Aquí</p>
+                <p>¡Bocado de felicidad!</p>
             </div>
             
             {/* Carrusel aqui */}
@@ -72,10 +78,12 @@ export const MainScreen = () => {
             </div>
 
             {/* Promos */}
-            <h1>Promos del día</h1>        
+            <h1>Promos del mes</h1>        
             
             <div className={style.containerCard}>
-                
+                {filtered.map((f) => (
+                    <CardPromotion promotion={f.promotion}/>
+                ))}
                 
             </div>
             
