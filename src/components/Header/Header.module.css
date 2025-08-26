@@ -48,11 +48,15 @@
     gap: 20px;
     
 }
-.searchAndProfile input{
+.searchBar{
+    min-width: 250px;
+}
+.searchBar input{
     padding: 5px;
-    width: 40%;
+    width: 100%;
     border: none;
     outline: none;
+    height: 30px;
 }
 .searchAndProfile span{
     cursor: pointer;

@@ -7,6 +7,10 @@ import { handleNavigate } from '../../Routes/navigationService'
 
 import { Rol } from '../../types/enums/Rol'
 import { useStoreUser } from '../../Store/useStoreUsers'
+import { useStorePromotionDetails } from '../../Store/useStorePromotionDetails'
+import { DropdownSearch } from '../DropdownSearch/DropdownSearch'
+import { useStoreProducts } from '../../Store/useStoreProducts'
+import { useStorePromotion } from '../../Store/useStorePromotions'
 
 
 
@@ -18,6 +22,12 @@ export const Header = () => {
     const [isAdmin, setIsAdmin] = useState<boolean>()
     const {loginUser} = useStoreUser()
 
+    // Llamo a los productos y promociones para filtrar
+    const {products, fetchProduct} = useStoreProducts()
+    const {promotions, fetchPromotions} = useStorePromotion()
+
+
+    
     useEffect(() => {
         const token = localStorage.getItem("token")
         if (loginUser === null || !token) return
@@ -27,7 +37,29 @@ export const Header = () => {
             setIsAdmin(false)
         }
         
-    },[])
+    },[isAdmin])
+    
+    // Estado para la barra de busqueda
+    const [query, setQuery] = useState<string>("")
+    const [showDropdown, setShowDropdown] = useState<boolean>(false)
+    
+    // Llamo cada vez que se renderiza el componente
+    
+    
+    const filteredProducts = products.filter((p) =>  // Filtro por nombre de producto
+        p.name.toLowerCase().includes(query.toLocaleLowerCase())
+    )
+
+    const filteredPromotions = promotions.filter((p) => 
+        p.name.toLowerCase().includes(query.toLowerCase())
+    )
+    
+
+    useEffect(() => {
+        fetchProduct(),
+        fetchPromotions()
+        setShowDropdown(query.length > 0)
+    },[query])
 
     // Funcion que verifica si estas logueado
     const handleIsLogged = (route : string) => {
@@ -70,7 +102,10 @@ export const Header = () => {
                             </span>}
 
                         {/* Barra de busqueda */}
-                        <input type="text" name="" id="" placeholder='Buscar'/>
+                        <div className={styles.searchBar}>
+                            <input type="text" name="search" value={query} placeholder='Buscar' onChange={(e) => setQuery(e.target.value)}/>
+                            {showDropdown && <DropdownSearch listProducts={filteredProducts} listPromotions={filteredPromotions}/>}
+                        </div>
 
                         {/* Lupa */}
                         <span className="material-symbols-outlined">

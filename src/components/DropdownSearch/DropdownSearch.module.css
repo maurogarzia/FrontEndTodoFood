@@ -1,0 +1,22 @@
+.containerPrincipal{
+    position: absolute;
+    z-index: 5;
+    background-color: white;
+    width: 250px;
+    border-top: 1px solid #E95708;
+}
+.containerItem{
+    color: gray;
+    
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+}
+.item{
+    padding: 5px;
+}
+.item:hover {
+    cursor: pointer;
+    background-color: #E95708;
+    color: white;
+}
