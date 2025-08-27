@@ -1,69 +1,54 @@
-# React + TypeScript + Vite
+# 🍔TodoFood Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TodoFood es una aplicación web desarrollada en Vite + React + TypeScript que funciona como frontend para el sistema de gestión de hamburguesas TodoFood. Permite manejar productos, ingredientes, promociones, pedidos, entre otros.
 
-Currently, two official plugins are available:
+Esta conectada a un backend realizado con Springboot + MySql
+🔗 [Repositorio del backend (Spring Boot + MySQL)](https://github.com/maurogarzia/BackEndTodoFood)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tecnologías utilizadas
 
-## Expanding the ESLint configuration
+- ⚡ TypeScript  
+- ⚛️ React + Vite  
+- 🔄 React Router  
+- 🗂 Zustand (manejo de estado)  
+- 🔑 JWT (jwt-decode)  
+- 💬 SweetAlert2  
+- 🌐 Axios  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
+## 🧩Estructura del proyecto
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+├── assets # Imágenes estáticas
+├── components # Componentes de React
+├── cruds # Funciones CRUD para entidades
+├── routes # Rutas de navegación
+├── screens # Pantallas de la aplicación
+├── store # Estado global con Zustand
+├── types # Tipos TypeScript de entidades
+├── utils # Funciones reutilizables
+├── App.module.css
+├── App.tsx
+├── index.css
+├── main.tsx
 ```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+▶️ Cómo correr el proyecto
+1. Cloná el repositorio:
+```bash
+git clone https://github.com/maurogarzia/FrontEndTodoFood
+cd FrontEndTodoFood
 ```
+2. Instalá dependencias:
+```bash
+npm install
+```
+3. Corré la aplicación en modo de desarrollo: 
+```bash
+npm run dev 
+```
+4.Abrí en el navegador el link que aparece en la terminal (ej: http://localhost:5173)
+
+AUTOR: Desarrollado por maurogarzia
+
+
